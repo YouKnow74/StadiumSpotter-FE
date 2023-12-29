@@ -15,6 +15,7 @@ function App() {
 
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
+ 
 
   useEffect(() => {
     const user = getUser();
@@ -76,6 +77,7 @@ function App() {
     setUser(null)
   }
 
+
   return (
 
     <div>
@@ -84,7 +86,8 @@ function App() {
       (
       <div>
         <Link to="/">Home</Link> &nbsp;
-        <Link to='/logout' onClick={onLogoutHandler}>Logout</Link>
+        <Link to='/logout' onClick={onLogoutHandler}>Logout</Link>&nbsp;
+        <Link to="/stadium">Stadium List</Link> &nbsp;
       </div>
       )
       :
@@ -99,7 +102,7 @@ function App() {
     </nav>
     <div className="App">
       <Routes>
-        <Route path='/stadium/index' element={<StadiumList />} />
+        <Route path="/stadium" element={isAuth ? <StadiumList user={user}/>:<Signin login={loginHandler}/>}></Route>
         <Route path='/signup' element={ <Signup register={registerHandler} /> } />
         <Route path='/signin' element={ <Signin login={loginHandler} /> } />
       </Routes>

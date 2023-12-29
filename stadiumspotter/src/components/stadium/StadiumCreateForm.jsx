@@ -1,6 +1,6 @@
-import React ,{useState} from 'react'
+import React ,{useState} from 'react';
 
-export default function StadiumCreateForm({add,sports,facilities}) {
+export default function StadiumCreateForm({add,sports,facilities,user}) {
 
   const [newStadium,setNewStadium]=useState({});
   const [facilitesArr,setfacilitesArr]=useState([]);
@@ -10,8 +10,12 @@ export default function StadiumCreateForm({add,sports,facilities}) {
     setfacilitesArr(facArr);
   }
 
-  const handleChange =(e)=>{
+  const addUser =(e)=>{
+    newStadium["user"]=user.id;
+  }
 
+  const handleChange =(e)=>{
+    console.log(user);
     const stad = {...newStadium};
     stad[e.target.name] = e.target.value;
     console.log(stad);
@@ -23,6 +27,7 @@ export default function StadiumCreateForm({add,sports,facilities}) {
     console.log(newStadium);
     console.log("facility array"+facilitesArr);
     newStadium.facilities = facilitesArr;
+    addUser();
     add(newStadium);
     e.target.reset();
   }
@@ -73,13 +78,13 @@ export default function StadiumCreateForm({add,sports,facilities}) {
         </select>
       </div>
 
-      {/* 
-
-      IMPORTANT TO BE ADDED IN THE DATA 
-
-      <input type='hidden' value={userid} name='user' /> 
       
-      */}
+
+      {/*IMPORTANT TO BE ADDED IN THE DATA */}
+
+      <input type='hidden' value={user.id} name='user' onSubmit={addUser} /> 
+      
+      
       <button type='submit'>Add Stadium</button>
     </form>
 

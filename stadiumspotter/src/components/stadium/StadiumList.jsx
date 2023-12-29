@@ -5,18 +5,35 @@ import StadiumCreateForm from './StadiumCreateForm';
 import "bootstrap/dist/css/bootstrap.min.css"
 import StadiumEditForm from './StadiumEditForm';
 
-export default function StadiumList() {
+export default function StadiumList(props) {
     const [stadiums,setStadiums]=useState([]);
     const [sports,setSports]=useState([]);
     const [facilities,setFacilities]=useState([]);
     const [isEdit,setIsEdit]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
+    const [userDetails, setUserDetails]=useState({});
 
     useEffect(() => {
       
     loadStadiumsList();
+    // userGet(user);
       
     }, []);
+
+    // const userGet =(user)=>{
+    //     Axios.get(`user/detail?id=${user.id}`)
+    //     .then(res=>{
+    //         console.log("res",res);
+    //         console.log(res.data.userDetail);
+    //         setUserDetails(res.data.userDetail);
+    //         // userDetails.password=null;
+    //         console.log(userDetails);
+    //     })
+    //     .catch(err=>{
+    //         console.log("User undefined");
+    //         console.log(err);
+    //     })
+    // }
 
     /*
 
@@ -27,6 +44,7 @@ export default function StadiumList() {
     -setting the list of facilites for create stadium form
     */
     const loadStadiumsList = ()=>{
+        // console.log("user:",user.id);
         Axios.get("stadium/index")
         .then(response=>{
             Axios.get("stadium/add")
@@ -102,11 +120,24 @@ export default function StadiumList() {
         })
     }
 
+    const deleteStadium = (id)=>{
+        Axios.delete(`stadium/delete?id=${id}`)
+        .then(res=>{
+            console.log("deleted");
+            console.log(res);
+            loadStadiumsList();
+        })
+        .catch(err=>{
+            console.log("Error Deleting Stadium");
+            console.log(err);
+        })
+    }
+
 
     const allStadiums = stadiums.map((stadium,index)=>(
         <>
         <tr key={index}>
-            <Stadium {...stadium} edit={editStadium} />
+            <Stadium {...stadium} edit={editStadium} delete={deleteStadium}/>
         </tr>
         
         </>
@@ -127,6 +158,7 @@ export default function StadiumList() {
                 <th>Stadium Facilities</th>
                 <th>Stadium Category</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
             {allStadiums}
             </tbody>
@@ -135,7 +167,7 @@ export default function StadiumList() {
         <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
         sports={sports} facilities={facilities}/>
         :
-        <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities}/>}
+        <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities} user={props.user}/>}
         
     </div>
     </div>
