@@ -2,8 +2,8 @@
 import './App.css';
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-// import Signin from './components/user/Signin';
-// import Signup from './components/user/Signup';
+import Signin from './components/user/Signin';
+import Signup from './components/user/Signup';
 import {Routes,Route,Link} from 'react-router-dom';
 import  Axios  from 'axios';
 import {jwtDecode} from 'jwt-decode';
@@ -78,9 +78,33 @@ function App() {
 
   return (
 
+    <div>
+    <nav>
+      {isAuth ?
+      (
+      <div>
+        <Link to="/">Home</Link> &nbsp;
+        <Link to='/logout' onClick={onLogoutHandler}>Logout</Link>
+      </div>
+      )
+      :
+      (
+        <div>
+        <Link to="/">Home</Link> &nbsp;
+        <Link to='/signup'>Signup</Link> &nbsp;
+        <Link to='/signin'>Signin</Link> &nbsp;
+      </div>
+      )
+      }
+    </nav>
     <div className="App">
-      
-   <StadiumList />
+      <Routes>
+        <Route path='/stadium/index' element={<StadiumList />} />
+        <Route path='/signup' element={ <Signup register={registerHandler} /> } />
+        <Route path='/signin' element={ <Signin login={loginHandler} /> } />
+      </Routes>
+    </div>
+   
 
     </div>
     
