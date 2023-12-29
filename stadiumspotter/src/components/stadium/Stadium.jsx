@@ -13,6 +13,8 @@ export default function Stadium(props) {
                     ))}</td>
                <td>{props.category.category}</td>
                <td><button onClick={()=>props.edit(props._id)}>Edit</button></td>
+               <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
+
     </>
   )
 }
