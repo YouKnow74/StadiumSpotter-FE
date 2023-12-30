@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import startTime from './startTime'
 import endTime from './endTime'
 import Axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ReservationCreateForm(props) {
 
@@ -11,7 +11,10 @@ export default function ReservationCreateForm(props) {
     const [currentStadium, setCurrentStadium] = useState({})
 
     const [selectedStartTime, setSelectedStartTime] = useState("");
+    const [selectedEndTime, setSelectedEndTime] = useState("")
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
     
@@ -38,12 +41,34 @@ export default function ReservationCreateForm(props) {
         const selectedValue = e.target.value;
         setSelectedStartTime (selectedValue)
 
-        console.log(availableEndTime)
         const startTimeIndex = startTime.indexOf(selectedValue)
 
         const slicedEndTime = endTime.slice(startTimeIndex, endTime.length)
-        setAvailableEndTime(slicedEndTime);
+        // console.log("Selected Start Time:", selectedValue);
+        // console.log("Start Time Index:", startTimeIndex);
+        // console.log("Sliced End Time:", slicedEndTime);
+        setAvailableEndTime([...slicedEndTime]);
+        const reservation = { ...newReserve, startTime: selectedValue, endTime: null };
+        console.log(reservation);
+        setNewReserve(reservation);
     }
+
+    const handleEndTime = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedEndTime(selectedValue);
+        // Calculate the price based on the index of the selected start time and end time
+        const startTimeIndex = startTime.indexOf(selectedStartTime);
+        const endTimeIndex = endTime.indexOf(selectedValue);
+
+        const durationInHours = endTimeIndex - startTimeIndex;
+
+        const stadiumPrice = currentStadium.price;
+        const totalPrice = stadiumPrice * (durationInHours + 1);
+        
+        const reservation = { ...newReserve, endTime: selectedValue, price: totalPrice };
+        console.log(reservation);
+        setNewReserve(reservation);
+    };
 
     const addReservation = (reservation) => {
         Axios.post('/reservation/add', reservation)
@@ -56,17 +81,19 @@ export default function ReservationCreateForm(props) {
         })
     }
 
-    const handleChange = (e) => {
+    const handleChange = (event) => {
         const reservation = {...newReserve};
 
-        reservation[e.target.name] = e.target.value;
+        reservation[event.target.name] = event.target.value;
         console.log(reservation);
         setNewReserve(reservation);
+        console.log(reservation.endTime);
     }
 
     const submitReservation = (e) =>{
         e.preventDefault();
         addReservation(newReserve);
+        navigate(`/`)
     }
 
   return (
@@ -91,7 +118,7 @@ export default function ReservationCreateForm(props) {
                 {selectedStartTime ? 
                 <div>
                     <label>End Time</label>
-                    <select name='endTime'>
+                    <select name='endTime' value={selectedEndTime} onChange={handleEndTime}>
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
