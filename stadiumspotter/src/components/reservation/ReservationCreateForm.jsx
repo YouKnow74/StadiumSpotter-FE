@@ -1,14 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import startTime from './startTime'
 import endTime from './endTime'
 import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-export default function ReservationCreateForm() {
+export default function ReservationCreateForm(props) {
 
     const [newReserve, setNewReserve] = useState({})
+    const stadium = useParams();
+    const [currentStadium, setCurrentStadium] = useState({})
 
     const [selectedStartTime, setSelectedStartTime] = useState("");
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
+
+    useEffect(() => {
+    
+        gettingStadiumData();
+      
+    }, [])
+    
+    const gettingStadiumData = () => {
+        Axios.get(`/reservation/add?id=${stadium.id}`)
+        .then((res) => {
+            const reservationData = res.data.reservation;
+            const stadiumData = res.data.stadium;
+            console.log(reservationData);
+            console.log(stadiumData);
+            setCurrentStadium(stadiumData);
+        })
+        .catch(err => {
+            console.log("Error Fetching Data!");
+            console.log(err);
+        })
+    }
 
     const handleStartTime = (e) => {
         const selectedValue = e.target.value;
@@ -32,16 +56,29 @@ export default function ReservationCreateForm() {
         })
     }
 
+    const handleChange = (e) => {
+        const reservation = {...newReserve};
+
+        reservation[e.target.name] = e.target.value;
+        console.log(reservation);
+        setNewReserve(reservation);
+    }
+
+    const submitReservation = (e) =>{
+        e.preventDefault();
+        addReservation(newReserve);
+    }
+
   return (
     <div>
         <h1>Reservation</h1>
-        <div><img/></div>
+        <div><img src='' alt='...'/></div>
         <div>
-            <h2></h2>
-            <form>
+            <h2>{currentStadium.name}</h2>
+            <form onSubmit={submitReservation}>
                 <div>
                     <label htmlFor="inputdate" class="form-label">Choose a Date</label>
-                    <input type="date" class="form-control" id="inputdate" name="date" />
+                    <input type="date" class="form-control" id="inputdate" name="date" onChange={handleChange} />
                 </div>
                 <div>
                     <label>Start Time</label>
@@ -70,7 +107,7 @@ export default function ReservationCreateForm() {
                     </select>
                 </div> 
                 }
-                
+                <button type='submit'>Reserve Stadium</button>
             </form>
         </div>
     </div>

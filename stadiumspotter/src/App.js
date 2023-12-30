@@ -115,7 +115,7 @@ function App() {
         <Route path="/stadium" element={isAuth ? <StadiumList user={user}/>:<Signin login={loginHandler}/>}></Route>
         <Route path='/signup' element={ <Signup register={registerHandler} /> } />
         <Route path='/signin' element={ <Signin login={loginHandler} /> } />
-        <Route path='/reserve' element={ <ReservationCreateForm /> }/>
+        <Route path='/reservation/:id' element={ <ReservationCreateForm /> }/>
       </Routes>
     </div>
    
