@@ -9,13 +9,24 @@ export default function FacilityList() {
     const [facilities,setFacilites]=useState([])
     const [isAdd,setIsAdd]=useState(false);
     const [isEdit,setIsEdit]=useState(false);
+    const [facilityEdit,setFacilityEdit]=useState({})
 
     useEffect(() => {
    
         loadFacilitesList();
     
       
-    }, [])
+    }, []);
+
+    const changeToAdd=()=>{
+    setIsAdd(!isAdd)
+    setIsEdit(false)
+    }
+    
+    const changeToEdit =()=>{
+        setIsAdd(false);
+        setIsEdit(true);
+    }
 
     const loadFacilitesList =()=>{
         Axios.get("facility/index")
@@ -42,16 +53,57 @@ export default function FacilityList() {
             console.log(err);
         })
     }
+
+    const editFacility =(id)=>{
+        Axios.get(`facility/edit?id=${id}`)
+        .then(res=>{
+            console.log("Fetched facility to edit");
+            console.log(res);
+            setFacilityEdit(res.data.facility)
+        })
+        .catch(err=>{
+            console.log("error fetching facility to edit");
+            console.log(err);
+        })
+
+    }
+
+    const updateFacility=(facility)=>{
+        Axios.put("facility/update",facility)
+        .then(res=>{
+            console.log("Facility updated");
+            console.log(res);
+            loadFacilitesList();
+        })
+        .catch(err=>{
+            console.log("error updating facility");
+            console.log(err);
+        })
+    }
+    const deleteFacility=(id)=>{
+        Axios.delete(`facility/delete?id=${id}`)
+        .then(res=>{
+            console.log("facility deleted");
+            console.log(res);
+            loadFacilitesList();
+        })
+        .catch(err=>{
+            console.log("Facility Did not Delete");
+            console.log(err);
+        })
+    }
     const allFacilites = facilities.map((onefacility,index)=>(
         <tr key={index}>
-            <Facility {...onefacility} />
+            <Facility {...onefacility} edit={editFacility} 
+            changeToEdit={changeToEdit} delete={deleteFacility}
+            />
         </tr>
     ))
   return (
     <div>
 
 <h1>All Facilities</h1>
-<button onClick={()=>(setIsAdd(!isAdd)&& setIsEdit(false))}>Add Facility Form</button>
+<button onClick={changeToAdd}>Add Facility Form</button>
     {/* This is temporary only and needs to be designed diffrently */}
     <div>
         <table className='table table-dark table-striped-columns'>
@@ -66,13 +118,13 @@ export default function FacilityList() {
             </tbody>
         </table>
         {isAdd ?
-        <FacilityAddForm />:
+        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd}/>:
         ""
         }
         {
             isEdit ?
-            <FacilityEditForm />:
-            ""
+            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} />:
+            null
         }
         
     </div>
