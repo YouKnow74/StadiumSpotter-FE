@@ -59,6 +59,10 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
         {/*should be a dropdown select option TO BE EDITED */ }
         <input type='text' name="location"  onChange={handleChange}/>
       </div>
+      <div>
+        <label>Stadium Price:</label>
+        <input type='text' name="price"  onChange={handleChange}/>
+      </div>
 
       <div>
         <label>Stadium Sports:</label>

@@ -9,7 +9,12 @@ import  Axios  from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import { useEffect } from 'react';
 import StadiumList from './components/stadium/StadiumList';
+
+import SportList from './components/sport/SportList';
+import FacilityList from './components/facilities/FacilityList';
+
 import ReservationCreateForm from './components/reservation/ReservationCreateForm';
+
 
 
 function App() {
@@ -89,6 +94,8 @@ function App() {
         <Link to="/">Home</Link> &nbsp;
         <Link to='/logout' onClick={onLogoutHandler}>Logout</Link>&nbsp;
         <Link to="/stadium">Stadium List</Link> &nbsp;
+        <Link to="/sport">Sport List</Link> &nbsp;
+        <Link to="/facility">Facility List</Link> &nbsp;
       </div>
       )
       :
@@ -103,6 +110,8 @@ function App() {
     </nav>
     <div className="App">
       <Routes>
+      <Route path="/facility" element={isAuth ? <FacilityList user={user}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/sport" element={isAuth ? <SportList user={user}/>:<Signin login={loginHandler}/>}></Route>
         <Route path="/stadium" element={isAuth ? <StadiumList user={user}/>:<Signin login={loginHandler}/>}></Route>
         <Route path='/signup' element={ <Signup register={registerHandler} /> } />
         <Route path='/signin' element={ <Signin login={loginHandler} /> } />

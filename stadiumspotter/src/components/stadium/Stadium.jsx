@@ -12,6 +12,8 @@ export default function Stadium(props) {
                     <p key={index}>{fac.facility}</p>
                     ))}</td>
                <td>{props.category.category}</td>
+               <td>{props.price}</td>
+               <td>{props.image}</td>
                <td><button onClick={()=>props.edit(props._id)}>Edit</button></td>
                <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
 

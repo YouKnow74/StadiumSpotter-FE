@@ -46,6 +46,11 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
       </div>
 
       <div>
+        <label>Stadium Price:</label>
+        <input type='text' name="price"  onChange={handleChange} value={editStadium.price}/>
+      </div>
+  
+      <div>
         <label>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         <input type='text' name="location"  onChange={handleChange} value={editStadium.location}/>

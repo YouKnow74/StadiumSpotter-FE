@@ -151,12 +151,14 @@ export default function StadiumList(props) {
         <table className='table table-dark table-striped-columns'>
             <tbody>
             <tr>
-                <th>Stadium Name:</th>
+                <th>Stadium Name</th>
                 <th>Stadium Description</th>
                 <th>Stadium Size</th>
                 <th>Stadium Location</th>
                 <th>Stadium Facilities</th>
                 <th>Stadium Category</th>
+                <th>Stadium Price (each hour)</th>
+                <th>Stadium Image</th>{/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/}
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
