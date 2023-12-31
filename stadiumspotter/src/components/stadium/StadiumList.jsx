@@ -4,6 +4,7 @@ import Stadium from './Stadium';
 import StadiumCreateForm from './StadiumCreateForm';
 import "bootstrap/dist/css/bootstrap.min.css"
 import StadiumEditForm from './StadiumEditForm';
+import { useNavigate } from 'react-router-dom';
 
 export default function StadiumList(props) {
     const [stadiums,setStadiums]=useState([]);
@@ -11,7 +12,8 @@ export default function StadiumList(props) {
     const [facilities,setFacilities]=useState([]);
     const [isEdit,setIsEdit]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
-    const [userDetails, setUserDetails]=useState({});
+    // const [userDetails, setUserDetails]=useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
       
@@ -137,11 +139,25 @@ export default function StadiumList(props) {
         })
     }
 
+    const reserveStadium = (id) => {
+        Axios.get(`reservation/add?id=${id}`)
+        .then((response) => {
+            const stadiumData = response.data.stadium
+            setCurrentStadium(stadiumData)
+            console.log(response.data.stadium);
+            navigate(`/reservation/${stadiumData._id}`)
+        })
+        .catch(err=>{
+            console.log("Error Reserving Stadium");
+            console.log(err);
+        })
+    }
+
 
     const allStadiums = stadiums.map((stadium,index)=>(
         <>
         <tr key={index}>
-            <Stadium {...stadium} edit={editStadium} delete={deleteStadium}/>
+            <Stadium {...stadium} edit={editStadium} delete={deleteStadium} reserve={reserveStadium}/>
         </tr>
         
         </>
@@ -164,6 +180,7 @@ export default function StadiumList(props) {
                 <th>Stadium Category</th>
                 <th>Stadium Price (each hour)</th>
                 <th>Stadium Image</th>{/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/}
+                <th>Reserve</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -175,7 +192,7 @@ export default function StadiumList(props) {
         sports={sports} facilities={facilities}/>
         :
         <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities} user={props.user}/>}
-        
+        {/* <ReservationCreateForm currentStadium={currentStadium} /> */}
     </div>
     </div>
   )
