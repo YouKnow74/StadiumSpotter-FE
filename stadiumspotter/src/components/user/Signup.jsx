@@ -3,6 +3,13 @@ import React, { useState } from 'react'
 export default function Signup(props) {
 
     const [newUser, setNewUser] = useState({})
+    const [image,setImage]=useState("");
+
+    const handleImage=(e)=>{
+        console.log(e.target.files);
+        setImage(e.target.files[0])
+        console.log("image");
+      }
 
     const handleChange = (e) => {
         const user = {...newUser};
@@ -12,14 +19,17 @@ export default function Signup(props) {
     }
     const registerHandler = (e) => {
         e.preventDefault();
-        props.register(newUser);
+        const formData = new FormData();
+        formData.append("user",JSON.stringify(newUser));
+        formData.append("image",image)
+        props.register(formData);
         e.target.reset();
     }
 
     return (
         <div>
             <h1>Signup</h1>
-            <form onSubmit={registerHandler}>
+            <form onSubmit={registerHandler} encType='multipart/form-data'>
                 <div>
                     <label>First Name</label>
                     <input type='text' name='firstName' onChange={handleChange} className='form-control'></input>
@@ -74,6 +84,11 @@ export default function Signup(props) {
                 <div>
                     <label>Password</label>
                     <input type='password' name='password' onChange={handleChange} className='form-control'></input>
+                </div>
+
+                <div>
+                    <label>Image Upload</label>
+                    <input type='file' name='image' onChange={handleImage} className='form-control'></input>
                 </div>
 
                 <div>

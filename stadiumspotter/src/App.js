@@ -21,7 +21,7 @@ function App() {
 
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
- 
+  const [userDetails,setUserDetails]=useState()
 
   useEffect(() => {
     const user = getUser();
@@ -29,6 +29,16 @@ function App() {
     if(user){
       setIsAuth(true);
       setUser(user);
+      Axios.get(`user/detail?id=${user.id}`)
+      .then(res=>{
+      console.log("user fetched");
+      console.log(res);
+      setUserDetails(res.data.userDetail);
+      })
+      .catch(err=>{
+        console.log("User details not fetched");
+        console.log(err);
+      })
     }else{
       localStorage.removeItem("token");
       setIsAuth(false);
@@ -37,7 +47,11 @@ function App() {
   }, [])
 
   const registerHandler = (user) => {
-    Axios.post("user/signup", user)
+    Axios.post("user/signup", user,{
+      headers: {
+          'Content-Type' : 'multipart/form-data'
+      }
+  })
     .then((res) => {
       console.log(res);
     })
@@ -110,9 +124,9 @@ function App() {
     </nav>
     <div className="App">
       <Routes>
-      <Route path="/facility" element={isAuth ? <FacilityList user={user}/>:<Signin login={loginHandler}/>}></Route>
-      <Route path="/sport" element={isAuth ? <SportList user={user}/>:<Signin login={loginHandler}/>}></Route>
-        <Route path="/stadium" element={isAuth ? <StadiumList user={user}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/facility" element={isAuth ? <FacilityList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+        <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
         <Route path='/signup' element={ <Signup register={registerHandler} /> } />
         <Route path='/signin' element={ <Signin login={loginHandler} /> } />
         <Route path='/reservation/:id' element={ <ReservationCreateForm /> }/>
