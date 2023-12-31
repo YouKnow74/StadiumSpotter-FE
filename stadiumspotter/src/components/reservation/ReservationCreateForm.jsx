@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ReservationCreateForm(props) {
 
+    console.log(props.user);
+
     const [newReserve, setNewReserve] = useState({})
     const stadium = useParams();
     const [currentStadium, setCurrentStadium] = useState({})
@@ -13,6 +15,10 @@ export default function ReservationCreateForm(props) {
     const [selectedStartTime, setSelectedStartTime] = useState("");
     const [selectedEndTime, setSelectedEndTime] = useState("")
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
+
+    const addUser =(e)=>{
+        newReserve["user"]=props.user.id;
+    }
 
     const navigate = useNavigate();
 
@@ -64,7 +70,7 @@ export default function ReservationCreateForm(props) {
 
         const stadiumPrice = currentStadium.price;
         const totalPrice = stadiumPrice * (durationInHours + 1);
-        
+
         const reservation = { ...newReserve, endTime: selectedValue, price: totalPrice };
         console.log(reservation);
         setNewReserve(reservation);
@@ -76,13 +82,13 @@ export default function ReservationCreateForm(props) {
             console.log("Reservation is Successful!");
         })
         .catch( err => {
-            console.log("Error Addding Author!");
+            console.log("Error Addding reservation!");
             console.log(err);
         })
     }
 
     const handleChange = (event) => {
-        const reservation = {...newReserve};
+        const reservation = {...newReserve, user: props.user.id, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending"};
 
         reservation[event.target.name] = event.target.value;
         console.log(reservation);
@@ -92,6 +98,7 @@ export default function ReservationCreateForm(props) {
 
     const submitReservation = (e) =>{
         e.preventDefault();
+        // newReserve.date =JSON.stringify(newReserve.date);
         addReservation(newReserve);
         navigate(`/`)
     }
@@ -134,6 +141,10 @@ export default function ReservationCreateForm(props) {
                     </select>
                 </div> 
                 }
+                {/* <input type='hidden' value={props.user.id} name='user' onSubmit={handleChange} /> 
+                <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
+                <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
+                <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
                 <button type='submit'>Reserve Stadium</button>
             </form>
         </div>
