@@ -30,6 +30,7 @@ function App() {
     if(user){
       setIsAuth(true);
       setUser(user);
+      console.log("user",user);
       Axios.get(`user/detail?id=${user.id}`)
       .then(res=>{
       console.log("user fetched");
@@ -111,6 +112,7 @@ function App() {
         <Link to="/stadium">Stadium List</Link> &nbsp;
         <Link to="/sport">Sport List</Link> &nbsp;
         <Link to="/facility">Facility List</Link> &nbsp;
+        <Link to="/reservations">Reservations</Link> &nbsp;
       </div>
       )
       :
@@ -126,18 +128,14 @@ function App() {
     <div className="App">
       <Routes>
 
-        <Route path="/facility" element={isAuth ? <FacilityList user={user}/>:<Signin login={loginHandler}/>}></Route>
-        <Route path="/sport" element={isAuth ? <SportList user={user}/>:<Signin login={loginHandler}/>}></Route>
-        <Route path="/stadium" element={isAuth ? <StadiumList user={user}/>:<Signin login={loginHandler}/>}></Route>
-
       <Route path="/facility" element={isAuth ? <FacilityList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
       <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
       <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
 
-        <Route path='/signup' element={ <Signup register={registerHandler} /> } />
-        <Route path='/signin' element={ <Signin login={loginHandler} /> } />
-        <Route path='/reservation/:id' element={ <ReservationCreateForm user={user} /> }/>
-        <Route path='/reservations' element={ isAuth ? <ReservationList user={user} /> : <Signin login={loginHandler} /> } />
+      <Route path='/signup' element={ <Signup register={registerHandler} /> } />
+      <Route path='/signin' element={ <Signin login={loginHandler} /> } />
+      <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
+      <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
       </Routes>
     </div>
    

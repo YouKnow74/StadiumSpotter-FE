@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ReservationCreateForm(props) {
 
-    console.log(props.user);
+    console.log("user Data",props.user);
 
     const [newReserve, setNewReserve] = useState({})
     const stadium = useParams();
@@ -31,9 +31,7 @@ export default function ReservationCreateForm(props) {
     const gettingStadiumData = () => {
         Axios.get(`/reservation/add?id=${stadium.id}`)
         .then((res) => {
-            const reservationData = res.data.reservation;
             const stadiumData = res.data.stadium;
-            console.log(reservationData);
             console.log(stadiumData);
             setCurrentStadium(stadiumData);
         })
