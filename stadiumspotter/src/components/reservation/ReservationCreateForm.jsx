@@ -16,9 +16,7 @@ export default function ReservationCreateForm(props) {
     const [selectedEndTime, setSelectedEndTime] = useState("")
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
 
-    const addUser =(e)=>{
-        newReserve["user"]=props.user.id;
-    }
+
 
     const navigate = useNavigate();
 
@@ -88,7 +86,7 @@ export default function ReservationCreateForm(props) {
     }
 
     const handleChange = (event) => {
-        const reservation = {...newReserve, user: props.user.id, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending"};
+        const reservation = {...newReserve, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending"};
 
         reservation[event.target.name] = event.target.value;
         console.log(reservation);
