@@ -132,10 +132,12 @@ function App() {
       <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
       <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
 
+
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ <Signin login={loginHandler} /> } />
       <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
+
       </Routes>
     </div>
    
