@@ -4,14 +4,23 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
 
   const [newStadium,setNewStadium]=useState({});
   const [facilitesArr,setfacilitesArr]=useState([]);
+  const [image,setImage]=useState("");
+
+  const handleImage=(e)=>{
+    console.log(e.target.files);
+    // newStadium.image=e.target.files[0]
+    setImage(e.target.files[0])
+    console.log("image");
+    // console.log(newStadium.image.name);
+  }
 
   const handleMultiple =(e)=>{
     const facArr = Array.from(e.target.selectedOptions, (option)=>option.value);
     setfacilitesArr(facArr);
-  }
+  } 
 
   const addUser =(e)=>{
-    newStadium["user"]=user.id;
+    newStadium["user"]=user._id;
   }
 
   const handleChange =(e)=>{
@@ -24,11 +33,15 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
 
   const addStadium =(e)=>{
     e.preventDefault();
+    const formData = new FormData();
     console.log(newStadium);
     console.log("facility array"+facilitesArr);
     newStadium.facilities = facilitesArr;
     addUser();
-    add(newStadium);
+    formData.append("stadium",JSON.stringify(newStadium));
+    formData.append("image",image);
+    console.log("form data",formData);
+    add(formData);
     e.target.reset();
   }
 
@@ -37,7 +50,7 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
     <div>
       <h2>Add Stadium</h2>
 
-    <form onSubmit={addStadium}>
+    <form onSubmit={addStadium} encType="multipart/form-data">
 
       <div>
         <label>Stadium Name:</label>
@@ -65,6 +78,11 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
       </div>
 
       <div>
+        <label>Stadium image:</label>
+        <input type='file' name="image" onChange={handleImage} />
+      </div>
+
+      <div>
         <label>Stadium Sports:</label>
         <select type="text" name='category'  onChange={handleChange}>
           {sports.map((oneSport,index) => (
@@ -86,7 +104,7 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
 
       {/*IMPORTANT TO BE ADDED IN THE DATA */}
 
-      <input type='hidden' value={user.id} name='user' onSubmit={addUser} /> 
+      <input type='hidden' value={user} name='user' onSubmit={addUser} /> 
       
       
       <button type='submit'>Add Stadium</button>
