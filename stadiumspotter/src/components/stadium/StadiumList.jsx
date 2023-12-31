@@ -12,7 +12,7 @@ export default function StadiumList(props) {
     const [facilities,setFacilities]=useState([]);
     const [isEdit,setIsEdit]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
-    // const [userDetails, setUserDetails]=useState({});
+    const [userDetails, setUserDetails]=useState({});
     const navigate = useNavigate();
 
     useEffect(() => {

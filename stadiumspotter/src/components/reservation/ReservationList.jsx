@@ -48,7 +48,7 @@ export default function ReservationList() {
   const updateReservation = (reservation) => {
     Axios.put('reservation/update', reservation)
     .then((res) => {
-      console.log('Author updated Successfully');
+      console.log('Reservation updated Successfully');
       console.log(res);
       loadReservations();
       setIsEdit(false);
@@ -58,13 +58,23 @@ export default function ReservationList() {
     })
   }
 
+  const deleteReservation = (id) => {
+    Axios.delete(`reservation/delete?id=${id}`)
+    .then((res) => {
+      console.log('Reservation deleted Successfully');
+      console.log(res);
+      loadReservations();
+    })
+    .catch()
+  }
+
   const allReservations = reservations.map((reservation, index) => {
 
     // reservation.date = dayjs(reservation.date).format('DD/MM/YYYY')
     // console.log(reservation.date)
 
     return (<tr key={index}>
-      <Reservation {...reservation} edit={editView} />
+      <Reservation {...reservation} edit={editView} delete={deleteReservation} />
     </tr>
   )});
 
