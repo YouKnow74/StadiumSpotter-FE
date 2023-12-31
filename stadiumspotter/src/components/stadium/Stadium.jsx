@@ -13,7 +13,7 @@ export default function Stadium(props) {
                     ))}</td>
                <td>{props.category.category}</td>
                <td>{props.price}</td>
-               <td>{props.image}</td>
+               <td><img src={"/images/"+props.image} style={{width:"35px",height:"35px"}}/></td>
                <td><button onClick={()=>props.edit(props._id)}>Edit</button></td>
                <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
 

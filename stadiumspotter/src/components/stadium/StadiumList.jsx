@@ -78,7 +78,11 @@ export default function StadiumList(props) {
     }
 
     const addStadium =(stadium)=>{
-        Axios.post("stadium/add",stadium)
+        Axios.post("stadium/add",stadium, {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("Stadium Added");
             console.log(res);
@@ -145,6 +149,7 @@ export default function StadiumList(props) {
 
   return (
    <div>
+    <img src={"/images/"+userDetails.image} style={{width:"35px",height:"35px"}}/>
     <h1>All Stadiums</h1>
     {/* This is temporary only and needs to be designed diffrently */}
     <div>
