@@ -14,6 +14,7 @@ export default function Stadium(props) {
                <td>{props.category.category}</td>
                <td>{props.price}</td>
                <td>{props.image}</td>
+               <td><button onClick={()=>props.reserve(props._id)}>Reserve</button></td>
                <td><button onClick={()=>props.edit(props._id)}>Edit</button></td>
                <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
 
