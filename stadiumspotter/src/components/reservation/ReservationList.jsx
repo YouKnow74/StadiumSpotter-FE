@@ -37,7 +37,7 @@ export default function ReservationList() {
       let reservation = res.data.reservation;
       reservation.date = dayjs(reservation.date).format('YYYY-MM-DD')
       console.log(reservation.date)
-      setIsEdit(true);
+      setIsEdit(!isEdit);
       setCurrentReservation(reservation);
     })
     .catch((err) => {
@@ -65,7 +65,9 @@ export default function ReservationList() {
       console.log(res);
       loadReservations();
     })
-    .catch()
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   const allReservations = reservations.map((reservation, index) => {
@@ -98,7 +100,8 @@ export default function ReservationList() {
               </tbody>
             </table>
         </div>
-        < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />
+        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />}
+        
     </div>
   )
 }

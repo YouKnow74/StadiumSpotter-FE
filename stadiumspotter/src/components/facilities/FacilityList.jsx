@@ -25,7 +25,7 @@ export default function FacilityList() {
     
     const changeToEdit =()=>{
         setIsAdd(false);
-        setIsEdit(true);
+        setIsEdit(!isEdit);
     }
 
     const loadFacilitesList =()=>{

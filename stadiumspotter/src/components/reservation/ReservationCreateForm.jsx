@@ -12,8 +12,8 @@ export default function ReservationCreateForm(props) {
     const stadium = useParams();
     const [currentStadium, setCurrentStadium] = useState({})
 
-    const [selectedStartTime, setSelectedStartTime] = useState("");
-    const [selectedEndTime, setSelectedEndTime] = useState("")
+    const [selectedStartTime, setSelectedStartTime] = useState(startTime[0]);
+    const [selectedEndTime, setSelectedEndTime] = useState(endTime[0])
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
 
 
@@ -50,7 +50,7 @@ export default function ReservationCreateForm(props) {
         // console.log("Start Time Index:", startTimeIndex);
         // console.log("Sliced End Time:", slicedEndTime);
         setAvailableEndTime([...slicedEndTime]);
-        const reservation = { ...newReserve, startTime: selectedValue, endTime: null };
+        const reservation = { ...newReserve, startTime: selectedValue, endTime: endTime[startTimeIndex] };
         console.log(reservation);
         setNewReserve(reservation);
     }
@@ -118,7 +118,6 @@ export default function ReservationCreateForm(props) {
                         ))}
                     </select>
                 </div>
-                {selectedStartTime ? 
                 <div>
                     <label>End Time</label>
                     <select name='endTime' value={selectedEndTime} onChange={handleEndTime}>
@@ -127,16 +126,7 @@ export default function ReservationCreateForm(props) {
                         ))}
                     </select>
                 </div> 
-                :
-                <div>
-                    <label>End Time</label>
-                    <select name='endTime' aria-label="Disabled select example" disabled>
-                        {endTime.map((time, index) => (
-                            <option key={index} value={time}>{time}</option>
-                        ))}
-                    </select>
-                </div> 
-                }
+                
                 {/* <input type='hidden' value={props.user.id} name='user' onSubmit={handleChange} /> 
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
                 <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
