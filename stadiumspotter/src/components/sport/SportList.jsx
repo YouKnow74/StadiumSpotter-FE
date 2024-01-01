@@ -40,7 +40,11 @@ export default function SportList() {
     }
 
     const addSport=(sport)=>{
-        Axios.post("sport/add",sport)
+        Axios.post("sport/add",sport,{
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("sport added");
             console.log(res);

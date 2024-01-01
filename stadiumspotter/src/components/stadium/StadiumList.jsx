@@ -18,24 +18,8 @@ export default function StadiumList(props) {
     useEffect(() => {
       
     loadStadiumsList();
-    // userGet(user);
       
     }, []);
-
-    // const userGet =(user)=>{
-    //     Axios.get(`user/detail?id=${user.id}`)
-    //     .then(res=>{
-    //         console.log("res",res);
-    //         console.log(res.data.userDetail);
-    //         setUserDetails(res.data.userDetail);
-    //         // userDetails.password=null;
-    //         console.log(userDetails);
-    //     })
-    //     .catch(err=>{
-    //         console.log("User undefined");
-    //         console.log(err);
-    //     })
-    // }
 
     /*
 
@@ -47,7 +31,11 @@ export default function StadiumList(props) {
     */
     const loadStadiumsList = ()=>{
         // console.log("user:",user.id);
-        Axios.get("stadium/index")
+        Axios.get("stadium/index",{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("token")
+            }
+        })
         .then(response=>{
             Axios.get("stadium/add")
             .then(res=>{
@@ -82,8 +70,9 @@ export default function StadiumList(props) {
     const addStadium =(stadium)=>{
         Axios.post("stadium/add",stadium, {
             headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
         })
         .then(res=>{
             console.log("Stadium Added");

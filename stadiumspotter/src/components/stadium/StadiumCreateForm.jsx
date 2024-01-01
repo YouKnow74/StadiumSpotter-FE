@@ -1,4 +1,5 @@
 import React ,{useState} from 'react';
+import locations from './location';
 
 export default function StadiumCreateForm({add,sports,facilities,user}) {
 
@@ -70,7 +71,12 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
       <div>
         <label>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
-        <input type='text' name="location"  onChange={handleChange}/>
+        {/* <input type='text' name="location"  onChange={handleChange}/> */}
+        <select name='location' onChange={handleChange}>
+           {locations.map((oneLocation, index) => (
+            <option key={index} value={oneLocation}>{oneLocation}</option>
+              ))}
+        </select>
       </div>
       <div>
         <label>Stadium Price:</label>

@@ -4,6 +4,15 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
 
     const [newSport,setNewSport]=useState({});
     const [stadiumsArr,setStadiumsArr]=useState([]);
+    const [image,setImage]=useState("");
+
+    const handleImage=(e)=>{
+      console.log(e.target.files);
+ 
+      setImage(e.target.files[0])
+      console.log("image");
+
+    }
 
     const handleMultiple =(e)=>{
         const stadArr = Array.from(e.target.selectedOptions, (option)=>option.value);
@@ -21,14 +30,17 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
         e.preventDefault();
         console.log(newSport);
         newSport.stadium = stadiumsArr;
-        add(newSport);
+        const formData = new FormData();
+        formData.append("sport",JSON.stringify(newSport));
+        formData.append("image",image);
+        add(formData);
         e.target.reset();
         setIsAdd(false);
     }
   return (
     <div>
         <h2>Add Sport</h2>
-        <form onSubmit={addSport}>
+        <form onSubmit={addSport} encType="multipart/form-data">
 
             <div>
                 <label>Category:</label>
@@ -37,8 +49,8 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
 
             <div>
                 <label>Image:</label>
-                {/* NEEDS TO BE FILE UPLOAD USING MULTER / CLOUDINARY*/ }
-                <input type='text' name='image' onChange={handleChange}/>
+      
+                <input type='file' name='image' onChange={handleImage}/>
             </div>
 
             <div>
