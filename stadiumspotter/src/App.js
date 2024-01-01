@@ -15,6 +15,9 @@ import FacilityList from './components/facilities/FacilityList';
 
 import ReservationCreateForm from './components/reservation/ReservationCreateForm';
 import ReservationList from './components/reservation/ReservationList';
+import UserList from './components/user/UserList';
+import UserIndex from './components/user/UserIndex';
+import UserEditForm from './components/user/UserEditForm';
 
 
 
@@ -50,6 +53,7 @@ function App() {
     }
   }, [])
   console.log("UD",userDetails);
+
 
   const registerHandler = (user) => {
     Axios.post("user/signup", user,{
@@ -102,6 +106,8 @@ function App() {
     setUser(null)
   }
 
+  console.log(userDetails);
+
 
   return (
 
@@ -117,6 +123,7 @@ function App() {
         <Link to="/sport">Sport List</Link> &nbsp;
         <Link to="/facility">Facility List</Link> &nbsp;
         <Link to="/reservations">Reservations</Link> &nbsp;
+        <Link to={userDetails ? `/profile/${user.id}` : ''}>Profile</Link>
       </div>
       )
       :
@@ -136,11 +143,13 @@ function App() {
       <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
       <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
 
-
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ <Signin login={loginHandler} /> } />
       <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
+      <Route path='/usersList' element={ <UserList /> } />
+      <Route path='/profile/:id' element={ <UserIndex getUser={getUser} user={userDetails} /> } />
+      <Route path='/editProfile' element={ <UserEditForm user={userDetails} /> } />
 
       </Routes>
     </div>
