@@ -112,7 +112,7 @@ function App() {
   return (
 
     <div>
-      <img src={userDetails?"/images/"+userDetails.image : ""} width={50} height={50} style={{border: "1px solid red"}}/>
+      {user && <img src={userDetails?"/images/"+userDetails.image : ""} width={50} height={50} style={{border: "1px solid red"}}/>}
     <nav>
       {isAuth ?
       (
@@ -144,7 +144,7 @@ function App() {
       <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
 
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
-      <Route path='/signin' element={ <Signin login={loginHandler} /> } />
+      <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
       <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
       <Route path='/usersList' element={ <UserList /> } />
