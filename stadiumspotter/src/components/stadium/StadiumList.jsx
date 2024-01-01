@@ -113,7 +113,11 @@ export default function StadiumList(props) {
     }
     
     const updateStadium =(stadium)=>{
-        Axios.put("stadium/update",stadium)
+        Axios.put("stadium/update",stadium , {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("Stadium Updated");
             console.log(res);

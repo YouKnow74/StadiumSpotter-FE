@@ -3,7 +3,16 @@ import React, { useState } from 'react'
 export default function StadiumEditForm({stadium,update,facilities,sports}) {
   
   const [editStadium,setEditStadium]=useState(stadium);
-  const [facilitesArr,setfacilitesArr]=useState([]);
+  const [facilitesArr,setfacilitesArr]=useState(editStadium.facilities);
+  const [image,setImage]=useState("");
+
+  const handleImage=(e)=>{
+    console.log(e.target.files);
+    // newStadium.image=e.target.files[0]
+    setImage(e.target.files[0])
+    console.log("image");
+    // console.log(newStadium.image.name);
+  }
 
   const handleMultiple =(e)=>{
     const facArr = Array.from(e.target.selectedOptions, (option)=>option.value);
@@ -20,7 +29,10 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
   const updateStadium = (e)=>{
     e.preventDefault();
     editStadium.facilities = facilitesArr;
-    update(editStadium);
+    const formData = new FormData();
+    formData.append("stadium",JSON.stringify(editStadium));
+    formData.append("image",image);
+    update(formData);
     e.target.reset();
   }
 
@@ -28,7 +40,8 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
     <div>
 
     <h2>Stadium Edit Form</h2>
-    <form onSubmit={updateStadium}>
+    <img src={"/images/"+editStadium.image} width={50} height={50} style={{border: "1px solid red"}}/>
+    <form onSubmit={updateStadium} encType="multipart/form-data">
 
       <div>
         <label>Stadium Name:</label>
@@ -54,6 +67,11 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
         <label>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         <input type='text' name="location"  onChange={handleChange} value={editStadium.location}/>
+      </div>
+
+      <div>
+        <label>Stadium image:</label>
+        <input type='file' name="image" id='image' onChange={handleImage} />
       </div>
 
       <div>

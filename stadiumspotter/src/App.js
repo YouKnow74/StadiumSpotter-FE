@@ -36,6 +36,8 @@ function App() {
       console.log("user fetched");
       console.log(res);
       setUserDetails(res.data.userDetail);
+      console.log("userdetails");
+      console.log(userDetails);
       })
       .catch(err=>{
         console.log("User details not fetched");
@@ -47,6 +49,7 @@ function App() {
       setUser(null);
     }
   }, [])
+  console.log("UD",userDetails);
 
   const registerHandler = (user) => {
     Axios.post("user/signup", user,{
@@ -103,6 +106,7 @@ function App() {
   return (
 
     <div>
+      <img src={userDetails?"/images/"+userDetails.image : ""} width={50} height={50} style={{border: "1px solid red"}}/>
     <nav>
       {isAuth ?
       (

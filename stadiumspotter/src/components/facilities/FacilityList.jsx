@@ -42,7 +42,11 @@ export default function FacilityList() {
     }
 
     const addFacility =(facility)=>{
-        Axios.post("facility/add",facility)
+        Axios.post("facility/add",facility,{
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("Facility added");
             console.log(res);
@@ -69,7 +73,11 @@ export default function FacilityList() {
     }
 
     const updateFacility=(facility)=>{
-        Axios.put("facility/update",facility)
+        Axios.put("facility/update",facility,{
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("Facility updated");
             console.log(res);

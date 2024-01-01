@@ -8,7 +8,7 @@ export default function Facility(props) {
   return (
     <>
     <td>{props.facility}</td>
-    <td>{props.image}</td>{/*NEED TO BE AN IMAGE CURRENTLY ONLY TEXT*/}
+    <td><img src={"/images/"+props.image} style={{width:"35px",height:"35px"}}/></td>
     <td><button onClick={editFacility}>Edit</button></td>
     <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
     </>
