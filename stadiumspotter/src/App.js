@@ -123,7 +123,7 @@ function App() {
         <Link to="/sport">Sport List</Link> &nbsp;
         <Link to="/facility">Facility List</Link> &nbsp;
         <Link to="/reservations">Reservations</Link> &nbsp;
-        <Link to={userDetails ? `/profile/${user.id}` : ''}>Profile</Link>
+        <Link to={`/profile`}>Profile</Link>
       </div>
       )
       :
@@ -148,7 +148,7 @@ function App() {
       <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
       <Route path='/usersList' element={ <UserList /> } />
-      <Route path='/profile/:id' element={ <UserIndex getUser={getUser} user={userDetails} /> } />
+      <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} /> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} /> } />
 
       </Routes>
