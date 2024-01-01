@@ -1,81 +1,56 @@
 import Axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 
 export default function UserEditForm(props) {
 
-    const [newUser, setNewUser] = useState(props.user)
-    const [image,setImage]=useState("");
-
-    const navigate = useNavigate();
-
-    const handleImage=(e)=>{
-        console.log(e.target.files);
-        setImage(e.target.files[0])
-        console.log("image");
-      }
+    const [currentUser, setCurrentUser] = useState(props.user)
 
     const handleChange = (e) => {
-        const user = {...newUser};
+        const user = {...currentUser};
         user[e.target.name] = e.target.value;
         console.log(user);
-        setNewUser(user);
+        setCurrentUser(user);
     }
-    // const editProfile = (id) => {
-    //     Axios.get(`user/edit?id=${id}`)
-    //     .then((res) => {
-    //         console.log(res.data.user);
-    //         console.log("User Info Loaded");
-    //         let user = res.data.user;
-    //         setNewUser(user)
-    //     })
-    //     .catch((err) => {
-    //         console.log("Error loading user info");
-    //         console.log(err);
-    //     })
-    // }
 
-    
-    const updateProfile = (user) =>{
-        Axios.get('user/update', user)
+    const saveUpdatedUser = (e) => {
+        e.preventDefault();
+        Axios.put('/user/update', currentUser)
         .then((res) => {
-            console.log("User info updated successfulyy!");
-            console.log(res);
-            navigate('/profile')
-        })
+            console.log("User Updated Successfully!");
+            props.setIsEdit(false); 
+         })
         .catch((err) => {
-            console.log("Error updating user info");
+            console.log("Error Updating User Info");
             console.log(err);
-        })
+        });
     }
 
     return (
         <div>
-            <h1>Signup</h1>
-            <form onSubmit={updateProfile} encType='multipart/form-data'>
+            <form onSubmit={saveUpdatedUser} encType='multipart/form-data'>
                 <div>
                     <label>First Name</label>
-                    <input value={newUser.firstName} type='text' name='firstName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='firstName' value={currentUser.firstName} onChange={handleChange} className='form-control'></input>
                 </div>
 
                 <div>
                     <label>Last Name</label>
-                    <input type='text' name='lastName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='lastName' value={currentUser.lastName} onChange={handleChange} className='form-control'></input>
                 </div>
 
                 <div>
                     <label>Username</label>
-                    <input type='text' name='userName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='userName' value={currentUser.userName} onChange={handleChange} className='form-control'></input>
                 </div>
 
                 <div>
                     <label>Email Address</label>
-                    <input type='email' name='emailAddress' onChange={handleChange} className='form-control'></input>
+                    <input type='email' name='emailAddress' value={currentUser.emailAddress} onChange={handleChange} className='form-control'></input>
                 </div>
 
                 <div>
                     <label>Phone Number</label>
-                    <input type='text' name='phoneNumber' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='phoneNumber' value={currentUser.phoneNumber} onChange={handleChange} className='form-control'></input>
                 </div>
 
                 <div>
@@ -87,7 +62,8 @@ export default function UserEditForm(props) {
                          type="radio" 
                          name="role" 
                          id="stadiumOwner" 
-                         value="stadium owner" 
+                         value="stadium owner"
+                         checked={currentUser.role === 'stadium owner'}
                          onChange={handleChange}
                          ></input>
                     </div>
@@ -99,26 +75,35 @@ export default function UserEditForm(props) {
                         name='role' 
                         id='renter'
                         value="renter"
+                        checked={currentUser.role === 'renter'}
                         onChange={handleChange}
                         ></input>
                     </div>
+                    {/* {(currentUser.role == 'Admin') && */}
+                    <div>
+                        <label for='Admin'>Admin</label>
+                        <input 
+                        className='form-check-input' 
+                        type='radio' 
+                        name='role' 
+                        id='Admin'
+                        value="Admin"
+                        checked={currentUser.role === 'Admin'}
+                        onChange={handleChange}
+                        ></input>
+                    </div>
+                    {/* } */}
                 </div>
 
-                <div>
+                {/* <div>
                     <label>Password</label>
                     <input type='password' name='password' onChange={handleChange} className='form-control'></input>
-                </div>
+                </div> */}
 
                 <div>
-                    <label>Image Upload</label>
-                    <input type='file' name='image' onChange={handleImage} className='form-control'></input>
-                </div>
-
-                <div>
-                    <input type='submit' value='Update profile' className='btn btn-primary'></input>
+                    <input type='submit' value='Save' className='btn btn-primary'></input>
                 </div>
             </form>
-            {/* <button onClick={() => editProfile}></button> */}
         </div>
     )
 }
