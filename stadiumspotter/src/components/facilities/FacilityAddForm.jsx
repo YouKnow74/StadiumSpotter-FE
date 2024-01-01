@@ -3,6 +3,13 @@ import React,{useState} from 'react'
 export default function FacilityAddForm({add,setIsAdd}) {
 
   const [newFacility,setNewFacility]=useState({});
+  const [image,setImage]=useState("");
+
+  const handleImage=(e)=>{
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+    console.log("image");
+  }
 
   const handleChange =(e)=>{
     const fac = {...newFacility};
@@ -13,7 +20,10 @@ export default function FacilityAddForm({add,setIsAdd}) {
   const submitFacility =(e)=>{
     e.preventDefault();
     console.log("new facility",newFacility);
-    add(newFacility);
+    const formData = new FormData();
+    formData.append("facility",JSON.stringify(newFacility));
+    formData.append("image",image);
+    add(formData);
     setIsAdd(false);
     e.target.reset();
   }
@@ -22,7 +32,7 @@ export default function FacilityAddForm({add,setIsAdd}) {
     <div>
 
       <h2>Add Facility Form</h2>
-      <form onSubmit={submitFacility}>
+      <form onSubmit={submitFacility} encType="multipart/form-data">
 
         <div>
           <label>Facility Name</label>
@@ -31,7 +41,7 @@ export default function FacilityAddForm({add,setIsAdd}) {
 
         <div>
           <label>Facility Image</label>
-          <input name='image' type='text' onChange={handleChange}/>{/*NEEDS TO BE IMAGE WITH MULTER / Cloudinary*/}
+          <input name='image' type='file' onChange={handleImage}/>
         </div>
         <button type='submit'>Submit</button>
       </form>
