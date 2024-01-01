@@ -3,7 +3,7 @@ import React from 'react'
 export default function User(props) {
   return (
     <>
-    <td>{props.image}</td>
+    <td><img src={"/images/"+props.image} style={{width:"35px",height:"35px"}}/></td>
     <td>{props.userName}</td>
     <td>{props.firstName} {props.lastName}</td>
     <td>{props.emailAddress}</td>
