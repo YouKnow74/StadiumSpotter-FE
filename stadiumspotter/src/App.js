@@ -28,19 +28,26 @@ function App() {
   const [userDetails,setUserDetails]=useState()
 
   useEffect(() => {
-    const user = getUser();
+    let user = getUser();
     console.log(user);
+    
+    user = {"_id":user.id};
+  
+
     if(user){
       setIsAuth(true);
       setUser(user);
       console.log("user",user);
-      Axios.get(`user/detail?id=${user.id}`)
+      Axios.get(`user/detail?id=${user._id}`, {
+        headers: {
+            "Authorization":"Bearer "+localStorage.getItem("token")
+            }
+    })
       .then(res=>{
       console.log("user fetched");
       console.log(res);
       setUserDetails(res.data.userDetail);
       console.log("userdetails");
-      console.log(userDetails);
       })
       .catch(err=>{
         console.log("User details not fetched");
@@ -147,9 +154,14 @@ function App() {
       <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
       <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
-      <Route path='/usersList' element={ <UserList /> } />
-      <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} /> } />
-      <Route path='/editProfile' element={ <UserEditForm user={userDetails} /> } />
+      {/*
+       superData is for when the admin is going to edit another user details we need to save the data of current user
+        to be passed into user edit form      
+      */ }
+      <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
+      <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
+      <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
+      
 
       </Routes>
     </div>

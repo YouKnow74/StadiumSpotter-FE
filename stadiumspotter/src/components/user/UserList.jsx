@@ -3,19 +3,37 @@ import React, { useEffect, useState } from 'react'
 import User from './User'
 import UserEditForm from './UserEditForm';
 
-export default function UserList() {
+export default function UserList(props) {
+    console.log(props);
 
     const [users, setUsers] = useState([])
     const [isEdit, setIsEdit] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
+    // const [superUser,setSuperUser]=useState(superData);
+
+    const passTokenHeader=()=>{
+        const header={
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("token")
+        }
+    }
+    return header;
+    }
 
     useEffect(() => {
+        // setSuperUser(superData);
         // Call API
         allUsersList()
     }, [])
 
+    
+
     const allUsersList = () => {
-        Axios.get('user/index')
+        Axios.get('user/index', {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then((res) => {
             console.log(res);
             setUsers(res.data.alluser)
@@ -23,11 +41,16 @@ export default function UserList() {
         .catch((err) => {
             console.log(err)
         })
+        // console.log("superUser",superUser);
     }
 
     const viewEdit = (id) => {
         console.log(id);
-        Axios.get(`user/edit?id=${id}`)
+        Axios.get(`user/edit?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res => {
             // console.log(res.data.editUser);
             console.log("Loaded User Information");
@@ -39,10 +62,16 @@ export default function UserList() {
             console.log("Error Loading User Information");
             console.log(err);
         })
+
     }
 
     const updateUser = (user) => {
-        Axios.put('/user/update', user)
+        Axios.put('user/update', user, {
+            headers: {
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res => {
             console.log("User Updated Successfully!");
             console.log(res);
@@ -56,7 +85,11 @@ export default function UserList() {
     }
 
     const deleteUser = (id) => {
-        Axios.delete(`user/delete?id=${id}`)
+        Axios.delete(`user/delete?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res => {
             console.log("User Deleted Successfully");
             console.log(res);
@@ -93,7 +126,7 @@ export default function UserList() {
                 </tbody>
             </table>
         </div>
-        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser} />}
+        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser} superUser={props.superData} />}
     </div>
   )
 }
