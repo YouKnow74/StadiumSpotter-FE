@@ -1,9 +1,13 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import User from './User'
+import UserEditForm from './UserEditForm';
 
 export default function UserList() {
 
     const [users, setUsers] = useState([])
+    const [isEdit, setIsEdit] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
         // Call API
@@ -21,15 +25,53 @@ export default function UserList() {
         })
     }
 
+    const viewEdit = (id) => {
+        console.log(id);
+        Axios.get(`user/edit?id=${id}`)
+        .then(res => {
+            // console.log(res.data.editUser);
+            console.log("Loaded User Information");
+            let user = res.data.editUser ;
+            setIsEdit(!isEdit);
+            setCurrentUser(user)
+        })
+        .catch(err => {
+            console.log("Error Loading User Information");
+            console.log(err);
+        })
+    }
+
+    const updateUser = (user) => {
+        Axios.put('/user/update', user)
+        .then(res => {
+            console.log("User Updated Successfully!");
+            console.log(res);
+            allUsersList();
+            setIsEdit(false)
+        })
+        .catch(err => {
+            console.log("Error Updating User Info");
+            console.log(err);
+        })
+    }
+
+    const deleteUser = (id) => {
+        Axios.delete(`user/delete?id=${id}`)
+        .then(res => {
+            console.log("User Deleted Successfully");
+            console.log(res);
+            allUsersList();
+        })
+        .catch(err => {
+            console.log("Error Deleting User");
+            console.log(err);
+        })
+    }
+
 
     const allUsers = users.map((user, index) => (
-        <tr>
-            <td>{user.image}</td>
-            <td>{user.userName}</td>
-            <td>{user.firstName} {user.lastName}</td>
-            <td>{user.emailAddress}</td>
-            <td>{user.phoneNumber}</td>
-            <td>{user.role}</td>
+        <tr key={index}>
+            <User {...user} viewEdit={viewEdit} deleteUser={deleteUser} />
         </tr>
     ))
 
@@ -51,6 +93,7 @@ export default function UserList() {
                 </tbody>
             </table>
         </div>
+        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser} />}
     </div>
   )
 }

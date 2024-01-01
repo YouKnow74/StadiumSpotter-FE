@@ -1,10 +1,15 @@
 import Axios from 'axios';
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import UserEditForm from './UserEditForm';
 
 export default function UserIndex({user}) {
 
-   console.log(user);
+  const [isEdit, setIsEdit] = useState(false);
+  
+  const handleClick = () => {
+    setIsEdit(true)
+  }
 
   return (
 
@@ -16,6 +21,9 @@ export default function UserIndex({user}) {
         {user &&<div>{user.emailAddress}</div>}
         {user &&<div>{user.phoneNumber}</div>}
         {user &&<div>{user.role}</div>}
+        <button onClick={handleClick}>Edit</button>
+
+        {isEdit && <UserEditForm user={user} setIsEdit={setIsEdit} />}
     </div>
   )
 }
