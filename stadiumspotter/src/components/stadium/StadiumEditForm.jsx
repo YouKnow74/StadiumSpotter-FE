@@ -115,7 +115,7 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
       <input type='hidden' value={userid} name='user' /> 
       
       */}
-      <button type='submit'>Add Stadium</button>
+      <button type='submit'>Update Stadium</button>
     </form>
 
     

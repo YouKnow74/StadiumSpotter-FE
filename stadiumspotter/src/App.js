@@ -18,6 +18,7 @@ import ReservationList from './components/reservation/ReservationList';
 import UserList from './components/user/UserList';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
+import StadiumShow from './components/stadium/StadiumShow';
 
 
 
@@ -152,7 +153,7 @@ function App() {
 
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
-      <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
+      <Route path='/reservation/:id' element={ isAuth ?<ReservationCreateForm user={userDetails}/> :""}/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
       {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
@@ -161,7 +162,7 @@ function App() {
       <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
       <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
-      
+      <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
 
       </Routes>
     </div>
