@@ -29,7 +29,11 @@ export default function ReservationEditForm(props) {
     }, [])
     
     const gettingStadiumData = () => {
-        Axios.get(`/reservation/add?id=${stadium.id}`)
+        Axios.get(`/reservation/add?id=${stadium.id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then((res) => {
             const reservationData = res.data.reservation;
             const stadiumData = res.data.stadium;

@@ -7,6 +7,8 @@ export default function UserIndex({user,getUser,superUser}) {
 
 const [isEdit, setIsEdit] = useState(false);
 const [userInfo,setUserInfo]= useState({user});
+// const [supUser,setSupUser]=useState({superUser});
+
 let getUserInfo;
 
 useEffect(() => {
@@ -18,8 +20,28 @@ useEffect(() => {
   userInfoFetch();
 
  console.log("get user Info",getUserInfo);
+//  loadSuperUser();
+
 }, [])
 
+// const loadSuperUser =()=>{
+//   Axios.get(`user/detail?id=${supUser._id}`, {
+//       headers: {
+//           "Authorization":"Bearer "+localStorage.getItem("token")
+//           }
+//   })
+//   .then(res=>{
+//       console.log("super user fetched");
+//       console.log(res);
+//       setSupUser(res.data.userDetail)
+//   })
+
+//   .catch(err=>{
+//   console.log("super User not fetched");
+//   console.log(err);
+//   })
+  
+// }
 const userInfoFetch = () => {
   // getUserInfo is an ID that have a begining and changes when the user updates
   // fetch || refetch the user data to keep list updated
@@ -39,7 +61,7 @@ const userInfoFetch = () => {
 
   
   const handleClick = () => {
-    setIsEdit(!isEdit)
+    setIsEdit(true)
   }
 
   const updateUser = (user) => {

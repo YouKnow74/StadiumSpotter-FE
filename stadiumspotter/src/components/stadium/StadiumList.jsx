@@ -37,7 +37,11 @@ export default function StadiumList(props) {
             }
         })
         .then(response=>{
-            Axios.get("stadium/add")
+            Axios.get("stadium/add", {
+                headers: {
+                    "Authorization":"Bearer "+localStorage.getItem("token")
+                    }
+            })
             .then(res=>{
                 console.log("sport list");
                 console.log(res);
@@ -47,7 +51,11 @@ export default function StadiumList(props) {
                 console.log("error bringing sports list");
                 console.log(err);
             })
-            Axios.get("facility/index")
+            Axios.get("facility/index", {
+                headers: {
+                    "Authorization":"Bearer "+localStorage.getItem("token")
+                    }
+            })
             .then(res=>{
                 console.log("Facilities list");
                 console.log(res);
@@ -86,7 +94,11 @@ export default function StadiumList(props) {
     }
 
     const editStadium = (id)=>{
-        Axios.get(`stadium/edit?id=${id}`)
+        Axios.get(`stadium/edit?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("info good for editing");
             console.log(res.data.stadium);
@@ -120,7 +132,11 @@ export default function StadiumList(props) {
     }
 
     const deleteStadium = (id)=>{
-        Axios.delete(`stadium/delete?id=${id}`)
+        Axios.delete(`stadium/delete?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("deleted");
             console.log(res);
@@ -133,7 +149,11 @@ export default function StadiumList(props) {
     }
 
     const reserveStadium = (id) => {
-        Axios.get(`reservation/add?id=${id}`)
+        Axios.get(`reservation/add?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then((response) => {
             const stadiumData = response.data.stadium
             setCurrentStadium(stadiumData)

@@ -18,7 +18,11 @@ export default function ReservationList() {
   
 
   const loadReservations = () => {
-    Axios.get("reservation/index")
+    Axios.get("reservation/index", {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((response) => {
       console.log(response);
       const resData = response.data.reservation;
@@ -31,7 +35,11 @@ export default function ReservationList() {
   }
 
   const editView = (id) => {
-    Axios.get(`reservation/edit?id=${id}`)
+    Axios.get(`reservation/edit?id=${id}`, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log(res.data.reservation);
       let reservation = res.data.reservation;
@@ -46,7 +54,11 @@ export default function ReservationList() {
   }
 
   const updateReservation = (reservation) => {
-    Axios.put('reservation/update', reservation)
+    Axios.put('reservation/update', reservation, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log('Reservation updated Successfully');
       console.log(res);
@@ -59,7 +71,11 @@ export default function ReservationList() {
   }
 
   const deleteReservation = (id) => {
-    Axios.delete(`reservation/delete?id=${id}`)
+    Axios.delete(`reservation/delete?id=${id}`, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log('Reservation deleted Successfully');
       console.log(res);
