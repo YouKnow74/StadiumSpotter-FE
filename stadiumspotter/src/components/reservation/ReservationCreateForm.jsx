@@ -27,7 +27,11 @@ export default function ReservationCreateForm(props) {
     }, [])
     
     const gettingStadiumData = () => {
-        Axios.get(`/reservation/add?id=${stadium.id}`)
+        Axios.get(`/reservation/add?id=${stadium.id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then((res) => {
             const stadiumData = res.data.stadium;
             console.log(stadiumData);
@@ -73,7 +77,11 @@ export default function ReservationCreateForm(props) {
     };
 
     const addReservation = (reservation) => {
-        Axios.post('/reservation/add', reservation)
+        Axios.post('/reservation/add', reservation, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res => {
             console.log("Reservation is Successful!");
         })

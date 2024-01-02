@@ -26,7 +26,11 @@ export default function SportList() {
             console.log("Error fetching sport list");
             console.log(err);
         })
-        Axios.get("stadium/index")
+        Axios.get("stadium/index", {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("loaded stadiums");
             console.log(res);
@@ -40,10 +44,10 @@ export default function SportList() {
     }
 
     const addSport=(sport)=>{
-        Axios.post("sport/add",sport,{
+        Axios.post("sport/add",sport, {
             headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
         })
         .then(res=>{
             console.log("sport added");
@@ -57,7 +61,11 @@ export default function SportList() {
     }
 
     const deleteSport =(id)=>{
-        Axios.delete(`sport/delete?_id=${id}`)
+        Axios.delete(`sport/delete?_id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("Sport Deleted");
             console.log(res);
