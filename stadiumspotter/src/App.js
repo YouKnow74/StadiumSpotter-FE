@@ -1,22 +1,24 @@
-import "./App.css";
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Signin from "./components/user/Signin";
-import Signup from "./components/user/Signup";
-import { Routes, Route, Link } from "react-router-dom";
-import Axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react";
-import StadiumList from "./components/stadium/StadiumList";
+import './App.css';
+import React, { useState } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"
+import Signin from './components/user/Signin';
+import Signup from './components/user/Signup';
+import {Routes,Route,Link} from 'react-router-dom';
+import  Axios  from 'axios';
+import {jwtDecode} from 'jwt-decode';
+import { useEffect } from 'react';
+import StadiumList from './components/stadium/StadiumList';
 
-import SportList from "./components/sport/SportList";
-import FacilityList from "./components/facilities/FacilityList";
+import SportList from './components/sport/SportList';
+import FacilityList from './components/facilities/FacilityList';
 
-import ReservationCreateForm from "./components/reservation/ReservationCreateForm";
-import ReservationList from "./components/reservation/ReservationList";
-import UserList from "./components/user/UserList";
-import UserIndex from "./components/user/UserIndex";
-import UserEditForm from "./components/user/UserEditForm";
+import ReservationCreateForm from './components/reservation/ReservationCreateForm';
+import ReservationList from './components/reservation/ReservationList';
+import UserList from './components/user/UserList';
+import UserIndex from './components/user/UserIndex';
+import UserEditForm from './components/user/UserEditForm';
+import StadiumShow from './components/stadium/StadiumShow';
+
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -248,8 +250,10 @@ function App() {
               <UserEditForm user={userDetails} superUser={userDetails} />
             }
           />
+  <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
         </Routes>
       </div>
+
     </div>
   );
 }
