@@ -90,7 +90,7 @@ const userInfoFetch = () => {
   return (
 
     <div>
-        <h1>Profile</h1>
+        <h1>User Profile</h1>
         
         {/* 
         user && is to make sure we fetched the user first 
@@ -116,7 +116,7 @@ const userInfoFetch = () => {
   
         <label className=' p-2 '>
         Email Address:
-        {user &&<div className='form-control border'>{userInfo.emailAddress}</div>}
+        {user &&<div className='form-control border '>{userInfo.emailAddress}</div>}
         </label>
       
         
@@ -131,7 +131,7 @@ const userInfoFetch = () => {
         {user &&<div className='form-control1 border'>{userInfo.role}</div>}
         </label>
         <div className='col-auto'>
-        <button  class="btn btn-outline-secondary" onClick={handleClick}>Edit</button>
+        <button  className="btn btn-outline-secondary" onClick={handleClick}>Edit</button>
         </div>
         {isEdit && <UserEditForm user={userInfo} setIsEdit={setIsEdit} updateUser={updateUser} superUser={superUser}/>}
        

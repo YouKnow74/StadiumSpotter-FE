@@ -10,7 +10,7 @@ export default function Sport(props) {
         <td>{props.stadium.map((oneStadium,index)=>(
             <p key={index}>{oneStadium.name}</p>
         ))}</td>
-        <td><button class="btn btn-outline-secondary" onClick={()=>props.delete(props._id)}>Delete</button></td>
+        <td><button className="btn btn-outline-secondary" onClick={()=>props.delete(props._id)}>Delete</button></td>
     </>
   )
 }

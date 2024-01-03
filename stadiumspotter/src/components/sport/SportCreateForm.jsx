@@ -39,46 +39,49 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
     }
   return (
    <div>
-     <form onSubmit={addSport} class=" row g-2 " encType="multipart/form-data">
+     <form onSubmit={addSport} className=" row g-2 " encType="multipart/form-data">
 
-<div class=" row g-2 ">
+
+<div className=" row g-2 ">
+
+
            
-            <div class="col-12">
-              <div class="row g-3  ">
+            <div className="col-12">
+              <div className="row g-3  ">
                 <div className='col-auto'>
-                 <label class="form-label">Category:</label>
+                 <label className="form-label">Category:</label>
                  </div>
                  <div className='col-auto'>
-                <input type='text' name='category' class="form-control " onChange={handleChange}/>    
+                <input type='text' name='category' className="form-control green-border focus-ring focus-ring-success" onChange={handleChange}/>    
                 </div>
               </div>    
             </div>
-            <div class=" col-12">
-            <div class="row g-3  ">
+            <div className=" col-12">
+            <div className="row g-3  ">
                 <div className='col-auto'>
-                <label class="form-label">Image:</label>
+                <label className="form-label">Image:</label>
                 </div>
                 <div className='col-auto'>
-               <input type='file'  class="form-control" id="username" name='image' onChange={handleImage}/>
+               <input type='file'  className="form-control green-border focus-ring focus-ring-success" id="username" name='image' onChange={handleImage}/>
                </div>
          </div>
             </div>
-            <div class="col-12">
-            <div class="row g-3  ">
+            <div className="col-12">
+            <div className="row g-3  ">
             <div className='col-auto'>
-              <label  class="form-label" >Stadiums:</label>
+              <label  className="form-label" >Stadiums:</label>
               </div>
               <div className='col-auto'>
-                <select type="text" class="form-control" name='stadium' multiple='multiple' onChange={handleMultiple} value={stadiumsArr}>
+                <select type="text" className="form-control green-border focus-ring focus-ring-success" name='stadium' multiple='multiple' onChange={handleMultiple} value={stadiumsArr}>
                   {stadiums.map((oneStadium,index)=>(
                     <option key={index} value={oneStadium._id}>{oneStadium.name}</option>
                   ))}
                 </select>
                 </div>
             </div>
-
+            <button type='submit' className="btn btn-success my-button" >Submit</button>
       </div>
-      <button type='submit' class=" col-2 p-2 m-3 g-5 btn btn-success" >Submit</button>
+      
 
           </div>
 

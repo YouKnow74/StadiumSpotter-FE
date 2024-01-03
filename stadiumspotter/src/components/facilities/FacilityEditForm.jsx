@@ -33,41 +33,42 @@ export default function FacilityEditForm({facility,update,setIsEdit,user}) {
     <div>
           <h2>Facility Edit Form</h2>
 
-      <form onSubmit={updateFac} encType="multipart/form-data" class=" row g-2 ">
+      <form onSubmit={updateFac} encType="multipart/form-data" className=" row g-2 ">
 
-      <div class=" row g-2 ">
-<div class="col-12">
-              <div class="row g-3  ">
+      <div className=" row g-2 ">
+<div className="col-12">
+              <div className="row g-3  ">
                 <div className='col-auto'>  
-          <label  class="form-label">Facility Name :</label>
+          <label  className="form-label">Facility Name :</label>
           </div>
           <div className='col-auto'>
 
-          <input name='facility' type='text' class="form-control " value={facilityToEdit.facility} onChange={handleChange}/>
+          <input name='facility' type='text' className="form-control" value={facilityToEdit.facility} onChange={handleChange}/>
         </div>
         </div>
 </div>
 </div>
 
-<div class=" col-12">
-            <div class="row g-3  ">
+<div className=" col-12">
+            <div className="row g-3  ">
                 <div className='col-auto'>
 
-          <label class="form-label">Facility Image</label>
+          <label className="form-label">Facility Image</label>
           </div>
           <div className='col-auto'>
 
-          <input name='image' type='file' class="form-control" onChange={handleImage}/>
+          <input name='image' type='file' className="form-control" onChange={handleImage}/>
         </div>
+        
         </div>
-        <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
-        </div>
-
-       { user.role=="Admin" ? (
+        { user.role=="Admin" ? (
                     <>
-                <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
+                <button className="btn btn-success my-button" type='submit'>Submit</button>
                 </>
                 ):""}
+        </div>
+
+    
 
       </form>
 

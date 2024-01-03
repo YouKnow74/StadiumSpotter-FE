@@ -126,11 +126,11 @@ export default function FacilityList(props) {
     <div>
 
 <h1>All Facilities</h1>
-<button class="d-flex btn btn-success p-2 m-3 g-2 " onClick={changeToAdd}>Add Facility Form</button>
+<button className="d-flex btn btn-success p-2 m-3 g-2 " onClick={changeToAdd}>Add Facility Form</button>
     {/* This is temporary only and needs to be designed diffrently */}
 
 
- <div className='d-flex '>
+ <div className='d-md-flex  '>
         {isAdd ?
         <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
 
@@ -147,10 +147,12 @@ export default function FacilityList(props) {
         <table className='justify-content-center table w-100 table-bordered'>
             <tbody>
             <tr>
-                <th class="   table-success ">Facility Name</th>
-                <th class="   table-success ">Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
-                <th class="   table-success ">Edit</th>
-                <th class="   table-success ">Delete</th>
+
+                <th className="   table-success ">Facility Name</th>
+                <th className="   table-success ">Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
+                <th className="   table-success ">Edit</th>
+                <th className="   table-success ">Delete</th>
+
             </tr>
             {allFacilites}
             </tbody>

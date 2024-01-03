@@ -12,8 +12,8 @@ export default function Facility(props) {
 
     { props.user.role=="Admin" ? (
       <>
-      <td><button onClick={editFacility}>Edit</button></td>
-    <td><button onClick={()=>props.delete(props._id)}>Delete</button></td>
+      <td><button className='btn btn-outline-secondary' onClick={editFacility}>Edit</button></td>
+    <td><button className='btn btn-outline-secondary' onClick={()=>props.delete(props._id)}>Delete</button></td>
 
 
     </>
