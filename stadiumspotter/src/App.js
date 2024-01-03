@@ -135,7 +135,7 @@ function App() {
     <div>
       {user && (
         <img
-          src={userDetails ? "/images/" + userDetails.image : ""}
+          src={userDetails && "/images/" + userDetails.image}
           width={50}
           height={50}
           style={{ border: "1px solid red" }}
@@ -250,7 +250,7 @@ function App() {
               <UserEditForm user={userDetails} superUser={userDetails} />
             }
           />
-  <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
+        <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
         </Routes>
       </div>
 
