@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import locations from './location';
 
-export default function StadiumCreateForm({add,sports,facilities,user}) {
+export default function StadiumCreateForm({add,sports,facilities,user, setIsAdd}) {
 
   const [newStadium,setNewStadium]=useState({});
   const [facilitesArr,setfacilitesArr]=useState([]);
@@ -43,6 +43,7 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
     formData.append("image",image);
     console.log("form data",formData);
     add(formData);
+    setIsAdd(false)
     e.target.reset();
   }
 
@@ -54,43 +55,43 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
     <form onSubmit={addStadium} encType="multipart/form-data">
 
       <div>
-        <label>Stadium Name:</label>
-        <input type='text' name="name"  onChange={handleChange}/>
+        <label className='form-label'>Stadium Name:</label>
+        <input className='form-control' type='text' name="name"  onChange={handleChange}/>
       </div>
 
       <div>
-        <label>Stadium Description:</label>
-        <input type='text' name="descriptin"  onChange={handleChange}/>
+        <label className='form-label'>Stadium Description:</label>
+        <input className='form-control' type='text' name="descriptin"  onChange={handleChange}/>
       </div>
 
       <div>
-        <label>Stadium Size:</label>
-        <input type='text' name="size"  onChange={handleChange}/>
+        <label className='form-label'>Stadium Size:</label>
+        <input className='form-control' type='text' name="size"  onChange={handleChange}/>
       </div>
 
       <div>
-        <label>Stadium Location:</label>
+        <label className='form-label'>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         {/* <input type='text' name="location"  onChange={handleChange}/> */}
-        <select name='location' onChange={handleChange}>
+        <select className='form-control' name='location' onChange={handleChange}>
            {locations.map((oneLocation, index) => (
             <option key={index} value={oneLocation}>{oneLocation}</option>
               ))}
         </select>
       </div>
       <div>
-        <label>Stadium Price:</label>
-        <input type='text' name="price"  onChange={handleChange}/>
+        <label className='form-label'>Stadium Price:</label>
+        <input className='form-control' type='text' name="price"  onChange={handleChange}/>
       </div>
 
       <div>
-        <label>Stadium image:</label>
-        <input type='file' name="image" onChange={handleImage} />
+        <label className='form-label'>Stadium image:</label>
+        <input className='form-control' type='file' name="image" onChange={handleImage} />
       </div>
 
       <div>
-        <label>Stadium Sports:</label>
-        <select type="text" name='category'  onChange={handleChange}>
+        <label className='form-label'>Stadium Sports:</label>
+        <select className='form-control' type="text" name='category'  onChange={handleChange}>
           {sports.map((oneSport,index) => (
             <option key={index} value={oneSport._id}>{oneSport.category}</option>
           ))}
@@ -98,8 +99,8 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
       </div>
 
       <div>
-        <label>Stadium Facilites:</label>
-        <select type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
+        <label className='form-label'>Stadium Facilites:</label>
+        <select className='form-control' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
           {facilities.map((oneFacility,index)=>(
             <option key={index} value={oneFacility._id}>{oneFacility.facility}</option>
           ))}
@@ -113,7 +114,7 @@ export default function StadiumCreateForm({add,sports,facilities,user}) {
       <input type='hidden' value={user} name='user' onSubmit={addUser} /> 
       
       
-      <button type='submit'>Add Stadium</button>
+      <button className='btn btn-success my-button' type='submit'>Add Stadium</button>
     </form>
 
     </div>

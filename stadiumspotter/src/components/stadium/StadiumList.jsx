@@ -11,6 +11,7 @@ export default function StadiumList(props) {
     const [sports,setSports]=useState([]);
     const [facilities,setFacilities]=useState([]);
     const [isEdit,setIsEdit]=useState(false);
+    const [isAdd,setIsAdd]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
     const [userDetails, setUserDetails]=useState({});
     const navigate = useNavigate();
@@ -20,6 +21,11 @@ export default function StadiumList(props) {
     loadStadiumsList();
       
     }, []);
+
+    const changeToAdd=()=>{
+        setIsAdd(!isAdd)
+        setIsEdit(false)
+        }
 
     /*
 
@@ -102,7 +108,8 @@ export default function StadiumList(props) {
         .then(res=>{
             console.log("info good for editing");
             console.log(res.data.stadium);
-            setIsEdit(true);
+            setIsEdit(!isEdit);
+            setIsAdd(false)
             setCurrentStadium(res.data.stadium);
 
         })
@@ -168,44 +175,33 @@ export default function StadiumList(props) {
 
 
     const allStadiums = stadiums.map((stadium,index)=>(
-        <>
-        <tr key={index}>
-            <Stadium {...stadium} edit={editStadium} delete={deleteStadium} reserve={reserveStadium}/>
-        </tr>
         
-        </>
+        <div className='col'>
+            <div className='card shadow-sm' key={index}>
+                <Stadium user={props.user} {...stadium} edit={editStadium} delete={deleteStadium} reserve={reserveStadium}/>
+            </div>
+        </div>
     ));
 
   return (
    <div>
-    {/* <img src={"/images/"+props.user.image} style={{width:"35px",height:"35px"}}/> */}
     <h1>All Stadiums</h1>
-    {/* This is temporary only and needs to be designed diffrently */}
+    <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>
     <div>
-        <table className='table table-dark table-striped-columns'>
-            <tbody>
-            <tr>
-                <th>Stadium Name</th>
-                <th>Stadium Description</th>
-                <th>Stadium Size</th>
-                <th>Stadium Location</th>
-                <th>Stadium Facilities</th>
-                <th>Stadium Category</th>
-                <th>Stadium Price (each hour)</th>
-                <th>Stadium Image</th>{/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/}
-                <th>Reserve</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            {allStadiums}
-            </tbody>
-        </table>
         {isEdit ?
         <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
-        sports={sports} facilities={facilities}/>
-        :
-        <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities} user={props.user}/>}
-        {/* <ReservationCreateForm currentStadium={currentStadium} /> */}
+        sports={sports} facilities={facilities} setIsEdit={setIsEdit} />
+        :null}
+        {isAdd?
+        <StadiumCreateForm setIsAdd={setIsAdd} add={addStadium} sports={sports} facilities={facilities} user={props.user}/>:""}
+
+        <div className='album py-5 bg-body-tertiary'>
+            <div className='container'>
+                <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
+                    {allStadiums}
+                </div>
+            </div>
+        </div>
     </div>
     </div>
   )
