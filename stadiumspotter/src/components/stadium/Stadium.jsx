@@ -1,9 +1,12 @@
 import React from 'react'
+import StadiumCreateForm from './StadiumCreateForm'
+import StadiumList from './StadiumList'
 
 export default function Stadium(props) {
+  
   return (
+
     <>
-    
                <td>{props.name}</td>
                <td>{props.descriptin}</td>
                <td>{props.size}</td>
