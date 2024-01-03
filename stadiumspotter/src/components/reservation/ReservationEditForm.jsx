@@ -127,28 +127,28 @@ export default function ReservationEditForm(props) {
     <div>
         <h2>Edit Reservation</h2>
             <h2>{newReserve.stadiumName}</h2>
-            <form class=" row g-2 " onSubmit={submitReservation}>
+            <form className=" row g-2 " onSubmit={submitReservation}>
                
-         <div class=" row g-2 p-2 ">
-          <div class="col-12">
-              <div class="row g-3  ">
+         <div className=" row g-2 p-2 ">
+          <div className="col-12">
+              <div className="row g-3  ">
                 <div className='col-auto'> 
-                    <label htmlFor="inputdate" class="form-label">Choose a Date:</label>
+                    <label htmlFor="inputdate" className="form-label">Choose a Date:</label>
                 </div>
                     <div className='col-auto'>
-                    <input value={newReserve.date} type="date" class="form-control" id="inputdate" name="date" onChange={handleChange} />
+                    <input value={newReserve.date} type="date" className="form-control" id="inputdate" name="date" onChange={handleChange} />
                 </div>
                 </div>
                 </div>
                 </div>
 
-            <div class="col-12">
-              <div class="row g-2 p-2 ">
+            <div className="col-12">
+              <div className="row g-2 p-2 ">
                 <div className='col-auto'>
-                    <label class="form-label">Start Time:</label>
+                    <label className="form-label">Start Time:</label>
                     </div>
                     <div className='col-auto'>
-                    <select class="form-control"  value={selectedStartTime} name='startTime' onChange={handleStartTime}>
+                    <select className="form-control"  value={selectedStartTime} name='startTime' onChange={handleStartTime}>
 
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
@@ -161,13 +161,13 @@ export default function ReservationEditForm(props) {
                 
               
 
-                <div class="col-12">
-              <div class="row g-2 p-2  ">
-                <div className='col-auto'>                 <label class="form-label">End Time</label>
+                <div className="col-12">
+              <div className="row g-2 p-2  ">
+                <div className='col-auto'>                 <label className="form-label">End Time</label>
                 </div>
 
                 <div className='col-auto'>             
-                     <select  class="form-control"  value={selectedEndTime} name='endTime'onChange={handleEndTime}>
+                     <select  className="form-control"  value={selectedEndTime} name='endTime'onChange={handleEndTime}>
 
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
@@ -182,7 +182,7 @@ export default function ReservationEditForm(props) {
                 
                 <div>
                     <label>Status</label>
-                    <input value={newReserve.Status} type="text" class="form-control" name="Status" onChange={handleChange} />
+                    <input value={newReserve.Status} type="text" className="form-control" name="Status" onChange={handleChange} />
                 </div>
                 }
                 
@@ -192,7 +192,7 @@ export default function ReservationEditForm(props) {
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
     
             </form>
-            <button class="d-flex btn btn-success w-10 p-2 m-3 g-2 " type='submit'>Save Reservation</button>
+            <button className="btn btn-success my-button" type='submit'>Save Reservation</button>
             </div>
 
  

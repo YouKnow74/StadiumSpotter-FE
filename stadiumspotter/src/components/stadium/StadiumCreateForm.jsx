@@ -56,24 +56,24 @@ export default function StadiumCreateForm({add,sports,facilities,user, setIsAdd}
 
       <div>
         <label className='form-label'>Stadium Name:</label>
-        <input className='form-control' type='text' name="name"  onChange={handleChange}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="name"  onChange={handleChange}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Description:</label>
-        <input className='form-control' type='text' name="descriptin"  onChange={handleChange}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="descriptin"  onChange={handleChange}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Size:</label>
-        <input className='form-control' type='text' name="size"  onChange={handleChange}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="size"  onChange={handleChange}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         {/* <input type='text' name="location"  onChange={handleChange}/> */}
-        <select className='form-control' name='location' onChange={handleChange}>
+        <select className='form-control green-border focus-ring focus-ring-success' name='location' onChange={handleChange}>
            {locations.map((oneLocation, index) => (
             <option key={index} value={oneLocation}>{oneLocation}</option>
               ))}
@@ -81,17 +81,17 @@ export default function StadiumCreateForm({add,sports,facilities,user, setIsAdd}
       </div>
       <div>
         <label className='form-label'>Stadium Price:</label>
-        <input className='form-control' type='text' name="price"  onChange={handleChange}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='number' name="price"  onChange={handleChange}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium image:</label>
-        <input className='form-control' type='file' name="image" onChange={handleImage} />
+        <input className='form-control green-border focus-ring focus-ring-success' type='file' name="image" onChange={handleImage} />
       </div>
 
       <div>
         <label className='form-label'>Stadium Sports:</label>
-        <select className='form-control' type="text" name='category'  onChange={handleChange}>
+        <select className='form-control green-border focus-ring focus-ring-success' type="text" name='category'  onChange={handleChange}>
           {sports.map((oneSport,index) => (
             <option key={index} value={oneSport._id}>{oneSport.category}</option>
           ))}
@@ -100,7 +100,7 @@ export default function StadiumCreateForm({add,sports,facilities,user, setIsAdd}
 
       <div>
         <label className='form-label'>Stadium Facilites:</label>
-        <select className='form-control' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
+        <select className='form-control green-border focus-ring focus-ring-success' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
           {facilities.map((oneFacility,index)=>(
             <option key={index} value={oneFacility._id}>{oneFacility.facility}</option>
           ))}

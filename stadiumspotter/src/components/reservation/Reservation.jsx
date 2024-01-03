@@ -12,8 +12,8 @@ export default function Reservation(props) {
     <td>{props.price}</td>
     <td>{props.user.userName}</td>
     <td>{props.stadiumName}</td>
-    <td><button class="btn btn-outline-secondary" onClick={ () => props.edit(props._id) }>Edit</button></td>
-    <td><button class="btn btn-outline-secondary" onClick={ () => props.delete(props._id) }>Delete</button></td>
+    <td><button className="btn btn-outline-secondary" onClick={ () => props.edit(props._id) }>Edit</button></td>
+    <td><button className="btn btn-outline-secondary" onClick={ () => props.delete(props._id) }>Delete</button></td>
     </>
   )
 }

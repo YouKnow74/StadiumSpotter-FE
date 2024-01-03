@@ -196,12 +196,12 @@ console.log(reservedTimes);
             <h2>{currentStadium.name}</h2>
             <form onSubmit={submitReservation}>
                 <div>
-                    <label htmlFor="inputdate" class="form-label">Choose a Date</label>
-                    <input type="date" class="form-control" id="inputdate" name="date" onChange={handleChange} />
+                    <label htmlFor="inputdate" className="form-label">Choose a Date</label>
+                    <input type="date" className="form-control green-border focus-ring focus-ring-success" id="inputdate" name="date" onChange={handleChange} />
                 </div>
                 <div>
                     <label>Start Time</label>
-                    <select name='startTime' value={selectedStartTime} onChange={handleStartTime}>
+                    <select name='startTime' className='form-control green-border focus-ring focus-ring-success' value={selectedStartTime} onChange={handleStartTime}>
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
@@ -209,7 +209,7 @@ console.log(reservedTimes);
                 </div>
                 <div>
                     <label>End Time</label>
-                    <select name='endTime' value={selectedEndTime} onChange={handleEndTime}>
+                    <select name='endTime' className='form-control green-border focus-ring focus-ring-success' value={selectedEndTime} onChange={handleEndTime}>
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
@@ -220,7 +220,7 @@ console.log(reservedTimes);
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
                 <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
-                <button type='submit'>Reserve Stadium</button>
+                <button type='submit' className='btn btn-success my-button'>Reserve Stadium</button>
             </form>
         </div>
     </div>

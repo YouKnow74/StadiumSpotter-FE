@@ -4,6 +4,7 @@
   /* text-align: center; */
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
+  margin: 20px;
 
 }
 
@@ -82,5 +83,9 @@
 
 .green-border:focus {
   border-color: green;
+}
+
+.form-check-input:checked{
+  background-color: green;
 }
 
