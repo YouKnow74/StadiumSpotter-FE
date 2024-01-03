@@ -86,26 +86,29 @@ export default function SportList() {
     <div>
 
 <h1>All Sports</h1>
-<button onClick={()=>setIsAdd(!isAdd)}>Add Sport</button>
+<button class="d-flex btn btn-success p-2 m-3 g-2 " onClick={()=>setIsAdd(!isAdd)}>Add Sport</button>
     {/* This is temporary only and needs to be designed diffrently */}
-    <div>
-        <table className='table table-dark table-striped-columns'>
-            <tbody>
+    <div className='d-flex '>
+       
+    {isAdd ?
+        <SportCreateForm setIsAdd={setIsAdd} add={addSport} stadiums={stadiums}/>:
+        ""
+        }
+        <table className=' justify-content-center table w-100 table-bordered '>
+            <tbody >
             <tr>
-                <th>Sport Category</th>
-                <th>Sport image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
-                <th>Sport Stadiums</th>
-                <th>Delete</th>
+                <th class="   table-success " >Sport Category</th>
+                <th   class="   table-success " >Sport image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
+                <th  class="   table-success ">Sport Stadiums</th>
+                <th  class="   table-success ">Delete</th>
             </tr>
             {allSports}
             </tbody>
         </table>
-        {isAdd ?
-        <SportCreateForm setIsAdd={setIsAdd} add={addSport} stadiums={stadiums}/>:
-        ""
-        }
+        </div>
+      
         
     </div>
-    </div>
+  
   )
 }
