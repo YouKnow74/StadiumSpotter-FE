@@ -5,7 +5,7 @@ import Reservation from './Reservation';
 import ReservationEditForm from './ReservationEditForm';
 import dayjs from 'dayjs'
 
-export default function ReservationList() {
+export default function ReservationList(props) {
 
   const [reservations, setReservations] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -117,7 +117,7 @@ export default function ReservationList() {
               </tbody>
             </table>
         </div>
-        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />}
+        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={props.user}/>}
         
     </div>
   )
