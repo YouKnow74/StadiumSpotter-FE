@@ -10,10 +10,10 @@ export default function ReservationEditForm(props) {
     console.log(props.reservation)
     const [newReserve, setNewReserve] = useState(props.reservation)
     const stadium = useParams();
-    const [currentStadium, setCurrentStadium] = useState({})
+    const [currentStadium, setCurrentStadium] = useState()
 
-    const [selectedStartTime, setSelectedStartTime] = useState("");
-    const [selectedEndTime, setSelectedEndTime] = useState("")
+    const [selectedStartTime, setSelectedStartTime] = useState(props.reservation.startTime);
+    const [selectedEndTime, setSelectedEndTime] = useState(props.reservation.endTime)
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
 
     const addUser =(e)=>{
@@ -22,24 +22,22 @@ export default function ReservationEditForm(props) {
 
     const navigate = useNavigate();
 
+    const getStadium = ()=>{
+        Axios.get('stadium/')
+    }
+
     useEffect(() => {
     
         gettingStadiumData();
-        setSelectedStartTime(startTime[0])
-        setSelectedEndTime(endTime[0])
-        const startTimeIndex = startTime.indexOf(selectedStartTime);
-        const endTimeIndex = endTime.indexOf(selectedEndTime);
-
-        const durationInHours = endTimeIndex - startTimeIndex;
-
-        const stadiumPrice = currentStadium.price;
-        const totalPrice = stadiumPrice * (durationInHours + 1);
-        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
+        setSelectedStartTime(props.reservation.startTime)
+        setSelectedEndTime(props.reservation.endTime)
+     
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime,user: props.user._id, stadiumName: props.reservation.stadiumName, stadium: props.reservation.stadium , Status: "Pending" })
       
     }, [])
     
     const gettingStadiumData = () => {
-        Axios.get(`/reservation/add?id=${stadium.id}`, {
+        Axios.get(`/reservation/add?id=${props.reservation.stadium}`, {
             headers: {
                 "Authorization":"Bearer "+localStorage.getItem("token")
                 }
@@ -61,14 +59,17 @@ export default function ReservationEditForm(props) {
         const selectedValue = e.target.value;
         setSelectedStartTime (selectedValue)
 
-        const startTimeIndex = startTime.indexOf(selectedValue)
+        let startTimeIndex = startTime.indexOf(selectedValue)
 
         const slicedEndTime = endTime.slice(startTimeIndex, endTime.length)
         // console.log("Selected Start Time:", selectedValue);
         // console.log("Start Time Index:", startTimeIndex);
         // console.log("Sliced End Time:", slicedEndTime);
         setAvailableEndTime([...slicedEndTime]);
-        const reservation = { ...newReserve, startTime: selectedValue, endTime: null };
+        
+
+        // console.log(reservation);
+        const reservation = { ...newReserve, startTime: selectedValue, endTime: null};
         console.log(reservation);
         setNewReserve(reservation);
     }
@@ -76,7 +77,17 @@ export default function ReservationEditForm(props) {
     const handleEndTime = (e) => {
         const selectedValue = e.target.value;
         setSelectedEndTime(selectedValue);
-        const reservation = { ...newReserve, endTime: selectedValue, };
+        const startTimeIndex = startTime.indexOf(selectedStartTime);
+        const endTimeIndex = endTime.indexOf(selectedEndTime);
+
+        const durationInHours = endTimeIndex - startTimeIndex;
+
+        const stadiumPrice = currentStadium.price;
+        console.log(stadiumPrice);
+        const totalPrice = stadiumPrice * (durationInHours + 1);
+        // reservation.price = totalPrice;
+        console.log("price",parseInt(totalPrice));
+        const reservation = { ...newReserve, endTime: selectedValue, price: totalPrice };
         console.log(reservation);
         setNewReserve(reservation);
     };
@@ -85,46 +96,88 @@ export default function ReservationEditForm(props) {
     const handleChange = (event) => {
         const reservation = {...newReserve, Status: newReserve.Status};
 
+
         reservation[event.target.name] = event.target.value;
         console.log(reservation);
         setNewReserve(reservation);
         console.log(reservation.endTime);
     }
 
+    const calculate = ()=>{
+        const startTimeIndex1 = startTime.indexOf(selectedStartTime);
+        const endTimeIndex = endTime.indexOf(selectedEndTime);
+
+        const durationInHours = endTimeIndex - startTimeIndex1;
+
+        const stadiumPrice = currentStadium.price;
+        console.log(stadiumPrice);
+        const totalPrice = stadiumPrice * (durationInHours + 1);
+        return totalPrice;
+    }
+
     const submitReservation = (e) =>{
         e.preventDefault();
+        const reservation = { ...newReserve,_id:props.reservation._id};
         // newReserve.date =JSON.stringify(newReserve.date);
-        props.updateReservation(newReserve)
+        props.updateReservation(reservation)
         e.target.reset();
         // addReservation(newReserve);
     }
   return (
     <div>
-        <h1>Edit Reservation</h1>
-        <div><img src='' alt='...'/></div>
-        <div>
+        <h2>Edit Reservation</h2>
             <h2>{newReserve.stadiumName}</h2>
-            <form onSubmit={submitReservation}>
-                <div>
-                    <label htmlFor="inputdate" class="form-label">Choose a Date</label>
+            <form class=" row g-2 " onSubmit={submitReservation}>
+               
+         <div class=" row g-2 p-2 ">
+          <div class="col-12">
+              <div class="row g-3  ">
+                <div className='col-auto'> 
+                    <label htmlFor="inputdate" class="form-label">Choose a Date:</label>
+                </div>
+                    <div className='col-auto'>
                     <input value={newReserve.date} type="date" class="form-control" id="inputdate" name="date" onChange={handleChange} />
                 </div>
-                <div>
-                    <label>Start Time</label>
-                    <select value={newReserve.startTime} name='startTime' onChange={handleStartTime}>
+                </div>
+                </div>
+                </div>
+
+            <div class="col-12">
+              <div class="row g-2 p-2 ">
+                <div className='col-auto'>
+                    <label class="form-label">Start Time:</label>
+                    </div>
+                    <div className='col-auto'>
+                    <select class="form-control"  value={selectedStartTime} name='startTime' onChange={handleStartTime}>
+
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
                     </select>
+                    </div>  
+                      </div>  
+                      </div>
+                       
+                
+              
+
+                <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'>                 <label class="form-label">End Time</label>
                 </div>
-                <div>
-                    <label>End Time</label>
-                    <select value={newReserve?newReserve.endTime:props.reservation.endTime} name='endTime'onChange={handleEndTime}>
+
+                <div className='col-auto'>             
+                     <select  class="form-control"  value={selectedEndTime} name='endTime'onChange={handleEndTime}>
+
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
                     </select>
+                    </div>  
+                    </div>
+
                 </div>
+               
                 {props.user && ((props.user.role == 'stadium owner') || (props.user.role == 'Admin')) &&
                 
                 <div>
@@ -137,9 +190,11 @@ export default function ReservationEditForm(props) {
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
                 <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
-                <button type='submit'>Save Reservation</button>
+    
             </form>
-        </div>
-    </div>
+            <button class="d-flex btn btn-success w-10 p-2 m-3 g-2 " type='submit'>Save Reservation</button>
+            </div>
+
+ 
   )
 }

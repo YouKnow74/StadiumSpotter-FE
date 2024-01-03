@@ -110,23 +110,29 @@ export default function UserList(props) {
 
   return (
     <div>
-        <h1>User List</h1>
-        <div>
-            <table>
+        <h1>Users List</h1>
+        <div className='d-flex '>
+
+        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser} superUser={props.superData} />}
+        
+            <table className=' justify-content-center table w-100 table-bordered '>
                 <tbody>
                     <tr>
-                        <th>User Image</th>
-                        <th>UserName</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Role</th>
+                        <th class="   table-success ">User Image</th >
+                        <th  class="   table-success "  >UserName</th>
+                        <th  class="   table-success ">Full Name</th>
+                        <th  class="   table-success ">Email</th>
+                        <th  class="   table-success ">Phone Number</th>
+                        <th  class="   table-success ">Role</th>
+                        <th  class="   table-success ">Edit</th>
+                        <th  class="   table-success ">Delete</th>
                     </tr>
                     {allUsers}
                 </tbody>
             </table>
-        </div>
-        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser} superUser={props.superData} />}
+            </div>
+       
+       
     </div>
   )
 }

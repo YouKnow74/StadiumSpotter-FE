@@ -5,7 +5,7 @@ import Facility from './Facility';
 import FacilityAddForm from "./FacilityAddForm";
 import FacilityEditForm from './FacilityEditForm';
 
-export default function FacilityList() {
+export default function FacilityList(props) {
     const [facilities,setFacilites]=useState([])
     const [isAdd,setIsAdd]=useState(false);
     const [isEdit,setIsEdit]=useState(false);
@@ -118,6 +118,7 @@ export default function FacilityList() {
         <tr key={index}>
             <Facility {...onefacility} edit={editFacility} 
             changeToEdit={changeToEdit} delete={deleteFacility}
+            user={props.user}
             />
         </tr>
     ))
@@ -125,31 +126,40 @@ export default function FacilityList() {
     <div>
 
 <h1>All Facilities</h1>
-<button onClick={changeToAdd}>Add Facility Form</button>
+<button class="d-flex btn btn-success p-2 m-3 g-2 " onClick={changeToAdd}>Add Facility Form</button>
     {/* This is temporary only and needs to be designed diffrently */}
-    <div>
-        <table className='table table-dark table-striped-columns'>
+
+
+ <div className='d-flex '>
+        {isAdd ?
+        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
+
+        ""
+        }
+       
+        
+        {
+            isEdit ?
+            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} user ={props.user}/>:
+            null
+        }
+                
+        <table className='justify-content-center table w-100 table-bordered'>
             <tbody>
             <tr>
-                <th>Facility Name</th>
-                <th>Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="   table-success ">Facility Name</th>
+                <th class="   table-success ">Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
+                <th class="   table-success ">Edit</th>
+                <th class="   table-success ">Delete</th>
             </tr>
             {allFacilites}
             </tbody>
         </table>
-        {isAdd ?
-        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd}/>:
-        ""
-        }
-        {
-            isEdit ?
-            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} />:
-            null
-        }
         
-    </div>
-    </div>
+        
+        </div>
+
+        </div>
+       
   )
 }

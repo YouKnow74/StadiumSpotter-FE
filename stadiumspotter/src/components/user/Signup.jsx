@@ -32,27 +32,27 @@ export default function Signup(props) {
             <form onSubmit={registerHandler} encType='multipart/form-data'>
                 <div>
                     <label>First Name</label>
-                    <input type='text' name='firstName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='firstName' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Last Name</label>
-                    <input type='text' name='lastName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='lastName' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Username</label>
-                    <input type='text' name='userName' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='userName' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Email Address</label>
-                    <input type='email' name='emailAddress' onChange={handleChange} className='form-control'></input>
+                    <input type='email' name='emailAddress' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Phone Number</label>
-                    <input type='text' name='phoneNumber' onChange={handleChange} className='form-control'></input>
+                    <input type='text' name='phoneNumber' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
@@ -60,7 +60,7 @@ export default function Signup(props) {
                     <div>
                         <label for="stadiumOwner">Stadium Owner</label>
                         <input
-                         className='form-check-input'
+                         className='form-check-input  green-border focus-ring focus-ring-success'
                          type="radio" 
                          name="role" 
                          id="stadiumOwner" 
@@ -71,7 +71,7 @@ export default function Signup(props) {
                     <div>
                         <label for='renter'>Booking a Stadium</label>
                         <input 
-                        className='form-check-input' 
+                        className='form-check-input  green-border focus-ring focus-ring-success' 
                         type='radio' 
                         name='role' 
                         id='renter'
@@ -83,16 +83,16 @@ export default function Signup(props) {
 
                 <div>
                     <label>Password</label>
-                    <input type='password' name='password' onChange={handleChange} className='form-control'></input>
+                    <input type='password' name='password' onChange={handleChange} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Image Upload</label>
-                    <input type='file' name='image' onChange={handleImage} className='form-control'></input>
+                    <input type='file' name='image' onChange={handleImage} className='form-control  green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
-                    <input type='submit' value='Register' className='btn btn-primary'></input>
+                    <input type='submit' value='Register' className='btn btn-success my-button'></input>
                 </div>
             </form>
         </div>

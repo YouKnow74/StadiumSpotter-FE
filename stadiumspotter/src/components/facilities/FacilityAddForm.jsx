@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export default function FacilityAddForm({add,setIsAdd}) {
+export default function FacilityAddForm({add,setIsAdd,user}) {
 
   const [newFacility,setNewFacility]=useState({});
   const [image,setImage]=useState("");
@@ -30,22 +30,41 @@ export default function FacilityAddForm({add,setIsAdd}) {
   
   return (
     <div>
+        <form onSubmit={submitFacility} class=" row g-2 " encType="multipart/form-data">
+<div class=" row g-2 ">
+<div class="col-12">
+              <div class="row g-3  ">
+                <div className='col-auto'>  
+          <label class="form-label">Facility Name :</label>
+          </div>
+          <div className='col-auto'>
+          <input name='facility' type='text' class="form-control "onChange={handleChange}/>
+        </div>
+</div>
+</div>
+</div>
+<div class=" col-12">
+            <div class="row g-3  ">
+                <div className='col-auto'>
 
-      <h2>Add Facility Form</h2>
-      <form onSubmit={submitFacility} encType="multipart/form-data">
+          <label class="form-label">Facility Image</label>
+          </div>
+          <div className='col-auto'>
 
-        <div>
-          <label>Facility Name</label>
-          <input name='facility' type='text' onChange={handleChange}/>
+          <input name='image' type='file' class="form-control" onChange={handleImage}/>
+        </div>
         </div>
 
-        <div>
-          <label>Facility Image</label>
-          <input name='image' type='file' onChange={handleImage}/>
+        { user.role=="Admin" ? (
+                    <>
+                <button type='submit'>Submit</button>
+                </>
+                ):""}
         </div>
-        <button type='submit'>Submit</button>
       </form>
+</div>
 
-    </div>
+
+
   )
 }

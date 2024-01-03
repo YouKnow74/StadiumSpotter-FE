@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export default function FacilityEditForm({facility,update,setIsEdit}) {
+export default function FacilityEditForm({facility,update,setIsEdit,user}) {
 
     const [facilityToEdit,setFacilityToEdit]=useState(facility);
     const [image,setImage]=useState("");
@@ -31,20 +31,44 @@ export default function FacilityEditForm({facility,update,setIsEdit}) {
 
   return (
     <div>
-        <h2>Facility Edit Form</h2>
-    
-      <form onSubmit={updateFac} encType="multipart/form-data">
+          <h2>Facility Edit Form</h2>
 
-        <div>
-          <label>Facility Name</label>
-          <input name='facility' type='text' value={facilityToEdit.facility} onChange={handleChange}/>
+      <form onSubmit={updateFac} encType="multipart/form-data" class=" row g-2 ">
+
+      <div class=" row g-2 ">
+<div class="col-12">
+              <div class="row g-3  ">
+                <div className='col-auto'>  
+          <label  class="form-label">Facility Name :</label>
+          </div>
+          <div className='col-auto'>
+
+          <input name='facility' type='text' class="form-control " value={facilityToEdit.facility} onChange={handleChange}/>
+        </div>
+        </div>
+</div>
+</div>
+
+<div class=" col-12">
+            <div class="row g-3  ">
+                <div className='col-auto'>
+
+          <label class="form-label">Facility Image</label>
+          </div>
+          <div className='col-auto'>
+
+          <input name='image' type='file' class="form-control" onChange={handleImage}/>
+        </div>
+        </div>
+        <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
         </div>
 
-        <div>
-          <label>Facility Image</label>
-          <input name='image' type='file' onChange={handleImage}/>
-        </div>
-        <button type='submit'>Submit</button>
+       { user.role=="Admin" ? (
+                    <>
+                <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
+                </>
+                ):""}
+
       </form>
 
     </div>

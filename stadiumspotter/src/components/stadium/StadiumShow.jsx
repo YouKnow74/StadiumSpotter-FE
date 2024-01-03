@@ -9,11 +9,17 @@ export default function StadiumShow({user}) {
     const [sports,setSports]=useState([]);
     const [facilities,setFacilities]=useState([]);
     const [isEdit,setIsEdit]=useState(false);
+    const [isAdd,setIsAdd]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
 
     useEffect(() => {
         showStadiums();
     }, [])
+
+    const changeToAdd=()=>{
+        setIsAdd(!isAdd)
+        setIsEdit(false)
+    }
     
 
     const showStadiums = () => {
@@ -68,11 +74,16 @@ export default function StadiumShow({user}) {
     }
 
     const editStadium = (id)=>{
-        Axios.get(`stadium/edit?id=${id}`)
+        Axios.get(`stadium/edit?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("info good for editing");
             console.log(res.data.stadium);
-            setIsEdit(true);
+            setIsEdit(!isEdit);
+            setIsAdd(false)
             setCurrentStadium(res.data.stadium);
 
         })
@@ -86,8 +97,9 @@ export default function StadiumShow({user}) {
     const updateStadium =(stadium)=>{
         Axios.put("stadium/update",stadium , {
             headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
         })
         .then(res=>{
             console.log("Stadium Updated");
@@ -102,7 +114,12 @@ export default function StadiumShow({user}) {
     }
 
     const deleteStadium = (id)=>{
-        Axios.delete(`stadium/delete?id=${id}`)
+        Axios.delete(`stadium/delete?id=${id}`, {
+            headers: {
+               
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("deleted");
             console.log(res);
@@ -137,6 +154,13 @@ export default function StadiumShow({user}) {
   return (
     <div>
         <h1>Stadiums</h1>
+        <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>
+        {isEdit ?
+        <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
+        sports={sports} facilities={facilities}/>
+        :""}
+        {isAdd ?
+        <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities} user={user}/>:""}
         <table>
             <tbody>
                 <tr>
@@ -152,11 +176,6 @@ export default function StadiumShow({user}) {
                 {myStadiums}
             </tbody>
         </table>
-        {isEdit ?
-        <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
-        sports={sports} facilities={facilities}/>
-        :
-        <StadiumCreateForm add={addStadium} sports={sports} facilities={facilities} user={user}/>}
     </div>
   )
 }
