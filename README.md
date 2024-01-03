@@ -1,12 +1,14 @@
+# StadiumSpotter-BE
+Back end code for StadiumSpotter application 
 # SEI7 Team Project3 Capstone
 
 ## Project Name:  StadiumSpotter-Back End
 
 ### Developers & Collaborators Team
 
-### Samia jamal
 ### Hussain Zuhair
 ### Kawthar Mahfoodh
+### Samia Jamal
 ### Rajiah A Rasool
 
 ## ERD StadiumSpotter
@@ -27,7 +29,9 @@
 
 <img src="/images/ourteam.png" alt="Team Seven">
 
+## Landing Page of the project:
 
+<img src="/images/landingpage.png" alt="Home Page">
 
 ## Requirements
 
@@ -39,18 +43,18 @@
 - Create a `README.md` file that explains your app to the world.(completed)
 - Include ERD of your project idea.(completed)
 - Include wireframes or link to wireframes.(completed)
-- Include link to your trello board.()
-- Users' board and stories.
-- Link to your deployed application.
+- Include link to your trello board.(completed)
+- Users' board and stories. (completed)
+- Link to your deployed application. (completed)
 
 ### Readme Requirements
 Don't underestimate the value of a well crafted README.md.
 The README.md introduces your project to prospective employers and forms their first impression of your work!
 Include the following sections within the README.md:
-  ☐ App Title: Contains a description of what the app does and optional background info.
-  ☐ Screenshot(s): A screenshot of your app's landing page and any other screenshots of interest.
-  ☐ Technologies Used: List of the technologies used. 
-  ☐ Planned future enhancements for the application.
+  ☐ App Title: Contains a description of what the app does and optional background info.(completed)
+  ☐ Screenshot(s): A screenshot of your app's landing page and any other screenshots of interest. (in the progress)
+  ☐ Technologies Used: List of the technologies used. (dependencies list included, mongoosdb, testing emails for testing purporse, e-mails for some team members)
+  ☐ Planned future enhancements for the application. (search option and more payment methods)
 
 ### Technical Requirements
 
@@ -167,35 +171,104 @@ These dependencies are essential for the back-end functionality of the StadiumSp
 4. Create a `.env` file in the root directory and configure the necessary environment variables. Refer to the `.env.example` file for the required variables.
 5. Start the server by running the command: `node server.js`.
 
-## Configuration
+## Web Application Configuration:
 
-- The server listens on the port specified in the `PORT` environment variable.
+- The server listens on the port specified in the `PORT`:'3001' environment variable.
 - Static files, such as CSS, JS, audio, video, and image files, are served from the "public" directory.
 - The database configuration is defined in the "db" module located in the "config" directory.
 
-## Routes
+## Web Application Routes:
+Routes import the Express.js framework and create a new router object using the express.Router() method. The router object is used to define the routes for the application. The express.json() middleware is added to the router to parse incoming requests with JSON payloads. The routes are associated with specific handler functions from the differnt routes specified under controller module. At the end, all routes objects are exported so that they can be used in other files. Routes allow you to use these routers' configuration in the main application file by requiring it.
 
 The following routes are available:
 
-- `/facility`: Handles requests related to facilities.
-- `/reservation`: Handles requests related to reservations.
-- `/stadium`: Handles requests related to stadiums.
+- `/facility`: handles requests related to facilities such as: adding a new facility, retrieving a list of facilities, deleting
+    a facility, editing a facility and updating a facility.
+
+- `/reservation`: handles requests related to reservations affairs such as: adding a new reservation, retrieving a list of reservations, 
+   deleting a reservation, editing a reservation and updating a reservation.
+
+- `/stadium`: handles requests related to stadiums such as: creating a new stadium, retrieving a list of stadiums,
+   deleting a stadium, editing a stadium, and updating a stadium. It also includes file upload functionality using 
+   the multer middleware for the /add route. 
+
+-  `/payment`: handles request related to payment such as: retrieving a list of payments, adding a new payment, editing 
+    a payment, updating a payment and retrieving the details of a specific payment.
+
+-   `/sports`: handles request related to sports such as: adding a new sport, retrieving a list of sports and deleting a sport category.
+
+-   `/user`:  handles request related to user-related operations such as: signup, signin, index, detail, edit, delete and update 
+     the user.
 
 
+
+## Web Application Controller:
 
 ##control.js file exports functions that handle reservation-related operations such as creating a new reservation, retrieving a list of reservations, deleting a reservation, retrieving a reservation for editing, and updating a reservation. These functions interact with the Reservation model and perform database operations based on the received HTTP requests and send appropriate responses.
 
 ##used HTTP methods along with their typical usage:
 
-GET: retrieves a resource or a list of resources (retrieving data, fetching a web page and retrieving a list of items). It should not have any side effects on the server.
+-GET: retrieves a resource or a list of resources (retrieving data, fetching a web page and retrieving a list of items). 
+      It should not have any side effects on the server.
 
-POST: submits data to be processed to a specified resource (for example, submitting a form, sending data to be processed). It can create new resources or perform other actions that have side effects on the server.
+-POST: submits data to be processed to a specified resource (for example, submitting a form, sending data to be processed).
+       It can create new resources or perform other actions that have side effects on the server.
 
-PUT: updates a resource at a specified URL with the new representation provided in the request (updating an existing resource with a complete replacement representation). It replaces the entire resource with the new data.
+-PUT: updates a resource at a specified URL with the new representation provided in the request (updating an existing resource 
+      with a complete replacement representation). It replaces the entire resource with the new data.
 
 These HTTP methods are used in combination with URLs (endpoints) to perform various operations on web resources. The choice of method depends on the desired action and the semantics of the operation you decide to perform on the server.
 
-## Usage
+- `/facility`: handles requests related to facilities such as: adding a new facility, retrieving a list of facilities, deleting
+    a facility, editing a facility and updating a facility.
+
+- `/reservation`: handles requests related to reservations affairs such as: adding a new reservation, retrieving a list of reservations, 
+   deleting a reservation, editing a reservation and updating a reservation.
+
+- `/stadium`: handles requests related to stadiums such as: creating a new stadium, retrieving a list of stadiums,
+   deleting a stadium, editing a stadium, and updating a stadium. It also includes file upload functionality using 
+   the multer middleware for the /add route. 
+
+-  `/payment`: handles request related to payment such as: retrieving a list of payments, adding a new payment, editing 
+    a payment, updating a payment and retrieving the details of a specific payment.
+
+-   `/sports`: handles request related to sports such as: adding a new sport, retrieving a list of sports and deleting a sport category.
+
+-   `/user`:  handles request related to user-related operations such as: signup, signin, index, detail, edit, delete and update 
+     the user.
+
+
+## Web Application Models:
+##modles.js group of files provided define a Mongoose model for each section, it imports the Mongoose library, which is an Object Data Modeling (ODM) library for MongoDB and provides a convenient way to define schemas and interact with the database. Then creates a Mongoose model for different sections such as: "Facility", "payments", "reservation","stadium" and "user" by using Schema". The model represents a collection in the MongoDB database and provides an interface for interacting with the data. It allows import & export of these models in other parts of the web application and perform CRUD operations on different sections.:
+
+The break down of each section as follows along with their defined schema:
+
+
+
+- `/facility`:  defines a Mongoose model for a "Facility" entity with a schema that includes two fields: "facility" and "image". 
+   The model provides an interface for interacting with the "Facility" collection in the MongoDB database.
+
+- `/reservation`: defines a Mongoose model for a "Reservation" entity with a schema that includes several fields such as "date", 
+   "startTime", "endTime", "status", "price", "user", and "stadium". The "user" and "stadium" fields are object references to the "User" and "Stadium" models respectively. The model provides an interface for interacting with the "Reservation" collection in the MongoDB database.
+
+
+- `/stadium`: defines a Mongoose model for a "Stadium" entity with a schema that includes several fields such as "name", "image", 
+    "description", "size", "location", "price", "user", "facilities", and "category". The "user", "facilities", and "category" fields are object references to the "User", "Facility", and "Sport" models respectively. The model provides an interface for interacting with the "Stadium" collection in the MongoDB database.
+
+-  `/payment`: defines a Mongoose model for a "Payment" entity with a schema that includes four fields: "status", "date", "price", and 
+    "reservation". The "reservation" field is an array of object references to the "Reservation" model. The model provides an interface for interacting with the "Payment" collection in the MongoDB database.
+
+-   `/sports`: defines a Mongoose model for a "Sport" entity with a schema that includes several fields such as "category", "image",
+     and "stadium". The "stadium" field is an array of object references to the "Stadium" model. The model provides an interface for interacting with the "Sport" collection in the MongoDB database.
+
+
+-   `/user`:  defines a Mongoose model for a "User" entity with a schema that includes several fields such as "firstName", "lastName",
+      "userName", "emailAddress", "phoneNumber", "role", "password", and "image". The model provides an interface for interacting with the "User" collection in the MongoDB database.
+
+
+
+
+##  Web Application Usage
 
 1. Make sure the server is running.
 2. Send HTTP requests to the appropriate routes using tools like cURL or a web browser.
@@ -204,18 +277,17 @@ These HTTP methods are used in combination with URLs (endpoints) to perform vari
 
 
 
-
-
-
-
-
-
 ## Useful Resources
 
 - **[Git Team Workflow](https://trello.com/invite/stadiumspotter/ATTIb079db0c886353646c04bf9c6612f24e0062057C)**
 - **[MongooseJS documentation](https://mongoosejs.com/docs/index.html)**
--**[Mongoose web application databas link:mongodb+srv://Hussain:2qWcV0dri9YcdbAg@cluster0.j0qrk0d.mongodb.net/StadiumSpotter?       retryWrites=true&w=majority]
-     PORT=3011
-     SECRET=HelloTeamMembers85452222
+-**Here are some resources to help in learning and get started with the MERN (MongoDB, Express.js, React, Node.js) stack:
+
+     Official Documentation:
+
+      -MongoDB: https://docs.mongodb.com/
+      -Express.js: https://expressjs.com/
+      -React: https://reactjs.org/
+      -Node.js: https://nodejs.org/
 
 
