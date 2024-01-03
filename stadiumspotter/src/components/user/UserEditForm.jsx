@@ -1,10 +1,12 @@
 import Axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 
 export default function UserEditForm(props) {
 
     const [currentUser, setCurrentUser] = useState(props.user)
     const [image,setImage]=useState("");
+
+    
     // check for admin 
     console.log(props);
 
@@ -89,7 +91,7 @@ export default function UserEditForm(props) {
                         onChange={handleChange}
                         ></input>
                     </div>
-                    {(props.superUser.role === 'Admin') && 
+                    {props.superUser &&(props.superUser.role === 'Admin') && 
                     <div>
                         <label htmlFor='Admin'>Admin</label>
                         <input 

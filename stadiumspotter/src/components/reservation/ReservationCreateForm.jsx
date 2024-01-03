@@ -15,19 +15,41 @@ export default function ReservationCreateForm(props) {
     const [selectedStartTime, setSelectedStartTime] = useState(startTime[0]);
     const [selectedEndTime, setSelectedEndTime] = useState(endTime[0])
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
+    const [reservedTimes,setReservedTimes] = useState([])
 
+    const reservedTimesFetch=()=>{
+        Axios.get(`/reservation/reserved?id=${stadium.id}`)
+        .then(res=>{
+            console.log("Reserved list fetched");
+            console.log(res);
+            setReservedTimes(res.data.reserved);
+        })
+        .catch(err=>{
+            console.log("error fetching reserved list");
+            console.log(err);
+        })
+
+    }
 
 
     const navigate = useNavigate();
 
     useEffect(() => {
-    
+
+        reservedTimesFetch();
         gettingStadiumData();
-      
+        
+        
     }, [])
     
+
+        
     const gettingStadiumData = () => {
-        Axios.get(`/reservation/add?id=${stadium.id}`)
+        Axios.get(`/reservation/add?id=${stadium.id}`, {
+        headers: {
+            "Authorization":"Bearer "+localStorage.getItem("token")
+            }
+        })
         .then((res) => {
             const stadiumData = res.data.stadium;
             console.log(stadiumData);
@@ -37,11 +59,33 @@ export default function ReservationCreateForm(props) {
             console.log("Error Fetching Data!");
             console.log(err);
         })
+        
     }
 
+console.log(reservedTimes);
+
+// for (let i = 0; i< reservedTimes.length;i++){
+//     // console.log(startTime.indexOf("7:00 AM"));
+//     console.log(reservedTimes[i].startTime);
+//     if()
+//     if(startTime.indexOf(reservedTimes[i].startTime) > 0){
+//     console.log(startTime.indexOf(reservedTimes[i].startTime));
+//     startTime.splice(startTime.indexOf(reservedTimes[i].startTime),1)
+//     }
+
+//     if(endTime.indexOf(reservedTimes[i].endTime) > 0){
+//         console.log(endTime.indexOf(reservedTimes[i].endTime));
+//         endTime.splice(endTime.indexOf(reservedTimes[i].endTime),1)
+//     }
+//     // endTime.splice(endTime.indexOf(reservedTimes[i].endTime),1)
+    
+//    } 
+
     const handleStartTime = (e) => {
+
+
         const selectedValue = e.target.value;
-        setSelectedStartTime (selectedValue)
+        setSelectedStartTime (selectedValue);
 
         const startTimeIndex = startTime.indexOf(selectedValue)
 
@@ -73,7 +117,11 @@ export default function ReservationCreateForm(props) {
     };
 
     const addReservation = (reservation) => {
-        Axios.post('/reservation/add', reservation)
+        Axios.post('/reservation/add', reservation, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res => {
             console.log("Reservation is Successful!");
         })
@@ -100,7 +148,7 @@ export default function ReservationCreateForm(props) {
     }
 
   return (
-    <div>
+    <div>   
         <h1>Reservation</h1>
         <div><img src='' alt='...'/></div>
         <div>
