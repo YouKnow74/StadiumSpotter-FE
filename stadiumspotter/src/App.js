@@ -152,7 +152,7 @@ function App() {
         <Link to="/sport" class="nav-link px-2">Sport List</Link> &nbsp;
         <Link to="/facility" class="nav-link px-2">Facility List</Link> &nbsp;
         <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp;
-        <Link to={`/profile`} class="nav-link px-2">Profile</Link>&nbsp;
+        <Link to={`/profile`} class="nav-link px-2">{userDetails &&<img src={"/images/"+userDetails.image} style={{width:"35px",height:"35px"}}/>}</Link>&nbsp;
         <Link to='/logout'class="nav-link px-2" onClick={onLogoutHandler}>Logout</Link>&nbsp;
 
       </div>

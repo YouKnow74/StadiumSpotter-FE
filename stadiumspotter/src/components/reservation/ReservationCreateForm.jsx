@@ -3,6 +3,7 @@ import startTime from './startTime'
 import endTime from './endTime'
 import Axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import Reserved from './Reserved';
 
 export default function ReservationCreateForm(props) {
 
@@ -142,15 +143,32 @@ console.log(reservedTimes);
 
     const submitReservation = (e) =>{
         e.preventDefault();
+        let flag = true;
         // newReserve.date =JSON.stringify(newReserve.date);
         addReservation(newReserve);
         navigate(`/`)
     }
 
+    const allReserved = reservedTimes.map((oneReserv,index)=>(
+        <tr key={index}>
+            <Reserved {...oneReserv}/>
+        </tr>
+    ))
   return (
     <div>   
         <h1>Reservation</h1>
-        <div><img src='' alt='...'/></div>
+        <div><img src={"/images/"+currentStadium.image} style={{width:"35px",height:"35px"}}/></div>
+        <div>
+            <table>
+                <thead>Reserved Table</thead>
+                <tbody>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tbody>
+                {allReserved}
+            </table>
+        </div>
         <div>
             <h2>{currentStadium.name}</h2>
             <form onSubmit={submitReservation}>
