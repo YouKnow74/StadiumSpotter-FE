@@ -17,7 +17,7 @@ export default function ReservationCreateForm(props) {
     const [selectedEndTime, setSelectedEndTime] = useState(endTime[0])
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
     const [reservedTimes,setReservedTimes] = useState([])
-
+    
     const reservedTimesFetch=()=>{
         Axios.get(`/reservation/reserved?id=${stadium.id}`)
         .then(res=>{
@@ -37,7 +37,7 @@ export default function ReservationCreateForm(props) {
 
     useEffect(() => {
 
-        reservedTimesFetch();
+   
         gettingStadiumData();
         setSelectedStartTime(startTime[0])
         setSelectedEndTime(endTime[0])
@@ -50,7 +50,7 @@ export default function ReservationCreateForm(props) {
         const totalPrice = stadiumPrice * (durationInHours + 1);
         setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
 
-        
+        reservedTimesFetch();
         
     }, [])
     
@@ -144,7 +144,7 @@ console.log(reservedTimes);
     }
 
     const handleChange = (event) => {
-        const reservation = {...newReserve};
+        const reservation = {...newReserve, stadiumName: currentStadium.name};
 
         reservation[event.target.name] = event.target.value;
         console.log(reservation);
@@ -155,9 +155,21 @@ console.log(reservedTimes);
     const submitReservation = (e) =>{
         e.preventDefault();
         let flag = true;
+        for (let i = 0;i<reservedTimes.length;i++){
+            if(newReserve.date){
+                if(selectedStartTime==reservedTimes[i].startTime || selectedEndTime==reservedTimes[i].endTime){
+                    flag =false;
+                    break;
+                }
+            }
+        }
         // newReserve.date =JSON.stringify(newReserve.date);
+        if(flag==true){
         addReservation(newReserve);
         navigate(`/`)
+        }
+        e.target.reset();
+        
     }
 
     const allReserved = reservedTimes.map((oneReserv,index)=>(
