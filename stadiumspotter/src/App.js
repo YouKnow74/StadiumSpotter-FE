@@ -1,7 +1,7 @@
-import './App.css';
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min"
+import './App.css';
 import Signin from './components/user/Signin';
 import Signup from './components/user/Signup';
 import {Routes,Route,Link} from 'react-router-dom';
@@ -195,7 +195,7 @@ function App() {
         to be passed into user edit form      
 
       */}
-//           <Route
+         {/* <Route
 //             path="/usersList"
 //             element={<UserList superData={userDetails} />}
 //           />
@@ -217,7 +217,6 @@ function App() {
 //               <UserEditForm user={userDetails} superUser={userDetails} />
 //             }
 //           />
-//   <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
 //   <Route
 //             path="/myReservations"
 //             element={
@@ -232,7 +231,8 @@ function App() {
         
 //       </div>
 
-      */ }
+      //} */}
+      <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
       <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
       <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />

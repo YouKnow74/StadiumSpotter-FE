@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: 20px;
 }
 
 .App-logo {
@@ -36,3 +37,16 @@
     transform: rotate(360deg);
   }
 }
+
+.list-group {
+  margin-bottom: 5px;
+}
+
+.my-button {
+  margin: 10px;
+}
+
+.myImg {
+  width: 400px;
+}
+
