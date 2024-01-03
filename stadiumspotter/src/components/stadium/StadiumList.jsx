@@ -177,8 +177,8 @@ export default function StadiumList(props) {
     const allStadiums = stadiums.map((stadium,index)=>(
         
         <div className='col'>
-            <div className='card shadow-sm' key={index}>
-                <Stadium user={props.user} {...stadium} edit={editStadium} delete={deleteStadium} reserve={reserveStadium}/>
+            <div className='card shadow-sm' key={index}> 
+                <Stadium  {...stadium} edit={editStadium} delete={deleteStadium} reserve={reserveStadium} userDetails={props.user} />
             </div>
         </div>
     ));
@@ -186,11 +186,12 @@ export default function StadiumList(props) {
   return (
    <div>
     <h1>All Stadiums</h1>
+   
     <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>
     <div>
         {isEdit ?
         <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
-        sports={sports} facilities={facilities} setIsEdit={setIsEdit} />
+        sports={sports} facilities={facilities} setIsEdit={setIsEdit} user={props.user} />
         :null}
         {isAdd?
         <StadiumCreateForm setIsAdd={setIsAdd} add={addStadium} sports={sports} facilities={facilities} user={props.user}/>:""}

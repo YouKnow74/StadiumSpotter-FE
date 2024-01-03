@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export default function FacilityEditForm({facility,update,setIsEdit}) {
+export default function FacilityEditForm({facility,update,setIsEdit,user}) {
 
     const [facilityToEdit,setFacilityToEdit]=useState(facility);
     const [image,setImage]=useState("");
@@ -62,6 +62,13 @@ export default function FacilityEditForm({facility,update,setIsEdit}) {
         </div>
         <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
         </div>
+
+       { user.role=="Admin" ? (
+                    <>
+                <button class="d-flex btn btn-success p-2 m-3 g-2 " type='submit'>Submit</button>
+                </>
+                ):""}
+
       </form>
 
     </div>

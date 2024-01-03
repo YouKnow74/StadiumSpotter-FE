@@ -21,16 +21,16 @@ export default function Signin(props) {
             <form onSubmit={loginHandler}>
                 <div>
                     <label>Email Address</label>
-                    <input type='email' name='emailAddress' onChange={handleChange} className='form-control'></input>
+                    <input type='email' name='emailAddress' onChange={handleChange} className='form-control green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
                     <label>Password</label>
-                    <input type='password' name='password' onChange={handleChange} className='form-control'></input>
+                    <input type='password' name='password' onChange={handleChange} className='form-control green-border focus-ring focus-ring-success'></input>
                 </div>
 
                 <div>
-                    <input type='submit' value='Login' className='btn btn-primary'></input>
+                    <input type='submit' value='Login' className='btn btn-success my-button'></input>
                 </div>
             </form>
         </div>

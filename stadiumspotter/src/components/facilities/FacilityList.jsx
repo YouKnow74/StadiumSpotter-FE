@@ -5,7 +5,7 @@ import Facility from './Facility';
 import FacilityAddForm from "./FacilityAddForm";
 import FacilityEditForm from './FacilityEditForm';
 
-export default function FacilityList() {
+export default function FacilityList(props) {
     const [facilities,setFacilites]=useState([])
     const [isAdd,setIsAdd]=useState(false);
     const [isEdit,setIsEdit]=useState(false);
@@ -118,6 +118,7 @@ export default function FacilityList() {
         <tr key={index}>
             <Facility {...onefacility} edit={editFacility} 
             changeToEdit={changeToEdit} delete={deleteFacility}
+            user={props.user}
             />
         </tr>
     ))
@@ -127,16 +128,34 @@ export default function FacilityList() {
 <h1>All Facilities</h1>
 <button class="d-flex btn btn-success p-2 m-3 g-2 " onClick={changeToAdd}>Add Facility Form</button>
     {/* This is temporary only and needs to be designed diffrently */}
-    <div className='d-flex '>
-    {isAdd ?
-        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd}/>:
+
+    <div>
+        <table className='table table-dark table-striped-columns'>
+            <tbody>
+            <tr>
+                <th>Facility Name</th>
+                <th>Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
+                {props.user.role=="Admin" ? (
+                    <>
+                <th>Edit</th>
+                <th>Delete</th>
+                </>
+                ):""}
+            </tr>
+            {allFacilites}
+            </tbody>
+        </table>
+ <div className='d-flex '>
+        {isAdd ?
+        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
+
         ""
         }
        
         
         {
             isEdit ?
-            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} />:
+            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} user ={props.user}/>:
             null
         }
                 
