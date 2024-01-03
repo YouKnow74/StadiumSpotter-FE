@@ -163,7 +163,8 @@ export default function ReservationEditForm(props) {
 
                 <div class="col-12">
               <div class="row g-2 p-2  ">
-                <div className='col-auto'>                 <label class="form-label">End Time</label>
+                <div className='col-auto'>          
+                       <label class="form-label">End Time</label>
                 </div>
 
                 <div className='col-auto'>             
@@ -180,9 +181,16 @@ export default function ReservationEditForm(props) {
                
                 {props.user && ((props.user.role == 'stadium owner') || (props.user.role == 'Admin')) &&
                 
-                <div>
-                    <label>Status</label>
+                <div class="col-12">
+                <div class="row g-2 p-2  ">
+                  <div className='col-auto'>  
+                    <label class="form-label" >Status</label>
+                    </div>
+                    <div className='col-auto'> 
                     <input value={newReserve.Status} type="text" class="form-control" name="Status" onChange={handleChange} />
+                    </div>  
+                    </div>
+
                 </div>
                 }
                 

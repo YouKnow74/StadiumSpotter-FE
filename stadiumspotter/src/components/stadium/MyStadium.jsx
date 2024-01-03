@@ -250,9 +250,9 @@ export default function MyStadium({user}) {
                     ))}</td>
             <td>{oneStadium.category.category}</td>
             <td><img src={"/images/"+oneStadium.image} style={{width:"35px",height:"35px"}}/></td>
-            <td><button onClick={() => viewReservations(oneStadium._id)}>View</button></td>
-            <td><button onClick={()=>editStadium(oneStadium._id)}>Edit</button></td>
-            <td><button onClick={()=>deleteStadium(oneStadium._id)}>Delete</button></td>
+            <td><button className="btn btn-outline-secondary" onClick={() => viewReservations(oneStadium._id)}>View</button></td>
+            <td><button  className="btn btn-outline-secondary"onClick={()=>editStadium(oneStadium._id)}>Edit</button></td>
+            <td><button className="btn btn-outline-secondary" onClick={()=>deleteStadium(oneStadium._id)}>Delete</button></td>
             
         </tr>
     ))
@@ -272,38 +272,44 @@ export default function MyStadium({user}) {
         <StadiumEditForm key={currentStadium._id} setIsEdit={setIsEdit} stadium={currentStadium} update={updateStadium} 
         sports={sports} facilities={facilities}/>
         :""}
-        {isAdd ?
+      {isAdd ?
         <StadiumCreateForm setIsAdd={setIsAdd} add={addStadium} sports={sports} facilities={facilities} user={user}/>:""}
-         <table className='table table-dark table-striped-columns'>
+                <div className='d-md-flex d-sm-flex '> 
+
+         <table className='justify-content-center  table d-md-flex d-sm-flex w-100 table-bordered'>
             <tbody>
             <tr>
-                <th>Stadium Name</th>
-                <th>Stadium Description</th>
-                <th>Stadium Size</th>
-                <th>Stadium Location</th>
-                <th>Stadium Facilities</th>
-                <th>Stadium Category</th>
-                <th>Stadium Price (each hour)</th>
-                <th>Stadium Image</th>{/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/}
-                <th>View Stadium Reservations</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th className="   table-success ">Stadium Name</th>
+                <th className="   table-success ">Stadium Description</th>
+                <th className="   table-success ">Stadium Size</th>
+                <th className="   table-success ">Stadium Location</th>
+                <th className="   table-success ">Stadium Facilities</th>
+                <th className="   table-success ">Stadium Category</th>
+                <th className="   table-success ">Stadium Price (each hour)</th>
+                <th className="   table-success ">Stadium Image</th>{/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/}
+                <th className="   table-success ">View Stadium Reservations</th>
+                <th className="   table-success ">Edit</th>
+                <th className="   table-success ">Delete</th>
             </tr>
             {allMyStadiums}
             </tbody>
         </table>
+        </div>
+
         <h1>My Reservations</h1>
-        <table className='table table-dark table-striped-columns'>
+        <table className='justify-content-center table w-100 table-bordered'>
               <tbody>
                 <tr>
                   {/* <th>Reservation id</th> */}
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Status</th>
-                  <th>Price</th>
-                  <th>User</th>
-                  <th>Stadium Name</th>
+                  <th className="   table-success " >Date</th>
+                  <th className="   table-success " >Start Time</th>
+                  <th className="   table-success " >End Time</th>
+                  <th className="   table-success " >Status</th>
+                  <th className="   table-success " >Price</th>
+                  <th className="   table-success " >User</th>
+                  <th className="   table-success " >Stadium Name</th>
+                  <th className="   table-success ">Edit</th>
+                <th className="   table-success ">Delete</th>
                 </tr>
                 {myReservationsList}
               </tbody>

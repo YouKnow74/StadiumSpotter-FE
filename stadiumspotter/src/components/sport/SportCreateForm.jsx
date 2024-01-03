@@ -41,7 +41,7 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
    <div>
      <form onSubmit={addSport} class=" row g-2 " encType="multipart/form-data">
 
-<div class=" row g-2 ">
+<div class=" row g-2  ">
            
             <div class="col-12">
               <div class="row g-3  ">

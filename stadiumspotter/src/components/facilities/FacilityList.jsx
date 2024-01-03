@@ -130,7 +130,7 @@ export default function FacilityList(props) {
     {/* This is temporary only and needs to be designed diffrently */}
 
 
- <div className='d-flex '>
+ <div className='d-md-flex  '>
         {isAdd ?
         <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
 
@@ -149,8 +149,8 @@ export default function FacilityList(props) {
             <tr>
                 <th class="   table-success ">Facility Name</th>
                 <th class="   table-success ">Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
-                <th class="   table-success ">Edit</th>
-                <th class="   table-success ">Delete</th>
+                <th class="  table-success ">Edit</th>
+                <th class="  table-success ">Delete</th>
             </tr>
             {allFacilites}
             </tbody>
