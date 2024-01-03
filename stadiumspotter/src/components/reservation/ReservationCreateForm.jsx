@@ -3,6 +3,7 @@ import startTime from './startTime'
 import endTime from './endTime'
 import Axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import Reserved from './Reserved';
 
 export default function ReservationCreateForm(props) {
 
@@ -15,12 +16,28 @@ export default function ReservationCreateForm(props) {
     const [selectedStartTime, setSelectedStartTime] = useState(startTime[0]);
     const [selectedEndTime, setSelectedEndTime] = useState(endTime[0])
     const [availableEndTime, setAvailableEndTime] = useState([...endTime]);
+    const [reservedTimes,setReservedTimes] = useState([])
 
+    const reservedTimesFetch=()=>{
+        Axios.get(`/reservation/reserved?id=${stadium.id}`)
+        .then(res=>{
+            console.log("Reserved list fetched");
+            console.log(res);
+            setReservedTimes(res.data.reserved);
+        })
+        .catch(err=>{
+            console.log("error fetching reserved list");
+            console.log(err);
+        })
+
+    }
 
 
     const navigate = useNavigate();
 
     useEffect(() => {
+
+        reservedTimesFetch();
         gettingStadiumData();
         setSelectedStartTime(startTime[0])
         setSelectedEndTime(endTime[0])
@@ -32,13 +49,18 @@ export default function ReservationCreateForm(props) {
         const stadiumPrice = currentStadium.price;
         const totalPrice = stadiumPrice * (durationInHours + 1);
         setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
+
+        
+        
     }, [])
     
+
+        
     const gettingStadiumData = () => {
         Axios.get(`/reservation/add?id=${stadium.id}`, {
-            headers: {
-                "Authorization":"Bearer "+localStorage.getItem("token")
-                }
+        headers: {
+            "Authorization":"Bearer "+localStorage.getItem("token")
+            }
         })
         .then((res) => {
             const stadiumData = res.data.stadium;
@@ -49,11 +71,33 @@ export default function ReservationCreateForm(props) {
             console.log("Error Fetching Data!");
             console.log(err);
         })
+        
     }
 
+console.log(reservedTimes);
+
+// for (let i = 0; i< reservedTimes.length;i++){
+//     // console.log(startTime.indexOf("7:00 AM"));
+//     console.log(reservedTimes[i].startTime);
+//     if()
+//     if(startTime.indexOf(reservedTimes[i].startTime) > 0){
+//     console.log(startTime.indexOf(reservedTimes[i].startTime));
+//     startTime.splice(startTime.indexOf(reservedTimes[i].startTime),1)
+//     }
+
+//     if(endTime.indexOf(reservedTimes[i].endTime) > 0){
+//         console.log(endTime.indexOf(reservedTimes[i].endTime));
+//         endTime.splice(endTime.indexOf(reservedTimes[i].endTime),1)
+//     }
+//     // endTime.splice(endTime.indexOf(reservedTimes[i].endTime),1)
+    
+//    } 
+
     const handleStartTime = (e) => {
+
+
         const selectedValue = e.target.value;
-        setSelectedStartTime (selectedValue)
+        setSelectedStartTime (selectedValue);
 
         const startTimeIndex = startTime.indexOf(selectedValue)
 
@@ -110,15 +154,32 @@ export default function ReservationCreateForm(props) {
 
     const submitReservation = (e) =>{
         e.preventDefault();
+        let flag = true;
         // newReserve.date =JSON.stringify(newReserve.date);
         addReservation(newReserve);
         navigate(`/`)
     }
 
+    const allReserved = reservedTimes.map((oneReserv,index)=>(
+        <tr key={index}>
+            <Reserved {...oneReserv}/>
+        </tr>
+    ))
   return (
-    <div>
+    <div>   
         <h1>Reservation</h1>
-        <div><img src='' alt='...'/></div>
+        <div><img src={"/images/"+currentStadium.image} style={{width:"35px",height:"35px"}}/></div>
+        <div>
+            <table>
+                <thead>Reserved Table</thead>
+                <tbody>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tbody>
+                {allReserved}
+            </table>
+        </div>
         <div>
             <h2>{currentStadium.name}</h2>
             <form onSubmit={submitReservation}>
