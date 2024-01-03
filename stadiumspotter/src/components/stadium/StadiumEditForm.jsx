@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import locations from './location';
 
-export default function StadiumEditForm({stadium,update,facilities,sports}) {
+export default function StadiumEditForm({stadium,update,facilities,sports, setIsEdit}) {
   
   const [editStadium,setEditStadium]=useState(stadium);
   const [facilitesArr,setfacilitesArr]=useState(editStadium.facilities);
@@ -34,6 +34,7 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
     formData.append("stadium",JSON.stringify(editStadium));
     formData.append("image",image);
     update(formData);
+    setIsEdit(false);
     e.target.reset();
   }
 
@@ -41,34 +42,34 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
     <div>
 
     <h2>Stadium Edit Form</h2>
-    <img src={"/images/"+editStadium.image} width={50} height={50} style={{border: "1px solid red"}}/>
+    <img src={"/images/"+editStadium.image} className='myImg'/>
     <form onSubmit={updateStadium} encType="multipart/form-data">
 
       <div>
-        <label>Stadium Name:</label>
-        <input type='text' name="name"  onChange={handleChange} value={editStadium.name}/>
+        <label className='form-label'>Stadium Name:</label>
+        <input className='form-control' type='text' name="name"  onChange={handleChange} value={editStadium.name}/>
       </div>
 
       <div>
-        <label>Stadium Description:</label>
-        <input type='text' name="descriptin"  onChange={handleChange} value={editStadium.descriptin}/>
+        <label className='form-label'>Stadium Description:</label>
+        <input className='form-control' type='text' name="descriptin"  onChange={handleChange} value={editStadium.descriptin}/>
       </div>
 
       <div>
-        <label>Stadium Size:</label>
-        <input type='text' name="size"  onChange={handleChange} value={editStadium.size}/>
+        <label className='form-label'>Stadium Size:</label>
+        <input className='form-control' type='text' name="size"  onChange={handleChange} value={editStadium.size}/>
       </div>
 
       <div>
-        <label>Stadium Price:</label>
-        <input type='text' name="price"  onChange={handleChange} value={editStadium.price}/>
+        <label className='form-label'>Stadium Price:</label>
+        <input className='form-control' type='text' name="price"  onChange={handleChange} value={editStadium.price}/>
       </div>
   
       <div>
-        <label>Stadium Location:</label>
+        <label className='form-label'>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         {/* <input type='text' name="location"  onChange={handleChange} value={editStadium.location}/> */}
-        <select name='location' onChange={handleChange} value={editStadium.location}>
+        <select className='form-control' name='location' onChange={handleChange} value={editStadium.location}>
            {locations.map((oneLocation, index) => (
             <option key={index} value={oneLocation}>{oneLocation}</option>
               ))}
@@ -76,16 +77,16 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
       </div>
 
       <div>
-        <label>Stadium image:</label>
-        <input type='file' name="image" id='image' onChange={handleImage} />
+        <label className='form-label'>Stadium image:</label>
+        <input className='form-control' type='file' name="image" id='image' onChange={handleImage} />
       </div>
 
       <div>
-        <label>Stadium Sports:</label>
+        <label className='form-label'>Stadium Sports:</label>
         <p>Selected</p>
-        <input value={editStadium.category.category} disabled/>
+        <input className='form-control' value={editStadium.category.category} disabled/>
         <p>New Value</p>
-        <select type="text" name='category'  onChange={handleChange}>
+        <select className='form-control' type="text" name='category'  onChange={handleChange}>
           {sports.map((oneSport,index) => (
             <option key={index} value={oneSport._id}>{oneSport.category}</option>
           ))}
@@ -93,15 +94,15 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
       </div>
 
       <div>
-        <label>Stadium Facilites:</label>
+        <label className='form-label'>Stadium Facilites:</label>
         <p>already selected</p>
-        <select multiple='multiple' disabled>
+        <select className='form-control' multiple='multiple' disabled>
           {editStadium.facilities.map((oneFacility,index)=>(
             <option key={index} >{oneFacility.facility}</option>
           ))}
         </select>
         <p>change</p>
-        <select type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
+        <select className='form-control' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
           {facilities.map((oneFacility,index)=>(
             <option key={index} value={oneFacility._id}>{oneFacility.facility}</option>
           ))}
@@ -115,7 +116,7 @@ export default function StadiumEditForm({stadium,update,facilities,sports}) {
       <input type='hidden' value={userid} name='user' /> 
       
       */}
-      <button type='submit'>Update Stadium</button>
+      <button className='btn btn-success my-button' type='submit'>Update Stadium</button>
     </form>
 
     
