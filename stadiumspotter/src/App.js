@@ -22,6 +22,7 @@ import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import StadiumShow from './components/stadium/StadiumShow';
 import ReservationCustomerList from './components/reservation/ReservationCustomerList';
+import MyStadium from './components/stadium/MyStadium';
 
 
 function App() {
@@ -155,7 +156,7 @@ function App() {
         <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp;
         <Link to={`/profile`} class="nav-link px-2">{userDetails &&<img src={"/images/"+userDetails.image} style={{width:"35px",height:"35px"}}/>}</Link>&nbsp;
         <Link to='/logout'class="nav-link px-2" onClick={onLogoutHandler}>Logout</Link>&nbsp;
-
+        <Link to='/mystadium'class="nav-link px-2">My Stadium </Link>
       </div>
       )
       :
@@ -170,10 +171,10 @@ function App() {
     </nav>
       </ul>
 
-      <div class="col-md-3 text-end">
+      {/* <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
         <button type="button" class="btn btn-primary">Sign-up</button>
-      </div>
+      </div> */}
     </header>
 
     
@@ -188,14 +189,16 @@ function App() {
 
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
-      <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
+      <Route path='/reservation/:id' element={ userDetails && <ReservationCreateForm user={userDetails} /> }/>
       <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
       {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
         to be passed into user edit form      
 
       */}
+
          {/* <Route
+
 //             path="/usersList"
 //             element={<UserList superData={userDetails} />}
 //           />
@@ -229,7 +232,10 @@ function App() {
 //           />
 //         </Routes>
         
-//       </div>
+//       </div> */}
+
+      {/*} */ } 
+
 
       //} */}
       <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
@@ -237,6 +243,7 @@ function App() {
       <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
       <Route path='/' element={ <Home />}/>
+      <Route path='/mystadium' element={userDetails ?<MyStadium user={userDetails}/>:<Home />} />
 
 
       </Routes>
