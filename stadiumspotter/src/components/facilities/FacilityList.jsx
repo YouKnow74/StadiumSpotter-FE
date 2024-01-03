@@ -129,22 +129,7 @@ export default function FacilityList(props) {
 <button class="d-flex btn btn-success p-2 m-3 g-2 " onClick={changeToAdd}>Add Facility Form</button>
     {/* This is temporary only and needs to be designed diffrently */}
 
-    <div>
-        <table className='table table-dark table-striped-columns'>
-            <tbody>
-            <tr>
-                <th>Facility Name</th>
-                <th>Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
-                {props.user.role=="Admin" ? (
-                    <>
-                <th>Edit</th>
-                <th>Delete</th>
-                </>
-                ):""}
-            </tr>
-            {allFacilites}
-            </tbody>
-        </table>
+
  <div className='d-flex '>
         {isAdd ?
         <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
@@ -174,6 +159,7 @@ export default function FacilityList(props) {
         
         </div>
 
-    </div>
+        </div>
+       
   )
 }

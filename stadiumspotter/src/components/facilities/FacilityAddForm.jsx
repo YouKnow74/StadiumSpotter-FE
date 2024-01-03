@@ -60,6 +60,7 @@ export default function FacilityAddForm({add,setIsAdd,user}) {
                 <button type='submit'>Submit</button>
                 </>
                 ):""}
+        </div>
       </form>
 </div>
 
