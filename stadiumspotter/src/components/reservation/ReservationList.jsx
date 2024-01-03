@@ -93,7 +93,7 @@ export default function ReservationList(props) {
     // console.log(reservation.date)
 
     return (<tr key={index}>
-      <Reservation {...reservation} edit={editView} delete={deleteReservation} />
+      <Reservation {...reservation} userDetails={props.user} edit={editView} delete={deleteReservation} />
     </tr>
   )});
 
@@ -106,6 +106,7 @@ export default function ReservationList(props) {
               <tbody>
                 <tr>
                   {/* <th>Reservation id</th> */}
+
 
                   <th className="   table-success ">Date</th>
                   <th className="   table-success ">Start Time</th>
