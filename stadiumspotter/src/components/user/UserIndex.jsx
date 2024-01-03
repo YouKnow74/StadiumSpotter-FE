@@ -91,20 +91,52 @@ const userInfoFetch = () => {
 
     <div>
         <h1>Profile</h1>
+        
         {/* 
         user && is to make sure we fetched the user first 
         then show the page content because when refreshing the page without (user &&) condition it gives an error 
         */}
-        {user && <div><img src={"/images/"+userInfo.image} style={{width:"35px",height:"35px"}}/></div>}
-        {user &&<div>{userInfo.userName}</div>}
-        {user &&<div>{userInfo.firstName} {userInfo.lastName}</div>}
-        {user &&<div>{userInfo.emailAddress}</div>}
-        {user &&<div>{userInfo.phoneNumber}</div>}
-        {user &&<div>{userInfo.role}</div>}
-        <button onClick={handleClick}>Edit</button>
 
+
+
+        {user && <div><img className="ProfileImg" src={"/images/"+userInfo.image}/></div>}
+        <div className='col-auto'>
+        <label>
+       
+
+        {user &&<div className=' form-control border'>{userInfo.firstName} {userInfo.lastName}</div>}
+        </label>
+        </div>
+        <label className=' p-2 ' >
+        Usename:{user &&<div className='form-control border'>{userInfo.userName}</div>}
+        </label>
+           
+        
+      
+  
+        <label className=' p-2 '>
+        Email Address:
+        {user &&<div className='form-control border'>{userInfo.emailAddress}</div>}
+        </label>
+      
+        
+        <label className=' p-2 '>
+        Phone Number:
+        {user &&<div className='form-control border'>{userInfo.phoneNumber}</div>}
+        </label>
+        
+        
+        <label className=' p-2 '>
+       Role:
+        {user &&<div className='form-control1 border'>{userInfo.role}</div>}
+        </label>
+        <div className='col-auto'>
+        <button  class="btn btn-outline-secondary" onClick={handleClick}>Edit</button>
+        </div>
         {isEdit && <UserEditForm user={userInfo} setIsEdit={setIsEdit} updateUser={updateUser} superUser={superUser}/>}
-    </div>
+       
+       </div>
+  
   )
 }
 

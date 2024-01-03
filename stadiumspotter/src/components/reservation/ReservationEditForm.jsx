@@ -100,31 +100,56 @@ export default function ReservationEditForm(props) {
     }
   return (
     <div>
-        <h1>Edit Reservation</h1>
-        <div><img src='' alt='...'/></div>
-        <div>
+        <h2>Edit Reservation</h2>
             <h2>{newReserve.stadiumName}</h2>
-            <form onSubmit={submitReservation}>
-                <div>
-                    <label htmlFor="inputdate" class="form-label">Choose a Date</label>
+            <form class=" row g-2 " onSubmit={submitReservation}>
+               
+         <div class=" row g-2 p-2 ">
+          <div class="col-12">
+              <div class="row g-3  ">
+                <div className='col-auto'> 
+                    <label htmlFor="inputdate" class="form-label">Choose a Date:</label>
+                </div>
+                    <div className='col-auto'>
                     <input value={newReserve.date} type="date" class="form-control" id="inputdate" name="date" onChange={handleChange} />
                 </div>
-                <div>
-                    <label>Start Time</label>
-                    <select value={newReserve.startTime} name='startTime' onChange={handleStartTime}>
+                </div>
+                </div>
+                </div>
+
+            <div class="col-12">
+              <div class="row g-2 p-2 ">
+                <div className='col-auto'>
+                    <label class="form-label">Start Time:</label>
+                    </div>
+                    <div className='col-auto'>
+                    <select class="form-control"  value={newReserve.startTime} name='startTime' onChange={handleStartTime}>
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
                     </select>
+                    </div>  
+                      </div>  
+                      </div>
+                       
+                
+              
+
+                <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'>                 <label class="form-label">End Time</label>
                 </div>
-                <div>
-                    <label>End Time</label>
-                    <select value={newReserve?newReserve.endTime:props.reservation.endTime} name='endTime'onChange={handleEndTime}>
+                <div className='col-auto'>             
+                     <select  class="form-control"  value={newReserve?newReserve.endTime:props.reservation.endTime} name='endTime'onChange={handleEndTime}>
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
                     </select>
+                    </div>  
+                    </div>
+
                 </div>
+               
                 {props.user && ((props.user.role == 'stadium owner') || (props.user.role == 'Admin')) &&
                 
                 <div>
@@ -137,9 +162,11 @@ export default function ReservationEditForm(props) {
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
                 <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
-                <button type='submit'>Save Reservation</button>
+    
             </form>
-        </div>
-    </div>
+            <button class="d-flex btn btn-success w-10 p-2 m-3 g-2 " type='submit'>Save Reservation</button>
+            </div>
+
+ 
   )
 }

@@ -22,6 +22,8 @@ import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import StadiumShow from './components/stadium/StadiumShow';
 import ReservationCustomerList from './components/reservation/ReservationCustomerList';
+import MyStadium from './components/stadium/MyStadium';
+
 
 
 function App() {
@@ -136,7 +138,7 @@ function App() {
   console.log(userDetails);
 
   return (
-    <div style={{}}>
+    <div className='FontChange'>
       <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
       <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -195,7 +197,9 @@ function App() {
         to be passed into user edit form      
 
       */}
-//           <Route
+
+         {/* <Route
+
 //             path="/usersList"
 //             element={<UserList superData={userDetails} />}
 //           />
@@ -234,7 +238,8 @@ function App() {
       {/*} */ } 
 
 
-      */ }
+     
+      <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
       <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
       <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
