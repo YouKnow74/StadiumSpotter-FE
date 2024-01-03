@@ -21,9 +21,17 @@ export default function ReservationCreateForm(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-    
         gettingStadiumData();
-      
+        setSelectedStartTime(startTime[0])
+        setSelectedEndTime(endTime[0])
+        const startTimeIndex = startTime.indexOf(selectedStartTime);
+        const endTimeIndex = endTime.indexOf(selectedEndTime);
+
+        const durationInHours = endTimeIndex - startTimeIndex;
+
+        const stadiumPrice = currentStadium.price;
+        const totalPrice = stadiumPrice * (durationInHours + 1);
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
     }, [])
     
     const gettingStadiumData = () => {
@@ -92,7 +100,7 @@ export default function ReservationCreateForm(props) {
     }
 
     const handleChange = (event) => {
-        const reservation = {...newReserve, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending"};
+        const reservation = {...newReserve};
 
         reservation[event.target.name] = event.target.value;
         console.log(reservation);
@@ -120,7 +128,7 @@ export default function ReservationCreateForm(props) {
                 </div>
                 <div>
                     <label>Start Time</label>
-                    <select name='startTime' onChange={handleStartTime}>
+                    <select name='startTime' value={selectedStartTime} onChange={handleStartTime}>
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}

@@ -18,6 +18,7 @@ import UserList from './components/user/UserList';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import StadiumShow from './components/stadium/StadiumShow';
+import ReservationCustomerList from './components/reservation/ReservationCustomerList';
 
 
 function App() {
@@ -251,7 +252,18 @@ function App() {
             }
           />
   <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
+  <Route
+            path="/myReservations"
+            element={
+              isAuth ? (userDetails &&
+                <ReservationCustomerList user={userDetails} />
+              ) : (
+                <Signin login={loginHandler} />
+              )
+            }
+          />
         </Routes>
+        
       </div>
 
     </div>
