@@ -18,24 +18,8 @@ export default function StadiumList(props) {
     useEffect(() => {
       
     loadStadiumsList();
-    // userGet(user);
       
     }, []);
-
-    // const userGet =(user)=>{
-    //     Axios.get(`user/detail?id=${user.id}`)
-    //     .then(res=>{
-    //         console.log("res",res);
-    //         console.log(res.data.userDetail);
-    //         setUserDetails(res.data.userDetail);
-    //         // userDetails.password=null;
-    //         console.log(userDetails);
-    //     })
-    //     .catch(err=>{
-    //         console.log("User undefined");
-    //         console.log(err);
-    //     })
-    // }
 
     /*
 
@@ -47,9 +31,17 @@ export default function StadiumList(props) {
     */
     const loadStadiumsList = ()=>{
         // console.log("user:",user.id);
-        Axios.get("stadium/index")
+        Axios.get("stadium/index",{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("token")
+            }
+        })
         .then(response=>{
-            Axios.get("stadium/add")
+            Axios.get("stadium/add", {
+                headers: {
+                    "Authorization":"Bearer "+localStorage.getItem("token")
+                    }
+            })
             .then(res=>{
                 console.log("sport list");
                 console.log(res);
@@ -59,7 +51,11 @@ export default function StadiumList(props) {
                 console.log("error bringing sports list");
                 console.log(err);
             })
-            Axios.get("facility/index")
+            Axios.get("facility/index", {
+                headers: {
+                    "Authorization":"Bearer "+localStorage.getItem("token")
+                    }
+            })
             .then(res=>{
                 console.log("Facilities list");
                 console.log(res);
@@ -82,8 +78,9 @@ export default function StadiumList(props) {
     const addStadium =(stadium)=>{
         Axios.post("stadium/add",stadium, {
             headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
         })
         .then(res=>{
             console.log("Stadium Added");
@@ -97,7 +94,11 @@ export default function StadiumList(props) {
     }
 
     const editStadium = (id)=>{
-        Axios.get(`stadium/edit?id=${id}`)
+        Axios.get(`stadium/edit?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("info good for editing");
             console.log(res.data.stadium);
@@ -113,7 +114,11 @@ export default function StadiumList(props) {
     }
     
     const updateStadium =(stadium)=>{
-        Axios.put("stadium/update",stadium)
+        Axios.put("stadium/update",stadium , {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
         .then(res=>{
             console.log("Stadium Updated");
             console.log(res);
@@ -127,7 +132,11 @@ export default function StadiumList(props) {
     }
 
     const deleteStadium = (id)=>{
-        Axios.delete(`stadium/delete?id=${id}`)
+        Axios.delete(`stadium/delete?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("deleted");
             console.log(res);
@@ -140,7 +149,11 @@ export default function StadiumList(props) {
     }
 
     const reserveStadium = (id) => {
-        Axios.get(`reservation/add?id=${id}`)
+        Axios.get(`reservation/add?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then((response) => {
             const stadiumData = response.data.stadium
             setCurrentStadium(stadiumData)

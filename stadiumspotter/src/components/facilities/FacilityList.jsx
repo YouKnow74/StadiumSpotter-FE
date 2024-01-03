@@ -25,11 +25,15 @@ export default function FacilityList() {
     
     const changeToEdit =()=>{
         setIsAdd(false);
-        setIsEdit(true);
+        setIsEdit(!isEdit);
     }
 
     const loadFacilitesList =()=>{
-        Axios.get("facility/index")
+        Axios.get("facility/index", {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("facilites fetched");
             console.log(res);
@@ -42,7 +46,12 @@ export default function FacilityList() {
     }
 
     const addFacility =(facility)=>{
-        Axios.post("facility/add",facility)
+        Axios.post("facility/add",facility, {
+            headers: {
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("Facility added");
             console.log(res);
@@ -55,7 +64,11 @@ export default function FacilityList() {
     }
 
     const editFacility =(id)=>{
-        Axios.get(`facility/edit?id=${id}`)
+        Axios.get(`facility/edit?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("Fetched facility to edit");
             console.log(res);
@@ -69,7 +82,12 @@ export default function FacilityList() {
     }
 
     const updateFacility=(facility)=>{
-        Axios.put("facility/update",facility)
+        Axios.put("facility/update",facility, {
+            headers: {
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("Facility updated");
             console.log(res);
@@ -81,7 +99,11 @@ export default function FacilityList() {
         })
     }
     const deleteFacility=(id)=>{
-        Axios.delete(`facility/delete?id=${id}`)
+        Axios.delete(`facility/delete?id=${id}`, {
+            headers: {
+                "Authorization":"Bearer "+localStorage.getItem("token")
+                }
+        })
         .then(res=>{
             console.log("facility deleted");
             console.log(res);

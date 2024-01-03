@@ -18,7 +18,11 @@ export default function ReservationList() {
   
 
   const loadReservations = () => {
-    Axios.get("reservation/index")
+    Axios.get("reservation/index", {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((response) => {
       console.log(response);
       const resData = response.data.reservation;
@@ -31,14 +35,19 @@ export default function ReservationList() {
   }
 
   const editView = (id) => {
-    Axios.get(`reservation/edit?id=${id}`)
+    Axios.get(`reservation/edit?id=${id}`, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log(res.data.reservation);
       let reservation = res.data.reservation;
       reservation.date = dayjs(reservation.date).format('YYYY-MM-DD')
       console.log(reservation.date)
-      setIsEdit(true);
+      setIsEdit(!isEdit);
       setCurrentReservation(reservation);
+      console.log(reservation);
     })
     .catch((err) => {
       console.log(err)
@@ -46,7 +55,11 @@ export default function ReservationList() {
   }
 
   const updateReservation = (reservation) => {
-    Axios.put('reservation/update', reservation)
+    Axios.put('reservation/update', reservation, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log('Reservation updated Successfully');
       console.log(res);
@@ -59,13 +72,19 @@ export default function ReservationList() {
   }
 
   const deleteReservation = (id) => {
-    Axios.delete(`reservation/delete?id=${id}`)
+    Axios.delete(`reservation/delete?id=${id}`, {
+      headers: {
+          "Authorization":"Bearer "+localStorage.getItem("token")
+          }
+  })
     .then((res) => {
       console.log('Reservation deleted Successfully');
       console.log(res);
       loadReservations();
     })
-    .catch()
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   const allReservations = reservations.map((reservation, index) => {
@@ -98,7 +117,8 @@ export default function ReservationList() {
               </tbody>
             </table>
         </div>
-        < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />
+        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />}
+        
     </div>
   )
 }

@@ -3,6 +3,15 @@ import React,{useState} from 'react'
 export default function FacilityEditForm({facility,update,setIsEdit}) {
 
     const [facilityToEdit,setFacilityToEdit]=useState(facility);
+    const [image,setImage]=useState("");
+
+
+    const handleImage=(e)=>{
+        console.log(e.target.files);
+        setImage(e.target.files[0])
+        console.log("image");
+        
+      }
 
     const handleChange =(e)=>{
         const editingFac = {...facilityToEdit};
@@ -12,7 +21,10 @@ export default function FacilityEditForm({facility,update,setIsEdit}) {
 
     const updateFac =(e)=>{
         e.preventDefault();
-        update(facilityToEdit);
+        const formData = new FormData();
+        formData.append("facility",JSON.stringify(facilityToEdit));
+        formData.append("image",image);
+        update(formData);
         setIsEdit(false);
         e.target.reset();
     }
@@ -21,7 +33,7 @@ export default function FacilityEditForm({facility,update,setIsEdit}) {
     <div>
         <h2>Facility Edit Form</h2>
     
-      <form onSubmit={updateFac}>
+      <form onSubmit={updateFac} encType="multipart/form-data">
 
         <div>
           <label>Facility Name</label>
@@ -30,7 +42,7 @@ export default function FacilityEditForm({facility,update,setIsEdit}) {
 
         <div>
           <label>Facility Image</label>
-          <input name='image' type='text' value={facilityToEdit.image} onChange={handleChange}/>{/*NEEDS TO BE IMAGE WITH MULTER / Cloudinary*/}
+          <input name='image' type='file' onChange={handleImage}/>
         </div>
         <button type='submit'>Submit</button>
       </form>
