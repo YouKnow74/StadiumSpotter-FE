@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min"
 import Signin from './components/user/Signin';
 import Signup from './components/user/Signup';
 import {Routes,Route,Link} from 'react-router-dom';
@@ -8,6 +9,8 @@ import  Axios  from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import { useEffect } from 'react';
 import StadiumList from './components/stadium/StadiumList';
+import Home from './components/home/Home';
+import logo from './images/logo.svg'
 
 import SportList from './components/sport/SportList';
 import FacilityList from './components/facilities/FacilityList';
@@ -133,129 +136,93 @@ function App() {
 
   return (
     <div>
-      {user && (
-        <img
-          src={userDetails && "/images/" + userDetails.image}
-          width={50}
-          height={50}
-          style={{ border: "1px solid red" }}
-        />
-      )}
-      <nav>
-        {isAuth ? (
-          <div>
-            <Link to="/">Home</Link> &nbsp;
-            <Link to="/logout" onClick={onLogoutHandler}>
-              Logout
-            </Link>
-            &nbsp;
-            <Link to="/stadium">Stadium List</Link> &nbsp;
-            <Link to="/sport">Sport List</Link> &nbsp;
-            <Link to="/facility">Facility List</Link> &nbsp;
-            <Link to="/reservations">Reservations</Link> &nbsp;
-            <Link to={`/profile`}>Profile</Link>
-          </div>
-        ) : (
-          <div>
-            <Link to="/">Home</Link> &nbsp;
-            <Link to="/signup">Signup</Link> &nbsp;
-            <Link to="/signin">Signin</Link> &nbsp;
-          </div>
-        )}
-      </nav>
-      <div className="App">
-        <Routes>
-          <Route
-            path="/facility"
-            element={
-              isAuth ? (
-                <FacilityList user={userDetails} />
-              ) : (
-                <Signin login={loginHandler} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/sport"
-            element={
-              isAuth ? (
-                <SportList user={userDetails} />
-              ) : (
-                <Signin login={loginHandler} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/stadium"
-            element={
-              isAuth ? (
-                <StadiumList user={userDetails} />
-              ) : (
-                <Signin login={loginHandler} />
-              )
-            }
-          ></Route>
+      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img className='logo' src={logo}/>
+        </a>
+      </div>
+      <ul class=" col-12 col-md-auto justify-content-center mb-md-0">
+        <nav>
+      {isAuth ?
+      (
+      <div class="d-flex flex-wrap justify-content-between align-items-center ">
+        <Link to="/" class="nav-link px-2">Home</Link> &nbsp;
+        <Link to="/stadium" class="nav-link px-2">Stadium List</Link> &nbsp;
+        <Link to="/sport" class="nav-link px-2">Sport List</Link> &nbsp;
+        <Link to="/facility" class="nav-link px-2">Facility List</Link> &nbsp;
+        <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp;
+        <Link to={`/profile`} class="nav-link px-2">Profile</Link>&nbsp;
+        <Link to='/logout'class="nav-link px-2" onClick={onLogoutHandler}>Logout</Link>&nbsp;
 
-          <Route
-            path="/signup"
-            element={<Signup register={registerHandler} />}
-          />
-          <Route
-            path="/signin"
-            element={
-              isAuth ? (
-                <StadiumList user={userDetails} />
-              ) : (
-                <Signin login={loginHandler} />
-              )
-            }
-          />
-          <Route
-            path="/reservation/:id"
-            element={<ReservationCreateForm user={userDetails} />}
-          />
-          <Route
-            path="/reservations"
-            element={
-              isAuth ? (
-                <ReservationList user={userDetails} />
-              ) : (
-                <Signin login={loginHandler} />
-              )
-            }
-          />
-          {/*
+      </div>
+      )
+      :
+      (
+        <div>
+        <Link to="/" class=" px-2 link-secondary">Home</Link> &nbsp;
+        <Link to='/signup' class="btn btn-outline-primary me-2">Signup</Link> &nbsp;
+        <Link to='/signin' class="btn btn-outline-primary me-2">Signin</Link> &nbsp;
+      </div>
+      )
+      }
+    </nav>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+
+    
+    <div className="App">
+      <Routes>
+
+
+    
+      <Route path="/facility" element={isAuth ? <FacilityList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+
+      <Route path='/signup' element={ <Signup register={registerHandler} /> } />
+      <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
+      <Route path='/reservation/:id' element={ <ReservationCreateForm user={userDetails} /> }/>
+      <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
+      {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
         to be passed into user edit form      
-      */}
-          <Route
-            path="/usersList"
-            element={<UserList superData={userDetails} />}
-          />
-          <Route
-            path="/profile"
-            element={
-              userDetails && (
-                <UserIndex
-                  getUser={getUser}
-                  user={userDetails}
-                  superUser={userDetails}
-                />
-              )
-            }
-          />
-          <Route
-            path="/editProfile"
-            element={
-              <UserEditForm user={userDetails} superUser={userDetails} />
-            }
-          />
-        <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
-        </Routes>
-      </div>
+      */ }
+      <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
+      <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
+      <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
+      <Route path='/' element={ <Home />}/>
 
+      </Routes>
     </div>
+   
+
+    
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2024 Company, Inc</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+    <img className='logo' src={logo}/>
+
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+  </footer>
+  </div>
+
   );
+
 }
 
 export default App;
