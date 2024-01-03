@@ -93,24 +93,27 @@ export default function ReservationCustomerList({user}) {
     // console.log(reservation.date)
 
     return (<tr key={index}>
-      <Reservation {...reservation} edit={editView} delete={deleteReservation} />
+      <Reservation {...reservation} edit={editView} delete={deleteReservation} user={user}/>
     </tr>
   )});
 
   return (
     <div>
         <h1>Reservation List</h1>
-        <div>
-            <table>
+        <div className='d-flex table-responsive'>
+            <table className='justify-content-center table w-100 table-bordered'>
               <tbody>
                 <tr>
                   {/* <th>Reservation id</th> */}
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Status</th>
-                  <th>Price</th>
-                  <th>Stadium Name</th>
+                  <th className='table-success'>Date</th>
+                  <th className='table-success'>Start Time</th>
+                  <th className='table-success'>End Time</th>
+                  <th className='table-success'>Status</th>
+                  <th className='table-success'>Price</th>
+                  <th className='table-success'>User</th>
+                  <th className='table-success'>Stadium Name</th>
+                  <th className='table-success'></th>
+                  <th className='table-success'></th>
                 </tr>
                 {allReservations}
               </tbody>

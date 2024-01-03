@@ -93,7 +93,7 @@ export default function ReservationList(props) {
     // console.log(reservation.date)
 
     return (<tr key={index}>
-      <Reservation {...reservation} edit={editView} delete={deleteReservation} />
+      <Reservation {...reservation} userDetails={props.user} edit={editView} delete={deleteReservation} />
     </tr>
   )});
 
@@ -112,9 +112,10 @@ export default function ReservationList(props) {
                   <th class="   table-success ">Status</th>
                   <th class="   table-success ">Price</th>
                   <th class="   table-success ">User</th>
+                  <th class="   table-success ">Stadium Name</th>
                   <th class="   table-success ">Edit</th>
                   <th class="   table-success ">Delete</th>
-                  <th class="   table-success ">Stadium Name</th>
+                 
                 </tr>
                 {allReservations}
               </tbody>

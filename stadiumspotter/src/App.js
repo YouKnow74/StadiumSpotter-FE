@@ -321,6 +321,16 @@ function App() {
 
 
       {/* //} */} 
+      <Route
+            path="/myReservations"
+            element={
+              isAuth ? (userDetails &&
+                <ReservationCustomerList user={userDetails} />
+              ) : (
+                <Signin login={loginHandler} />
+              )
+            }
+          />
       <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
       <Route path='/usersList' element={ isAuth && userDetails && userDetails.role=="Admin" ? <UserList superData={userDetails}/> :<Home />} />
       <Route path='/profile' element={ isAuth && <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
