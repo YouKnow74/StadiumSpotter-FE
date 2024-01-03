@@ -25,6 +25,7 @@ import ReservationCustomerList from './components/reservation/ReservationCustome
 import MyStadium from './components/stadium/MyStadium';
 
 
+
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
@@ -138,7 +139,7 @@ function App() {
   console.log(userDetails);
 
   return (
-    <div>
+    <div className='FontChange'>
       <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
       <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -324,6 +325,8 @@ function App() {
       <Route path='/usersList' element={ isAuth && userDetails && userDetails.role=="Admin" ? <UserList superData={userDetails}/> :<Home />} />
       <Route path='/profile' element={ isAuth && <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ isAuth && <UserEditForm user={userDetails} superUser={userDetails} /> } />
+
+
       <Route path='/' element={ <Home />}/>
       <Route path='/mystadium' element={ userDetails &&(userDetails.role=="stadium owner" || userDetails.role=="Admin") ?<MyStadium user={userDetails}/>:<Home />} />
 

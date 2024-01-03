@@ -3,7 +3,9 @@ import StadiumCreateForm from './StadiumCreateForm'
 import StadiumList from './StadiumList'
 
 export default function Stadium(props) {
+  
   return (
+
     <>
     <img className='bd-placeholder-img card-img-top' style={{width: "100%", height: "225px"}} src={"/images/"+props.image}/>
     <div className='card-body'>
