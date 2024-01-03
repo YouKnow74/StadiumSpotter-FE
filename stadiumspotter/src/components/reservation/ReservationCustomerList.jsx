@@ -5,7 +5,7 @@ import Reservation from './Reservation';
 import ReservationEditForm from './ReservationEditForm';
 import dayjs from 'dayjs'
 
-export default function ReservationList() {
+export default function ReservationCustomerList({user}) {
 
   const [reservations, setReservations] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -18,14 +18,15 @@ export default function ReservationList() {
   
 
   const loadReservations = () => {
-    Axios.get("reservation/index", {
+    console.log(user._id);
+    Axios.get(`reservation/detail?id=${user._id}`, {
       headers: {
           "Authorization":"Bearer "+localStorage.getItem("token")
           }
   })
     .then((response) => {
       console.log(response);
-      const resData = response.data.reservation;
+      const resData = response.data.reservstions;
       setReservations(resData)
       console.log(resData);
     })
@@ -47,7 +48,6 @@ export default function ReservationList() {
       console.log(reservation.date)
       setIsEdit(!isEdit);
       setCurrentReservation(reservation);
-      console.log(reservation);
     })
     .catch((err) => {
       console.log(err)
@@ -110,14 +110,13 @@ export default function ReservationList() {
                   <th>End Time</th>
                   <th>Status</th>
                   <th>Price</th>
-                  <th>User</th>
                   <th>Stadium Name</th>
                 </tr>
                 {allReservations}
               </tbody>
             </table>
         </div>
-        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />}
+        {isEdit && < ReservationEditForm key={currentReservation._id} user={user} updateReservation={updateReservation} reservation={currentReservation} />}
         
     </div>
   )

@@ -21,6 +21,7 @@ import UserList from './components/user/UserList';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import StadiumShow from './components/stadium/StadiumShow';
+import ReservationCustomerList from './components/reservation/ReservationCustomerList';
 
 
 function App() {
@@ -192,11 +193,51 @@ function App() {
       {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
         to be passed into user edit form      
+
+      */}
+//           <Route
+//             path="/usersList"
+//             element={<UserList superData={userDetails} />}
+//           />
+//           <Route
+//             path="/profile"
+//             element={
+//               userDetails && (
+//                 <UserIndex
+//                   getUser={getUser}
+//                   user={userDetails}
+//                   superUser={userDetails}
+//                 />
+//               )
+//             }
+//           />
+//           <Route
+//             path="/editProfile"
+//             element={
+//               <UserEditForm user={userDetails} superUser={userDetails} />
+//             }
+//           />
+//   <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
+//   <Route
+//             path="/myReservations"
+//             element={
+//               isAuth ? (userDetails &&
+//                 <ReservationCustomerList user={userDetails} />
+//               ) : (
+//                 <Signin login={loginHandler} />
+//               )
+//             }
+//           />
+//         </Routes>
+        
+//       </div>
+
       */ }
       <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
       <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
       <Route path='/' element={ <Home />}/>
+
 
       </Routes>
     </div>

@@ -25,6 +25,16 @@ export default function ReservationEditForm(props) {
     useEffect(() => {
     
         gettingStadiumData();
+        setSelectedStartTime(startTime[0])
+        setSelectedEndTime(endTime[0])
+        const startTimeIndex = startTime.indexOf(selectedStartTime);
+        const endTimeIndex = endTime.indexOf(selectedEndTime);
+
+        const durationInHours = endTimeIndex - startTimeIndex;
+
+        const stadiumPrice = currentStadium.price;
+        const totalPrice = stadiumPrice * (durationInHours + 1);
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
       
     }, [])
     
@@ -109,16 +119,19 @@ export default function ReservationEditForm(props) {
                 </div>
                 <div>
                     <label>End Time</label>
-                    <select value={newReserve.endTime} name='endTime'onChange={handleEndTime}>
+                    <select value={newReserve?newReserve.endTime:props.reservation.endTime} name='endTime'onChange={handleEndTime}>
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
                         ))}
                     </select>
-                </div> 
+                </div>
+                {props.user && ((props.user.role == 'stadium owner') || (props.user.role == 'Admin')) &&
+                
                 <div>
                     <label>Status</label>
                     <input value={newReserve.Status} type="text" class="form-control" name="Status" onChange={handleChange} />
                 </div>
+                }
                 
                 {/* <input type='hidden' value={props.user.id} name='user' onSubmit={handleChange} /> 
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
