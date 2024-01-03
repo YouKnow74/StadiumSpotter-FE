@@ -101,7 +101,7 @@ export default function ReservationList(props) {
     <div>
         <h1>Reservation List</h1>
         <div className='d-flex '> 
-        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />} 
+        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={props.user} />} 
             <table className='justify-content-center table w-100 table-bordered'>
               <tbody>
                 <tr>
