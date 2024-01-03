@@ -57,7 +57,9 @@ export default function FacilityAddForm({add,setIsAdd,user}) {
 
         { user.role=="Admin" ? (
                     <>
+
                 <button className="btn btn-success my-button" type='submit'>Submit</button>
+
                 </>
                 ):""}
         </div>

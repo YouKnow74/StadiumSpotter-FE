@@ -100,12 +100,13 @@ export default function ReservationList(props) {
   return (
     <div>
         <h1>Reservation List</h1>
-        <div className='d-flex '> 
+        <div className='d-md-flex  d-sm-flex '> 
         {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={props.user} />} 
-            <table className='justify-content-center table w-100 table-bordered'>
+            <table className='justify-content-center  table w-100 table-bordered'>
               <tbody>
                 <tr>
                   {/* <th>Reservation id</th> */}
+
                   <th className="   table-success ">Date</th>
                   <th className="   table-success ">Start Time</th>
                   <th className="   table-success ">End Time</th>
@@ -115,13 +116,14 @@ export default function ReservationList(props) {
                   <th className="   table-success ">Stadium Name</th>
                   <th className="   table-success ">Edit</th>
                   <th className="   table-success ">Delete</th>
+
                 </tr>
                 {allReservations}
               </tbody>
             </table>
         </div>
 
-        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={props.user}/>}
+        
 
         
     </div>

@@ -88,7 +88,7 @@ export default function SportList() {
 <h1>All Sports</h1>
 <button className="d-flex btn btn-success p-2 m-3 g-2 " onClick={()=>setIsAdd(!isAdd)}>Add Sport</button>
     {/* This is temporary only and needs to be designed diffrently */}
-    <div className='d-flex '>
+    <div className='d-md-flex '>
        
     {isAdd ?
         <SportCreateForm setIsAdd={setIsAdd} add={addSport} stadiums={stadiums}/>:
