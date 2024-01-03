@@ -5,7 +5,7 @@ import Facility from './Facility';
 import FacilityAddForm from "./FacilityAddForm";
 import FacilityEditForm from './FacilityEditForm';
 
-export default function FacilityList() {
+export default function FacilityList(props) {
     const [facilities,setFacilites]=useState([])
     const [isAdd,setIsAdd]=useState(false);
     const [isEdit,setIsEdit]=useState(false);
@@ -118,6 +118,7 @@ export default function FacilityList() {
         <tr key={index}>
             <Facility {...onefacility} edit={editFacility} 
             changeToEdit={changeToEdit} delete={deleteFacility}
+            user={props.user}
             />
         </tr>
     ))
@@ -133,19 +134,23 @@ export default function FacilityList() {
             <tr>
                 <th>Facility Name</th>
                 <th>Facility image</th> {/* Needs to be implemented with Multer / cloudinary CURRENTLY ONLY PLAIN TEXT*/ }
+                {props.user.role=="Admin" ? (
+                    <>
                 <th>Edit</th>
                 <th>Delete</th>
+                </>
+                ):""}
             </tr>
             {allFacilites}
             </tbody>
         </table>
         {isAdd ?
-        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd}/>:
+        <FacilityAddForm add={addFacility} setIsAdd={setIsAdd} user={props.user}/>:
         ""
         }
         {
             isEdit ?
-            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} />:
+            <FacilityEditForm key={facilityEdit._id} facility={facilityEdit} update={updateFacility} setIsEdit={setIsEdit} user ={props.user}/>:
             null
         }
         

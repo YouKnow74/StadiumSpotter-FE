@@ -34,9 +34,10 @@ function App() {
     let user = getUser();
     console.log(user);
 
-    user = { _id: user.id };
+    
 
     if (user) {
+      user = { _id: user.id };
       setIsAuth(true);
       setUser(user);
       console.log("user", user);
@@ -146,28 +147,109 @@ function App() {
       </div>
       <ul class=" col-12 col-md-auto justify-content-center mb-md-0">
         <nav>
-      {isAuth ?
+      {userDetails && userDetails.role=='Admin'  ?
       (
       <div class="d-flex flex-wrap justify-content-between align-items-center ">
-        <Link to="/" class="nav-link px-2">Home</Link> &nbsp;
+        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+</svg></Link> &nbsp;
         <Link to="/stadium" class="nav-link px-2">Stadium List</Link> &nbsp;
         <Link to="/sport" class="nav-link px-2">Sport List</Link> &nbsp;
         <Link to="/facility" class="nav-link px-2">Facility List</Link> &nbsp;
         <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp;
-        <Link to={`/profile`} class="nav-link px-2">{userDetails &&<img src={"/images/"+userDetails.image} style={{width:"35px",height:"35px"}}/>}</Link>&nbsp;
-        <Link to='/logout'class="nav-link px-2" onClick={onLogoutHandler}>Logout</Link>&nbsp;
-        <Link to='/mystadium'class="nav-link px-2">My Stadium </Link>
+        <Link to='/mystadium'class="nav-link px-2">My Stadiums</Link>
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
+          </a>
+          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
+            <li><Link to={`/usersList`} class="nav-link px-2">All Users</Link></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+          </ul>
+        </div>
+        {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link> */}
       </div>
       )
       :
       (
-        <div>
-        <Link to="/" class=" px-2 link-secondary">Home</Link> &nbsp;
-        <Link to='/signup' class="btn btn-outline-primary me-2">Signup</Link> &nbsp;
-        <Link to='/signin' class="btn btn-outline-primary me-2">Signin</Link> &nbsp;
-      </div>
+        ""
       )
       }
+     {userDetails && userDetails.role=='renter'  ?
+      (
+      <div class="d-flex flex-wrap justify-content-between align-items-center ">
+        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+</svg></Link> &nbsp;
+        <Link to="/stadium" class="nav-link px-2">Stadium List</Link> &nbsp;
+        {/* <Link to="/sport" class="nav-link px-2">Sport List</Link> &nbsp; */}
+        {/* <Link to="/facility" class="nav-link px-2">Facility List</Link> &nbsp; */}
+        {/* <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp; */}
+        {/* <Link to='/mystadium'class="nav-link px-2">My Stadium </Link> */}
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
+          </a>
+          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
+            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+          </ul>
+        </div>
+        {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
+      </div>
+      )
+      :
+      (
+        ""
+      )
+      }
+     {userDetails && userDetails.role=='stadium owner'  ?
+      (
+      <div class="d-flex flex-wrap justify-content-between align-items-center ">
+        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+</svg></Link> &nbsp;
+        <Link to="/stadium" class="nav-link px-2">Stadium List</Link> &nbsp;
+        {/* <Link to="/sport" class="nav-link px-2">Sport List</Link> &nbsp; */}
+        {/* <Link to="/facility" class="nav-link px-2">Facility List</Link> &nbsp; */}
+        {/* <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp; */}
+        <Link to='/mystadium'class="nav-link px-2">My Stadiums</Link>
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
+          </a>
+          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+          </ul>
+        </div>
+        {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
+      </div>
+      )
+      :
+      (
+        ""
+      )
+      }
+      {!isAuth ? (
+                <div class="d-flex flex-wrap justify-content-between align-items-center ">
+                <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+</svg></Link> &nbsp;
+                <Link to='/signup' class="btn btn-outline-success me-2">Signup</Link> &nbsp;
+                <Link to='/signin' class="btn btn-outline-success me-2">Signin</Link> &nbsp;
+              </div>
+      ):
+      ""}
     </nav>
       </ul>
 
@@ -183,14 +265,14 @@ function App() {
 
 
     
-      <Route path="/facility" element={isAuth ? <FacilityList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
-      <Route path="/sport" element={isAuth ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
-      <Route path="/stadium" element={isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/facility" element={isAuth && userDetails && userDetails.role=="Admin" ? <FacilityList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/sport" element={isAuth && userDetails && userDetails.role=="Admin" ? <SportList user={userDetails}/>:<Signin login={loginHandler}/>}></Route>
+      <Route path="/stadium" element={userDetails ? <StadiumList user={userDetails}/>:<Home /> }></Route>
 
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
-      <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} /> } />
+      <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} />  } />
       <Route path='/reservation/:id' element={ userDetails && <ReservationCreateForm user={userDetails} /> }/>
-      <Route path='/reservations' element={ isAuth ? <ReservationList user={userDetails} /> : <Signin login={loginHandler} /> } />
+      <Route path='/reservations' element={ isAuth && userDetails && userDetails.role=="Admin" ? <ReservationList user={userDetails} /> : <Home /> } />
       {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
         to be passed into user edit form      
@@ -237,13 +319,13 @@ function App() {
       {/*} */ } 
 
 
-      //} */}
+      {/* //} */} 
       <Route path='/allStadiums' element={ userDetails ? <StadiumShow user={userDetails} /> :""} />
-      <Route path='/usersList' element={ <UserList superData={userDetails}/> } />
-      <Route path='/profile' element={ <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
-      <Route path='/editProfile' element={ <UserEditForm user={userDetails} superUser={userDetails} /> } />
+      <Route path='/usersList' element={ isAuth && userDetails && userDetails.role=="Admin" ? <UserList superData={userDetails}/> :<Home />} />
+      <Route path='/profile' element={ isAuth && <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
+      <Route path='/editProfile' element={ isAuth && <UserEditForm user={userDetails} superUser={userDetails} /> } />
       <Route path='/' element={ <Home />}/>
-      <Route path='/mystadium' element={userDetails ?<MyStadium user={userDetails}/>:<Home />} />
+      <Route path='/mystadium' element={ userDetails &&(userDetails.role=="stadium owner" || userDetails.role=="Admin") ?<MyStadium user={userDetails}/>:<Home />} />
 
 
       </Routes>

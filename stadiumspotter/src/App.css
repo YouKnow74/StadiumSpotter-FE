@@ -50,3 +50,14 @@
   width: 400px;
 }
 
+.green-box-shadow {
+  box-shadow: 0 0 5px #4BB543; /* Adjust the color as needed (green color code) */
+}
+
+.myShadow {
+  --bs-focus-ring-color: rgba(var(--bs-success-rgb), .25)
+}
+
+.green-border:focus {
+  border-color: green;
+}

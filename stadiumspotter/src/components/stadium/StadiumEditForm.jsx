@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import locations from './location';
 
-export default function StadiumEditForm({stadium,update,facilities,sports, setIsEdit}) {
+export default function StadiumEditForm({stadium,update,facilities,sports, setIsEdit,user}) {
   
   const [editStadium,setEditStadium]=useState(stadium);
   const [facilitesArr,setfacilitesArr]=useState(editStadium.facilities);
@@ -95,13 +95,13 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
 
       <div>
         <label className='form-label'>Stadium Facilites:</label>
-        <p>already selected</p>
+        <p>Already Selected</p>
         <select className='form-control' multiple='multiple' disabled>
           {editStadium.facilities.map((oneFacility,index)=>(
             <option key={index} >{oneFacility.facility}</option>
           ))}
         </select>
-        <p>change</p>
+        <p>Change To</p>
         <select className='form-control' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
           {facilities.map((oneFacility,index)=>(
             <option key={index} value={oneFacility._id}>{oneFacility.facility}</option>
@@ -116,7 +116,7 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
       <input type='hidden' value={userid} name='user' /> 
       
       */}
-      <button className='btn btn-success my-button' type='submit'>Update Stadium</button>
+     {user && user.role == "Admin" ?<button className='btn btn-success my-button' type='submit'>Update Stadium</button>:""}
     </form>
 
     

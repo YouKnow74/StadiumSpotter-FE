@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export default function FacilityAddForm({add,setIsAdd}) {
+export default function FacilityAddForm({add,setIsAdd,user}) {
 
   const [newFacility,setNewFacility]=useState({});
   const [image,setImage]=useState("");
@@ -43,7 +43,11 @@ export default function FacilityAddForm({add,setIsAdd}) {
           <label>Facility Image</label>
           <input name='image' type='file' onChange={handleImage}/>
         </div>
-        <button type='submit'>Submit</button>
+        { user.role=="Admin" ? (
+                    <>
+                <button type='submit'>Submit</button>
+                </>
+                ):""}
       </form>
 
     </div>

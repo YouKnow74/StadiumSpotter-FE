@@ -1,4 +1,6 @@
 import React from 'react'
+import StadiumCreateForm from './StadiumCreateForm'
+import StadiumList from './StadiumList'
 
 export default function Stadium(props) {
   return (
@@ -15,12 +17,18 @@ export default function Stadium(props) {
                     <li className='list-group-item' key={index}>{fac.facility}</li>
                     ))}</ul>
       <div className='d-flex justify-content-between align-items-center'>
+        {}
+        {
+          
+          props.userDetails &&
+          (props.userDetails.role=="Admin") &&
         <div className='btn-group'>
         <button type='button' className='btn btn-sm btn-outline-secondary' onClick={()=>props.edit(props._id)}>Edit</button>
         <button type='button' className='btn btn-sm btn-outline-secondary' onClick={()=>props.delete(props._id)}>Delete</button>
-        </div>
+        </div>}
         <button type='button' className='btn btn-sm btn-success' onClick={()=>props.reserve(props._id)}>Reserve</button>
       </div>
+      
     </div>
 {/*     
                <td>{props.name}</td>
