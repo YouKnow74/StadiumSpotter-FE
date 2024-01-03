@@ -1,5 +1,5 @@
-# StadiumSpotter-BE
-Back end code for StadiumSpotter application 
+# StadiumSpotter-FE
+Front end code for StadiumSpotter application 
 # SEI7 Team Project3 Capstone
 
 ## Project Name:  StadiumSpotter-Back End
