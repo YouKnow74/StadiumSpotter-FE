@@ -38,52 +38,32 @@ export default function SportCreateForm({setIsAdd,add,stadiums}) {
         setIsAdd(false);
     }
   return (
-   <div>
-     <form onSubmit={addSport} class=" row g-2 " encType="multipart/form-data">
+    <div>
+        <h2>Add Sport</h2>
+        <form onSubmit={addSport} encType="multipart/form-data">
 
-<div class=" row g-2 ">
-           
-            <div class="col-12">
-              <div class="row g-3  ">
-                <div className='col-auto'>
-                 <label class="form-label">Category:</label>
-                 </div>
-                 <div className='col-auto'>
-                <input type='text' name='category' class="form-control " onChange={handleChange}/>    
-                </div>
-              </div>    
-            </div>
-            <div class=" col-12">
-            <div class="row g-3  ">
-                <div className='col-auto'>
-                <label class="form-label">Image:</label>
-                </div>
-                <div className='col-auto'>
-               <input type='file'  class="form-control" id="username" name='image' onChange={handleImage}/>
-               </div>
-         </div>
-            </div>
-            <div class="col-12">
-            <div class="row g-3  ">
-            <div className='col-auto'>
-              <label  class="form-label" >Stadiums:</label>
-              </div>
-              <div className='col-auto'>
-                <select type="text" class="form-control" name='stadium' multiple='multiple' onChange={handleMultiple} value={stadiumsArr}>
-                  {stadiums.map((oneStadium,index)=>(
-                    <option key={index} value={oneStadium._id}>{oneStadium.name}</option>
-                  ))}
-                </select>
-                </div>
+            <div>
+                <label>Category:</label>
+                <input type='text' name='category' onChange={handleChange}/>
             </div>
 
+            <div>
+                <label>Image:</label>
+      
+                <input type='file' name='image' onChange={handleImage}/>
+            </div>
+
+            <div>
+        <label>Stadiums:</label>
+        <select type="text" name='stadium' multiple='multiple' onChange={handleMultiple} value={stadiumsArr}>
+          {stadiums.map((oneStadium,index)=>(
+            <option key={index} value={oneStadium._id}>{oneStadium.name}</option>
+          ))}
+        </select>
       </div>
-      <button type='submit' class=" col-2 p-2 m-3 g-5 btn btn-success" >Submit</button>
+            <button type='submit'>Add Sport</button>
+        </form>
 
-          </div>
-
-    </form>
-</div>
-
+    </div>
   )
 }
