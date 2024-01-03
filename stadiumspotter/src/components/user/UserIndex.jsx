@@ -131,7 +131,7 @@ const userInfoFetch = () => {
         {user &&<div className='form-control1 border'>{userInfo.role}</div>}
         </label>
         <div className='col-auto'>
-        <button  class="btn btn-outline-secondary" onClick={handleClick}>Edit</button>
+        <button  className="btn btn-outline-secondary" onClick={handleClick}>Edit</button>
         </div>
         {isEdit && <UserEditForm user={userInfo} setIsEdit={setIsEdit} updateUser={updateUser} superUser={superUser}/>}
        

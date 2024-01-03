@@ -9,8 +9,8 @@ export default function User(props) {
     <td>{props.emailAddress}</td>
     <td>{props.phoneNumber}</td>
     <td>{props.role}</td>
-    <td><button class="btn btn-outline-secondary" onClick={() => props.viewEdit(props._id)}>Edit</button></td>
-    <td><button class="btn btn-outline-secondary" onClick={() => props.deleteUser(props._id)}>Delete</button></td>
+    <td><button className="btn btn-outline-secondary" onClick={() => props.viewEdit(props._id)}>Edit</button></td>
+    <td><button className="btn btn-outline-secondary" onClick={() => props.deleteUser(props._id)}>Delete</button></td>
     </>
   )
 }

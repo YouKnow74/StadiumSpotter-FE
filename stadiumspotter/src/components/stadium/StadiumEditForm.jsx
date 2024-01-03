@@ -47,29 +47,29 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
 
       <div>
         <label className='form-label'>Stadium Name:</label>
-        <input className='form-control' type='text' name="name"  onChange={handleChange} value={editStadium.name}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="name"  onChange={handleChange} value={editStadium.name}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Description:</label>
-        <input className='form-control' type='text' name="descriptin"  onChange={handleChange} value={editStadium.descriptin}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="descriptin"  onChange={handleChange} value={editStadium.descriptin}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Size:</label>
-        <input className='form-control' type='text' name="size"  onChange={handleChange} value={editStadium.size}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="size"  onChange={handleChange} value={editStadium.size}/>
       </div>
 
       <div>
         <label className='form-label'>Stadium Price:</label>
-        <input className='form-control' type='text' name="price"  onChange={handleChange} value={editStadium.price}/>
+        <input className='form-control green-border focus-ring focus-ring-success' type='text' name="price"  onChange={handleChange} value={editStadium.price}/>
       </div>
   
       <div>
         <label className='form-label'>Stadium Location:</label>
         {/*should be a dropdown select option TO BE EDITED */ }
         {/* <input type='text' name="location"  onChange={handleChange} value={editStadium.location}/> */}
-        <select className='form-control' name='location' onChange={handleChange} value={editStadium.location}>
+        <select className='form-control green-border focus-ring focus-ring-success' name='location' onChange={handleChange} value={editStadium.location}>
            {locations.map((oneLocation, index) => (
             <option key={index} value={oneLocation}>{oneLocation}</option>
               ))}
@@ -78,15 +78,15 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
 
       <div>
         <label className='form-label'>Stadium image:</label>
-        <input className='form-control' type='file' name="image" id='image' onChange={handleImage} />
+        <input className='form-control green-border focus-ring focus-ring-success' type='file' name="image" id='image' onChange={handleImage} />
       </div>
 
       <div>
         <label className='form-label'>Stadium Sports:</label>
         <p>Selected</p>
-        <input className='form-control' value={editStadium.category.category} disabled/>
+        <input className='form-control green-border focus-ring focus-ring-success' value={editStadium.category.category} disabled/>
         <p>New Value</p>
-        <select className='form-control' type="text" name='category'  onChange={handleChange}>
+        <select className='form-control green-border focus-ring focus-ring-success' type="text" name='category'  onChange={handleChange}>
           {sports.map((oneSport,index) => (
             <option key={index} value={oneSport._id}>{oneSport.category}</option>
           ))}
@@ -96,13 +96,13 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
       <div>
         <label className='form-label'>Stadium Facilites:</label>
         <p>Already Selected</p>
-        <select className='form-control' multiple='multiple' disabled>
+        <select className='form-control green-border focus-ring focus-ring-success' multiple='multiple' disabled>
           {editStadium.facilities.map((oneFacility,index)=>(
             <option key={index} >{oneFacility.facility}</option>
           ))}
         </select>
         <p>Change To</p>
-        <select className='form-control' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
+        <select className='form-control green-border focus-ring focus-ring-success' type="text" name='facilities' multiple='multiple' onChange={handleMultiple} value={facilitesArr}>
           {facilities.map((oneFacility,index)=>(
             <option key={index} value={oneFacility._id}>{oneFacility.facility}</option>
           ))}

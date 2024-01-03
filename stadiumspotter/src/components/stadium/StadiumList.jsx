@@ -123,7 +123,8 @@ export default function StadiumList(props) {
     const updateStadium =(stadium)=>{
         Axios.put("stadium/update",stadium , {
             headers: {
-                'Content-Type' : 'multipart/form-data'
+                'Content-Type' : 'multipart/form-data',
+                "Authorization":"Bearer "+localStorage.getItem("token")
             }
         })
         .then(res=>{
@@ -187,7 +188,7 @@ export default function StadiumList(props) {
    <div>
     <h1>All Stadiums</h1>
    
-    <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>
+    {props.user && (props.user.role=='Admin' || props.user.role =='stadium owner') ? <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>:""}
     <div>
         {isEdit ?
         <StadiumEditForm key={currentStadium._id} stadium={currentStadium} update={updateStadium} 
