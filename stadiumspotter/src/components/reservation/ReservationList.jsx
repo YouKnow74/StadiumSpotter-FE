@@ -100,24 +100,29 @@ export default function ReservationList(props) {
   return (
     <div>
         <h1>Reservation List</h1>
-        <div>
-            <table>
+        <div className='d-flex '> 
+        {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} />} 
+            <table className='justify-content-center table w-100 table-bordered'>
               <tbody>
                 <tr>
                   {/* <th>Reservation id</th> */}
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Status</th>
-                  <th>Price</th>
-                  <th>User</th>
-                  <th>Stadium Name</th>
+                  <th class="   table-success ">Date</th>
+                  <th class="   table-success ">Start Time</th>
+                  <th class="   table-success ">End Time</th>
+                  <th class="   table-success ">Status</th>
+                  <th class="   table-success ">Price</th>
+                  <th class="   table-success ">User</th>
+                  <th class="   table-success ">Edit</th>
+                  <th class="   table-success ">Delete</th>
+                  <th class="   table-success ">Stadium Name</th>
                 </tr>
                 {allReservations}
               </tbody>
             </table>
         </div>
+
         {isEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={props.user}/>}
+
         
     </div>
   )

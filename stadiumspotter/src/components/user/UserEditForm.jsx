@@ -34,41 +34,97 @@ export default function UserEditForm(props) {
     }
 
     return (
+        
         <div>
-            <form onSubmit={saveUpdatedUser} encType="multipart/form-data">
-            <div>
-                    <label>Profile Image</label>
-                    <input type='file' name='image' onChange={handleImage} className='form-control'></input>
+            <h2> Edit User </h2>
+
+            <form  class=" row g-2 " onSubmit={saveUpdatedUser} encType="multipart/form-data">
+
+            <div class=" row g-2 p-2 ">
+          <div class="col-12">
+              <div class="row g-3  ">
+                <div className='col-auto'> 
+                    <label class="form-label">Profile Image:</label>
+                    </div>
+                    <div className='col-auto'>
+
+                    <input type='file' name='image' class="form-control"onChange={handleImage} className='form-control'></input>
+                    </div>
+                    </div>
+
+                    </div>
                 </div>
-                <div>
-                    <label>First Name</label>
+                <div class="col-12">
+              <div class="row g-2 p-2 ">
+                <div className='col-auto'>
+                    <label class="form-label" >First Name:</label>
+                    </div>
+                    <div className='col-auto'>
+
                     <input type='text' name='firstName' value={currentUser.firstName} onChange={handleChange} className='form-control'></input>
                 </div>
-
-                <div>
-                    <label>Last Name</label>
-                    <input type='text' name='lastName' value={currentUser.lastName} onChange={handleChange} className='form-control'></input>
+                </div>
                 </div>
 
-                <div>
-                    <label>Username</label>
+                <div class="col-12">
+              <div class="row g-2 p-2 ">
+                <div className='col-auto'>
+                    <label class="form-label">Last Name:</label>
+                    </div>
+                    <div className='col-auto'>
+                    <input class="form-control" type='text' name='lastName' value={currentUser.lastName} onChange={handleChange} ></input>
+                </div>
+                </div>
+                </div>
+              
+
+                
+
+<div class="col-12">
+<div class="row g-2 p-2 ">
+<div className='col-auto'>
+          
+
+                    <label class="form-label" >Username:</label>
+                    </div>
+                    <div className='col-auto'>   
                     <input type='text' name='userName' value={currentUser.userName} onChange={handleChange} className='form-control'></input>
                 </div>
-
-                <div>
-                    <label>Email Address</label>
-                    <input type='email' name='emailAddress' value={currentUser.emailAddress} onChange={handleChange} className='form-control'></input>
+                </div>
+                </div>
+                <div class="col-12">
+<div class="row g-2 p-2 ">
+<div className='col-auto'>
+                    <label class="form-label ">Email Address:</label>
+                    </div>
+                    <div className='col-auto'>   
+                    <input type='email' name='emailAddress' value={currentUser.emailAddress} onChange={handleChange} className='form-control1'></input>
+                </div>
+                </div>
                 </div>
 
-                <div>
-                    <label>Phone Number</label>
+                <div class="col-12">
+<div class="row g-2 p-2 ">
+<div className='col-auto'>
+                    <label  class="form-label" >Phone Number:</label>
+                    </div>
+                    <div className='col-auto'>             
+
                     <input type='text' name='phoneNumber' value={currentUser.phoneNumber} onChange={handleChange} className='form-control'></input>
                 </div>
+                </div>
+                </div>
 
-                <div>
+                 <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'> 
                     <p>Why are you using Stadium Spotter?</p>
-                    <div>
-                        <label htmlFor="stadiumOwner">Stadium Owner</label>
+                 </div>
+                 </div>
+                 </div>
+                 <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'>
                         <input
                          className='form-check-input'
                          type="radio" 
@@ -78,11 +134,17 @@ export default function UserEditForm(props) {
                          checked={currentUser.role === 'stadium owner'}
                          onChange={handleChange}
                          ></input>
+                          <label class="form-label  p-1" htmlFor="stadiumOwner">Stadium Owner</label>
                     </div>
-                    <div>
-                        <label hrmlfor='renter'>Booking a Stadium</label>
+                    </div>
+                    </div>
+                    <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'>           
+
+                       
                         <input 
-                        className='form-check-input' 
+                        className=' form-check-input' 
                         type='radio' 
                         name='role' 
                         id='renter'
@@ -90,10 +152,15 @@ export default function UserEditForm(props) {
                         checked={currentUser.role === 'renter'}
                         onChange={handleChange}
                         ></input>
+                         <label class="form-label  p-1" hrmlfor='renter'>Booking a Stadium</label>
+                         </div>
                     </div>
+                    </div>
+                    <div class="col-12">
+              <div class="row g-3 p-2  ">
+                <div className='col-auto'>
                     {props.superUser &&(props.superUser.role === 'Admin') && 
-                    <div>
-                        <label htmlFor='Admin'>Admin</label>
+                     <div className='col-auto'> 
                         <input 
                         className='form-check-input' 
                         type='radio' 
@@ -103,19 +170,29 @@ export default function UserEditForm(props) {
                         checked={currentUser.role === 'Admin'}
                         onChange={handleChange}
                         ></input>
+                        <label class="form-label  p-1" htmlFor='Admin'>Admin</label>
                     </div>
+                   
                      }
-                </div>
-
-                <div>
-                    <label>Password</label>
+                         </div>
+                       </div>
+</div>
+                <div class="col-12">
+              <div class="row g-2 p-2  ">
+                <div className='col-auto'> 
+                    <label class="form-label" >Password</label>
+                    </div>
+                    <div className='col-auto'>          
                     <input type='password' name='password' onChange={handleChange} className='form-control'></input>
                 </div>
-
-                <div>
-                    <input type='submit' value='Save' className='btn btn-primary'></input>
                 </div>
+                </div>
+                <div>
+                    <input type='submit' value='Save' class="d-flex btn btn-success  p-2 m-3 g-2 "></input>
+                </div>
+                
             </form>
         </div>
+      
     )
 }

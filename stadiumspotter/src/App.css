@@ -27,6 +27,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
 .App-link {
@@ -49,8 +50,24 @@
 .my-button {
   margin: 10px;
 }
-
-.myImg {
-  width: 400px;
+.ProfileImg {
+  width: 150px;
 }
-
+.myImg {
+  width: 300px;
+}
+.form-control1{
+  display: block;
+  width: 130%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
