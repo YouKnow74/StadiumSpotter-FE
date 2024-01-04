@@ -12,7 +12,7 @@ export default function MyStadium({user}) {
     const [myStadiums,setMyStadiums]=useState([]);
     const [myReservations,setMyReservations]=useState([]);
     const [viewS,setViewS]=useState(false);
-    const [viewR,setViewR]=useState(false);
+    const [viewR,setViewR]=useState(true);
     const [isEdit,setIsEdit]=useState(false);
     const [isAdd,setIsAdd]=useState(false);
     const [currentStadium,setCurrentStadium]=useState({});
@@ -101,7 +101,7 @@ export default function MyStadium({user}) {
             console.log("Error fetching reservations list");
             console.log(err);
         })
-        setViewR(true);
+        setViewR(!viewR);
     }
 
     const addStadium =(stadium)=>{
@@ -211,9 +211,10 @@ export default function MyStadium({user}) {
         .then((res) => {
           console.log('Reservation updated Successfully');
           console.log(res);
-          viewReservations();
-        //   setIsEdit(false);
-            setIsResEdit(isResEdit);
+          viewReservations(reservation._id);
+            //setIsEdit(isEdit);
+            setIsResEdit(true);
+            setViewR(true)
         })
         .catch((err) => {
           console.log(err)
@@ -259,7 +260,7 @@ export default function MyStadium({user}) {
     
     const myReservationsList = myReservations.map((oneReserve,index)=>(
         <tr key={index}>
-            <Reservation {...oneReserve} edit={editView} delete={deleteReservation}/>
+            <Reservation {...oneReserve} edit={editView} delete={deleteReservation} userDetails={user}/>
         </tr>
     ))
 
@@ -270,7 +271,7 @@ export default function MyStadium({user}) {
         <button className='btn btn-success my-button' onClick={changeToAdd}>Add Stadium</button>
         {isEdit ?
         <StadiumEditForm key={currentStadium._id} setIsEdit={setIsEdit} stadium={currentStadium} update={updateStadium} 
-        sports={sports} facilities={facilities}/>
+        sports={sports} facilities={facilities} user={user}/>
         :""}
       {isAdd ?
         <StadiumCreateForm setIsAdd={setIsAdd} add={addStadium} sports={sports} facilities={facilities} user={user}/>:""}
@@ -295,7 +296,6 @@ export default function MyStadium({user}) {
             </tbody>
         </table>
         </div>
-
         <h1>My Reservations</h1>
         <table className='justify-content-center table w-100 table-bordered'>
               <tbody>
@@ -314,7 +314,7 @@ export default function MyStadium({user}) {
                 {myReservationsList}
               </tbody>
         </table>
-            {isResEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={user}/>}
+            {isResEdit && < ReservationEditForm key={currentReservation._id} updateReservation={updateReservation} reservation={currentReservation} user={user} setIsEdit={setIsResEdit}/>}
     </div>
   )
 }

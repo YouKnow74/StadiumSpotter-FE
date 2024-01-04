@@ -114,7 +114,7 @@ export default function StadiumCreateForm({add,sports,facilities,user, setIsAdd}
       <input type='hidden' value={user} name='user' onSubmit={addUser} /> 
       
       
-      {user && user.role == "Admin" ?<button className='btn btn-success my-button' type='submit'>Add Stadium</button>:""}
+      {user && (user.role == "Admin" || user.role=="stadium owner") ?<button className='btn btn-success my-button' type='submit'>Add Stadium</button>:""}
     </form>
 
     </div>

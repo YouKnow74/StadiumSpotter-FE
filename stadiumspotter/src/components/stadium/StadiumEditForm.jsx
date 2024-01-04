@@ -116,7 +116,7 @@ export default function StadiumEditForm({stadium,update,facilities,sports, setIs
       <input type='hidden' value={userid} name='user' /> 
       
       */}
-     {user && user.role == "Admin" ?<button className='btn btn-success my-button' type='submit'>Update Stadium</button>:""}
+     {user && (user.role == "Admin" || user.role=="stadium owner") ?<button className='btn btn-success my-button' type='submit'>Update Stadium</button>:""}
     </form>
 
     
