@@ -1,8 +1,14 @@
-# StadiumSpotter-FE
-Front end code for StadiumSpotter application 
+# Stadium Spotter Front-end
+Front-end code for Stadium Spotter application 
 # SEI7 Team Project3 Capstone
 
-## Project Name:  StadiumSpotter-Back End
+## Overview 
+
+The Stadium Spotter is a platform for users to reserve stadiums to play on, advertise for their stadiums, and keep track of the reservations of the stadiums.
+
+The Application consists of React to be the Front End for the MERN Application.
+
+## Project Name:  Stadium Spotter Front-end
 
 ### Developers & Collaborators Team
 
@@ -15,23 +21,147 @@ Front end code for StadiumSpotter application
 
 [ERD for Spotter Web Applicatiion](https://lucid.app/lucidchart/fefbef16-ca85-4e4b-9b4c-e50b83b0488d/edit?viewport_loc=221%2C48%2C1822%2C893%2C0_0&invitationId=inv_7358d525-c7c2-474f-99e6-8355a686d312)
 
-<img src="/images/ERD.png" alt="ERD">
+![Stadium Spotter ERD](https://github.com/YouKnow74/StadiumSpotter-BE/assets/79399404/05f58873-ccd9-49cd-9881-1df52a763d66)
+
 
 ## Wireframes
 [Wireframe for Spotter Web Applicatiion](https://drive.google.com/file/d/1ATwKRevKVkXsdx-5TLEJpfEL4yoAR78E/view?usp=sharing)
 
 
-## Link to StadiumSpotter Web Application: 
+## Link to StadiumSpotter Back End Web Application: 
 [Web Application Link](https://github.com/YouKnow74/StadiumSpotter-BE)
 
 ### Our Team:
 
+![image](https://github.com/YouKnow74/StadiumSpotter-FE/assets/79399404/bad83874-0c4e-4bec-b12c-75e111c09f31)
 
-<img src="/images/ourteam.png" alt="Team Seven">
+
 
 ## Landing Page of the project:
 
-<img src="/images/landingpage.png" alt="Home Page">
+![image](https://github.com/YouKnow74/StadiumSpotter-BE/assets/79399404/555c5cc7-dbea-46c0-964b-c9da1f4e98cf)
+
+## Features
+
+- Responsive Site
+- Multi-User Based Application
+- CRUD Operations
+- Mobile Responsive
+- Single-Page Application
+
+## Project Requirements
+
+- Technology used: 
+  - Axios
+  - bycrypt
+  - Dayjs
+  - Bootstrap
+  - JSON Web Token
+  - JWT-Decode 
+  - React
+  - React-Dom
+  - React-Router-Dom
+  - Proxy
+  - Sign-up Login functionality
+
+ ## Screenshots
+ ![image](https://github.com/YouKnow74/StadiumSpotter-BE/assets/79399404/8b72011b-a795-48f5-9af8-b17dd95aa806)
+![image](https://github.com/YouKnow74/StadiumSpotter-BE/assets/79399404/906f058a-ba6b-4b45-ba36-edf1fa063980)
+![image](https://github.com/YouKnow74/StadiumSpotter-BE/assets/79399404/72340366-cb9c-489f-9cde-2484f5a8e07d)
+
+## Trello Board
+https://trello.com/invite/b/QwY1JH05/ATTI795aad183967107df8cfbd4ca027847fB2090667/stadiumspotter
+
+## Platform Map of Data
+
+### User
+- Name (First Name, Last Name)
+- Username
+- Email
+- Password
+- Phone Number
+- Role
+- Profile Image
+
+### Stadium 
+-  Name
+-  Image
+-  Description
+-  Size
+-  Location
+-  User (Stadium Owner)
+-  Facilities
+-  Sport
+-  Price (How much it costs to rent the stadium for 1 hour)
+
+### Reservations
+- Date
+- Time (Start Time, End Time)
+- Status
+- User (The renter information)
+- Stadium (The Stadium information)
+- Price
+
+### Sport
+- Category (Sport Name/Field)
+- Image
+
+### Facillites
+- Facility (Name)
+- Image
+
+## User Stories
+### User Stories (If the user is to rent a stadium it is a role called renter)
+- Users should be able to sign up.
+- Users should be able to sign in.
+- Users should be able to log out.
+- Users should have a profile.
+- Users should be able to upload a profile picture.
+- Users should be able to edit their personal information.
+- Users should be able to see the stadiums list.
+- Users should be able to reserve a stadium.
+- Users should be able to see their reservation list.
+- Users should be able to edit and delete their reservations.
+
+### Admin Stories
+- Admin should be able to sign up.
+- Admin should be able to sign in.
+- Admin should be able to log out.
+- Admin should be able to see the stadiums list.
+- Admin should be able to add, edit, and delete stadiums.
+- Admin should be able to see the sports list.
+- Admin should be able to add or delete a sport.
+- Admin should be able to see the facility list.
+- Admin should be able to add, edit, and delete facilities.
+- Admin should be able to see the reservations list.
+- Admin should be able to add, edit, and delete reservations.
+  
+### Stadium Owner Stories
+- Stadium Owner should be able to sign up.
+- Stadium Owner should be able to sign in.
+- Stadium Owner should be able to log out.
+- Stadium Owner should be able to see their stadiums.
+- Stadium Owner should be able to add, edit, and delete his stadium.
+- Stadium Owner should be able to see the reservations list.
+- Stadium Owner should be able to add, edit, and delete reservations.
+
+## Future Features Enhancements
+- Develop user-friendly maps with clear directions for easy navigation to stadium locations.
+- Integrate online payment options to cater to the preferences of individuals who favor convenient and secure transactions.
+- Enhance user experience by providing detailed reviews and ratings for the facilities at each stadium.
+- Keep users informed about reservation statuses with real-time updates, ensuring accurate and timely information.
+- Implement an interactive seating chart for stadiums, enabling users to choose their preferred seats during the reservation process.
+- Facilitate communication between users venue administrators and stadium owners with an in-app messaging system, addressing queries and providing assistance in real-time.
+- Offer multi-language support to cater to a diverse user base, ensuring that language barriers do not hinder the user experience.
+- Introduce loyalty or membership programs, offering exclusive perks, discounts, or early access to reservations for dedicated users.
+
+## List of Unsolved Problems and Difficulties
+- Occasionally, unintended page refreshes occur when new functions are added to the system, even though such refreshes are not intended or necessary for the intended user experience.
+- When attempting to edit or add a reservation, we encountered difficulties in specifying the desired time. The system consistently defaulted to a predetermined time instead of allowing us to input or modify the selected time as intended.
+- Troubleshooting errors stemming from the Axios function involves a detailed analysis of the Axios implementation. It requires identifying and examining the specific error messages, debugging logs, and potential issues within the code that leverages Axios. A thorough investigation is essential to pinpoint the root cause and implement effective solutions for a seamless Axios integration.
+- One of the most challenging aspects was implementing a user-friendly and efficient time selection mechanism for stadium reservations. The complexity arose from the need to synchronize the start and end times, considering the stadium’s operational hours and existing reservations.
+- Form Validation to ensure that all the fields are set, and to check if the data input is fulfilled and appropriate.
+
 
 ## Requirements
 
