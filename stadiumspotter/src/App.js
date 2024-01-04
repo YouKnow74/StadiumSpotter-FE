@@ -277,7 +277,7 @@ function App() {
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ isAuth ? <StadiumList user={userDetails}/>:<Signin login={loginHandler} />  } />
       <Route path='/reservation/:id' element={ userDetails && <ReservationCreateForm user={userDetails} /> }/>
-      <Route path='/reservations' element={ isAuth && userDetails && userDetails.role=="Admin" ? <ReservationList user={userDetails} /> : <Home /> } />
+      <Route path='/reservations' element={ isAuth && (userDetails && userDetails.role=="Admin") ? <ReservationList user={userDetails} /> : <Home /> } />
       {/*
        superData is for when the admin is going to edit another user details we need to save the data of current user
         to be passed into user edit form      

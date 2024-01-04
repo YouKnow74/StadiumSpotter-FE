@@ -32,7 +32,7 @@ export default function ReservationEditForm(props) {
         setSelectedStartTime(props.reservation.startTime)
         setSelectedEndTime(props.reservation.endTime)
      
-        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime,user: props.user._id, stadiumName: props.reservation.stadiumName, stadium: props.reservation.stadium , Status: "Pending" })
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime,user: props.user._id, stadiumName: props.reservation.stadiumName, stadium: props.reservation.stadium , Status: newReserve.Status })
       
     }, [])
     
@@ -120,6 +120,8 @@ export default function ReservationEditForm(props) {
         const reservation = { ...newReserve,_id:props.reservation._id};
         // newReserve.date =JSON.stringify(newReserve.date);
         props.updateReservation(reservation)
+        // props.setIsEdit(false);
+     
         e.target.reset();
         // addReservation(newReserve);
     }
@@ -136,7 +138,7 @@ export default function ReservationEditForm(props) {
                     <label htmlFor="inputdate" className="form-label">Choose a Date:</label>
                 </div>
                     <div className='col-auto'>
-                    <input value={newReserve.date} type="date" className="form-control" id="inputdate" name="date" onChange={handleChange} />
+                    <input value={newReserve.date} type="date" className="form-control green-border focus-ring focus-ring-success" id="inputdate" name="date" onChange={handleChange} />
                 </div>
                 </div>
                 </div>
@@ -148,7 +150,7 @@ export default function ReservationEditForm(props) {
                     <label className="form-label">Start Time:</label>
                     </div>
                     <div className='col-auto'>
-                    <select className="form-control"  value={selectedStartTime} name='startTime' onChange={handleStartTime}>
+                    <select className="form-control green-border focus-ring focus-ring-success"  value={selectedStartTime} name='startTime' onChange={handleStartTime}>
 
                         {startTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
@@ -169,7 +171,7 @@ export default function ReservationEditForm(props) {
                 </div>
 
                 <div className='col-auto'>             
-                     <select  className="form-control"  value={selectedEndTime} name='endTime'onChange={handleEndTime}>
+                     <select  className="form-control green-border focus-ring focus-ring-success"  value={selectedEndTime} name='endTime'onChange={handleEndTime}>
 
                         {availableEndTime.map((time, index) => (
                             <option key={index} value={time}>{time}</option>
@@ -189,7 +191,7 @@ export default function ReservationEditForm(props) {
                     <label className="form-label" >Status</label>
                     </div>
                     <div className='col-auto'> 
-                    <input value={newReserve.Status} type="text" className="form-control" name="Status" onChange={handleChange} />
+                    <input value={newReserve.Status} type="text" className="form-control green-border focus-ring focus-ring-success" name="Status" onChange={handleChange} />
                     </div>  
                     </div>
 
@@ -200,9 +202,9 @@ export default function ReservationEditForm(props) {
                 <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
                 <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
-    
-            </form>
             <button className="btn btn-success my-button" type='submit'>Save Reservation</button>
+            </form>
+           
             </div>
 
  
