@@ -58,12 +58,12 @@ export default function LibraryList(props) {
                     }
             })
             .then(res=>{
-                console.log("Coomunities list");
+                console.log("Communities list");
                 console.log(res);
                 setCommunities(res.data.community);
             })
             .catch(err=>{
-                console.log("error bringing coomunities list");
+                console.log("error bringing communities list");
                 console.log(err);
             })
 

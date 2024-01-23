@@ -17,7 +17,7 @@ export default function LibraryEditForm({library,update,communities,albums, setI
 
   const handleMultiple =(e)=>{
     const comArr = Array.from(e.target.selectedOptions, (option)=>option.value);
-    setcommunitiesArr(facArr);
+    setcommunitiesArr(comArr);
   }
 
   const handleChange = (e)=>{

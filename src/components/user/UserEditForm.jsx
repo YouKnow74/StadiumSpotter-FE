@@ -12,10 +12,10 @@ export default function UserEditForm(props) {
 
     const handleImage=(e)=>{
         console.log(e.target.files);
-        // newStadium.image=e.target.files[0]
+        // newLibrary.image=e.target.files[0]
         setImage(e.target.files[0])
         console.log("image");
-        // console.log(newStadium.image.name);
+        // console.log(newLibrary.image.name);
       }
 
     const handleChange = (e) => {
@@ -136,7 +136,7 @@ export default function UserEditForm(props) {
                         checked={currentUser.role === 'renter'}
                         onChange={handleChange}
                         ></input>
-                         <label class="form-label  p-1" hrmlfor='renter'>Reserve from the Library</label>
+                         <label class="form-label  p-1" htmlfor='renter'>Reserve from the Library</label>
                          </div>
                     </div>
                     </div>

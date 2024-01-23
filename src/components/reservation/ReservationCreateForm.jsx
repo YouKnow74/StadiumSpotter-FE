@@ -10,8 +10,8 @@ export default function ReservationCreateForm(props) {
     console.log("user Data",props.user);
 
     const [newReserve, setNewReserve] = useState({})
-    const stadium = useParams();
-    const [currentStadium, setCurrentStadium] = useState({})
+    const library = useParams();
+    const [currentLibrary, setCurrentLibrary] = useState({})
 
     const [selectedStartTime, setSelectedStartTime] = useState(startTime[0]);
     const [selectedEndTime, setSelectedEndTime] = useState(endTime[0])
@@ -19,7 +19,7 @@ export default function ReservationCreateForm(props) {
     const [reservedTimes,setReservedTimes] = useState([])
     
     const reservedTimesFetch=()=>{
-        Axios.get(`/reservation/reserved?id=${stadium.id}`)
+        Axios.get(`/reservation/reserved?id=${library.id}`)
         .then(res=>{
             console.log("Reserved list fetched");
             console.log(res);
@@ -38,7 +38,7 @@ export default function ReservationCreateForm(props) {
     useEffect(() => {
 
    
-        gettingStadiumData();
+        gettingLibraryData();
         setSelectedStartTime(startTime[0])
         setSelectedEndTime(endTime[0])
         const startTimeIndex = startTime.indexOf(selectedStartTime);
@@ -46,9 +46,9 @@ export default function ReservationCreateForm(props) {
 
         const durationInHours = endTimeIndex - startTimeIndex;
 
-        const stadiumPrice = currentStadium.price;
-        const totalPrice = stadiumPrice * (durationInHours + 1);
-        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, stadiumName: currentStadium.name, stadium: stadium.id, Status: "Pending" })
+        const LibraryPrice = currentLibrary.price;
+        const totalPrice = libraryPrice * (durationInHours + 1);
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime, price: totalPrice, user: props.user, libraryName: currentLibrary.name, library: library.id, Status: "Pending" })
 
         reservedTimesFetch();
         
@@ -65,7 +65,7 @@ export default function ReservationCreateForm(props) {
         .then((res) => {
             const libraryData = res.data.library;
             console.log(libraryData);
-            setCurrentStadium(libraryData);
+            setCurrentLibrary(libraryData);
         })
         .catch(err => {
             console.log("Error Fetching Data!");
