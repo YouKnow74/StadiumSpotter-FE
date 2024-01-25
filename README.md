@@ -4,7 +4,7 @@ Front-end code for Music Box application
 
 ## Overview 
 
-The Music Box is a platform for users to reserve stadiums to play on, advertise for their stadiums, and keep track of the reservations of the stadiums.
+The Music Box is a platform for users to reserve Musixbox to play on, advertise for their Musixbox, and keep track of the reservations of the Musixbox.
 
 The Application consists of React to be the Front End for the MERN Application.
 
@@ -93,7 +93,7 @@ https://trello.com/b/xMlUtZ7Y/music-box
 - Album Edit
 - Price
 
-### Sport
+### album
 - Category (classical & popular)
 - Image
 
@@ -118,7 +118,7 @@ https://trello.com/b/xMlUtZ7Y/music-box
 - Admin should be able to log out.
 - Admin should be able to add, edit, and delete albums.
 - Admin should be able to see the album list.
-- Admin should be able to add or delete sport.
+- Admin should be able to add or delete album.
 - Admin should be able to see the communities list.
 
   
@@ -129,7 +129,7 @@ https://trello.com/b/xMlUtZ7Y/music-box
 - Integrate online payment options to cater to the preferences of individuals who favor convenient and secure transactions.
 - Enhance user experience by providing detailed reviews and ratings for the communities at each stadium.
 - Keep users informed about reservation statuses with real-time updates, ensuring accurate and timely information.
-- Implement an interactive seating chart for stadiums, enabling users to choose their preferred seats during the reservation process.
+- Implement an interactive seating chart for Musixbox, enabling users to choose their preferred seats during the reservation process.
 - Facilitate communication between users venue administrators and stadium owners with an in-app messaging system, addressing queries and providing assistance in real-time.
 - Offer multi-language support to cater to a diverse user base, ensuring that language barriers do not hinder the user experience.
 - Introduce loyalty or membership programs, offering exclusive perks, discounts, or early access to reservations for dedicated users.
@@ -210,7 +210,7 @@ Include the following sections within the README.md:
 The Stadium Reservation Application: is a web-based platform that facilitates the process of conducting reservation. It provides two distinct user roles: Admin, reservation customer, each with specific functionalities tailored to their roles.
 
 ### Admin User:
-As an Admin user, the user has an access authority to a comprehensive reservation categories created by the user. User can add, edit, view details, and delete reservation. Additionally, has a dedicated section to manage reservation, enabling admin team to add, edit, view details and delete reservation made by the users. Furthermore, they can add new item to sport categories to enhance the diversity of available categories of sport type. Existing Sport types are: indoor and outdoor sports.
+As an Admin user, the user has an access authority to a comprehensive reservation categories created by the user. User can add, edit, view details, and delete reservation. Additionally, has a dedicated section to manage reservation, enabling admin team to add, edit, view details and delete reservation made by the users. Furthermore, they can add new item to album categories to enhance the diversity of available categories of album type. Existing album types are: indoor and outdoor albums.
 
 ### Customer as a User:
 Customers are users who can create their own reservation and submit reservation request to reservation team. They have the capability to manage their own reservation, as well as review extra communities provided along with reservation. By selecting their option of reservation, customers can monitor the progress of reservation and stay informed about payment status or the price of reservation. Customers can also select the date of their reservation, enabling them to control the date of the reservation.
@@ -297,14 +297,14 @@ The following routes are available:
 - `/reservation`: handles requests related to reservations affairs such as: adding a new reservation, retrieving a list of reservations, 
    deleting a reservation, editing a reservation and updating a reservation.
 
-- `/sport`: handles requests related to stadiums such as: creating a new stadium, retrieving a list of stadiums,
+- `/album`: handles requests related to Musixbox such as: creating a new stadium, retrieving a list of Musixbox,
    deleting a stadium, editing a stadium, and updating a stadium. It also includes file upload functionality using 
    the multer middleware for the /add route. 
 
 -  `/payment`: handles request related to payment such as: retrieving a list of payments, adding a new payment, editing 
     a payment, updating a payment and retrieving the details of a specific payment.
 
--   `/albums`: handles request related to sports such as: adding a new sport, retrieving a list of sports and deleting a sport category.
+-   `/albums`: handles request related to albums such as: adding a new album, retrieving a list of albums and deleting a album category.
 
 -   `/user`:  handles request related to user-related operations such as: signup, signin, index, detail, edit, delete and update 
      the user.
@@ -334,14 +334,14 @@ These HTTP methods are used in combination with URLs (endpoints) to perform vari
 - `/reservation`: handles requests related to reservations affairs such as: adding a new reservation, retrieving a list of reservations, 
    deleting a reservation, editing a reservation and updating a reservation.
 
-- `/library`: handles requests related to stadiums such as: creating a new stadium, retrieving a list of stadiums,
+- `/library`: handles requests related to Musixbox such as: creating a new stadium, retrieving a list of Musixbox,
    deleting a stadium, editing a stadium, and updating a stadium. It also includes file upload functionality using 
    the multer middleware for the /add route. 
 
 -  `/payment`: handles request related to payment such as: retrieving a list of payments, adding a new payment, editing 
     a payment, updating a payment and retrieving the details of a specific payment.
 
--   `/albums`: handles request related to sports such as: adding a new sport, retrieving a list of sports and deleting a sport category.
+-   `/albums`: handles request related to albums such as: adding a new album, retrieving a list of albums and deleting a album category.
 
 -   `/user`:  handles request related to user-related operations such as: signup, signin, index, detail, edit, delete and update 
      the user.
@@ -362,13 +362,13 @@ The break down of each section as follows along with their defined schema:
 
 
 - `/library`: defines a Mongoose model for a "Stadium" entity with a schema that includes several fields such as "name", "image", 
-    "description", "size", "location", "price", "user", "communities", and "category". The "user", "communities", and "category" fields are object references to the "User", "Facility", and "Sport" models respectively. The model provides an interface for interacting with the "Stadium" collection in the MongoDB database.
+    "description", "size", "location", "price", "user", "communities", and "category". The "user", "communities", and "category" fields are object references to the "User", "Facility", and "album" models respectively. The model provides an interface for interacting with the "Stadium" collection in the MongoDB database.
 
 -  `/payment`: defines a Mongoose model for a "Payment" entity with a schema that includes four fields: "status", "date", "price", and 
     "reservation". The "reservation" field is an array of object references to the "Reservation" model. The model provides an interface for interacting with the "Payment" collection in the MongoDB database.
 
--   `/albums`: defines a Mongoose model for a "Sport" entity with a schema that includes several fields such as "category", "image",
-     and "stadium". The "stadium" field is an array of object references to the "Stadium" model. The model provides an interface for interacting with the "Sport" collection in the MongoDB database.
+-   `/albums`: defines a Mongoose model for a "album" entity with a schema that includes several fields such as "category", "image",
+     and "stadium". The "stadium" field is an array of object references to the "Stadium" model. The model provides an interface for interacting with the "album" collection in the MongoDB database.
 
 
 -   `/user`:  defines a Mongoose model for a "User" entity with a schema that includes several fields such as "firstName", "lastName",
