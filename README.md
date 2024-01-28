@@ -17,25 +17,25 @@ The Application consists of React to be the Front End for the MERN Application.
 ## ERD Music Box
 
 [ERD for Musixbox Web Applicatiion]
-![Music Box ERD](separated included).
+![Music Box ERD](separated file included).
 
 
 ## Wireframes
-[Wireframe for Musixbox Web Applicatiion](https://drive.google.com//app.diagrams.net/#G1ATwKRevKVkXsdx-5TLEJpfEL4yoAR78E)
+[Wireframe for Musixbox Web Applicatiion](separate file included)
 
 
-## Link to Music Box Back End Web Application: 
-[Web Application Link](https://github.com/YouKnow74/Music Box-BE)
+## Link to Music Box Front End Web Application: 
+[Web Application Link](https://github.com/Rajiah123/Music-BoxFE)
 
 ### Our Team:
 
-![image](https://github.com/YouKnow74/Music Box-FE/assets/79399404/bad83874-0c4e-4bec-b12c-75e111c09f31)
+only myself as team most of them are full. some student prefer to work alone. for this reason no group.
 
 
 
 ## Landing Page of the project:
 
-![image](https://github.com/YouKnow74/Music Box-BE/assets/79399404/555c5cc7-dbea-46c0-964b-c9da1f4e98cf)
+separate file included.
 
 ## Features
 
@@ -66,6 +66,7 @@ sperate image for front page
 ## Trello Board
 https://trello.com/b/xMlUtZ7Y/music-box
 
+
 ## Platform Map of Data
 
 ### User
@@ -84,14 +85,14 @@ https://trello.com/b/xMlUtZ7Y/music-box
 -  Membership
 -  User (Signin/Signout)
 -  Communities
--  Album App (seperate App)
--
+-  Album App & Album Store (seperate App)
+
 
 ### Album Reservations (separate app - external link)
 - Album add
 - Album Description
 - Album Edit
-- Price
+
 
 ### album
 - Category (classical & popular)
@@ -125,20 +126,20 @@ https://trello.com/b/xMlUtZ7Y/music-box
 
 
 ## Future Features Enhancements
-- Develop user-friendly maps with clear directions for easy navigation to stadium locations.
+- Develop user-friendly maps with clear directions for easy navigation the business.
 - Integrate online payment options to cater to the preferences of individuals who favor convenient and secure transactions.
-- Enhance user experience by providing detailed reviews and ratings for the communities at each stadium.
+- Enhance user experience by providing detailed reviews and ratings for the communities  and albums.
 - Keep users informed about reservation statuses with real-time updates, ensuring accurate and timely information.
 - Implement an interactive seating chart for Musixbox, enabling users to choose their preferred seats during the reservation process.
-- Facilitate communication between users venue administrators and stadium owners with an in-app messaging system, addressing queries and providing assistance in real-time.
+- Communities membership communication between users venue administrators, addressing queries and providing assistance in real-time.
 - Offer multi-language support to cater to a diverse user base, ensuring that language barriers do not hinder the user experience.
-- Introduce loyalty or membership programs, offering exclusive perks, discounts, or early access to reservations for dedicated users.
+- Introduce loyalty programs, offering exclusive perks, discounts, or early access to reservations for dedicated users.
 
 ## List of Unsolved Problems and Difficulties
 - Occasionally, unintended page refreshes occur when new functions are added to the system, even though such refreshes are not intended or necessary for the intended user experience.
-- When attempting to edit or add a reservation, we encountered difficulties in specifying the desired time. The system consistently defaulted to a predetermined time instead of allowing us to input or modify the selected time as intended.
+- When attempting to edit or add a reservation,I encountered difficulties in specifying the desired time or broken link. The system consistently defaulted to a predetermined time instead of allowing us to input or modify the selected time as intended.
 - Troubleshooting errors stemming from the Axios function involves a detailed analysis of the Axios implementation. It requires identifying and examining the specific error messages, debugging logs, and potential issues within the code that leverages Axios. A thorough investigation is essential to pinpoint the root cause and implement effective solutions for a seamless Axios integration.
-- One of the most challenging aspects was implementing a user-friendly and efficient time selection mechanism for stadium reservations. The complexity arose from the need to synchronize the start and end times, considering the stadium’s operational hours and existing reservations.
+- One of the most challenging aspects was implementing a user-friendly and efficient time selection mechanism for album reservations. The complexity arose from the need to   synchronize the start and end times, considering the library’s operational hours and existing reservations.
 - Form Validation to ensure that all the fields are set, and to check if the data input is fulfilled and appropriate.
 
 
@@ -192,7 +193,7 @@ Include the following sections within the README.md:
 
 ### Necessary Deliverables
 
-- Projects are due on Thursday, 04th of Jan, 2024 at 09.30am!
+- Projects are due on Thursday, 28th of Jan, 2024!
 - You have to fill the [Google Sheet] with you name, github link and deployed link.
 - A **15~20 minute presentation** in which you answer the following questions:
   - What is the application about?
@@ -207,13 +208,13 @@ Include the following sections within the README.md:
   - What would you like to add next?
 
 ## About the Web Application (Music Box-Back End):
-The Stadium Reservation Application: is a web-based platform that facilitates the process of conducting reservation. It provides two distinct user roles: Admin, reservation customer, each with specific functionalities tailored to their roles.
+The Album Reservation Application: is a web-based platform that facilitates the process of conducting reservation. It provides two distinct user roles: Admin, reservation customer, each with specific functionalities tailored to their roles.
 
 ### Admin User:
 As an Admin user, the user has an access authority to a comprehensive reservation categories created by the user. User can add, edit, view details, and delete reservation. Additionally, has a dedicated section to manage reservation, enabling admin team to add, edit, view details and delete reservation made by the users. Furthermore, they can add new item to album categories to enhance the diversity of available categories of album type. Existing album types are: indoor and outdoor albums.
 
 ### Customer as a User:
-Customers are users who can create their own reservation and submit reservation request to reservation team. They have the capability to manage their own reservation, as well as review extra communities provided along with reservation. By selecting their option of reservation, customers can monitor the progress of reservation and stay informed about payment status or the price of reservation. Customers can also select the date of their reservation, enabling them to control the date of the reservation.
+Customers are users who can create their own reservation and submit reservation request to reservation team. They have the capability to manage their own reservation, as well as review extra communities provided along with reservation. 
 
 
 #### User resources 
@@ -282,7 +283,7 @@ These dependencies are essential for the back-end functionality of the Music Box
 
 ## Web Application Configuration:
 
-- The server listens on the port specified in the `PORT`:'3001' environment variable.
+- The server listens on the port specified in the `PORT`:'3011' environment variable.
 - Static files, such as CSS, JS, audio, video, and image files, are served from the "public" directory.
 - The database configuration is defined in the "db" module located in the "config" directory.
 
@@ -348,34 +349,34 @@ These HTTP methods are used in combination with URLs (endpoints) to perform vari
 
 
 ## Web Application Models:
-##modles.js group of files provided define a Mongoose model for each section, it imports the Mongoose library, which is an Object Data Modeling (ODM) library for MongoDB and provides a convenient way to define schemas and interact with the database. Then creates a Mongoose model for different sections such as: "Facility", "payments", "reservation","stadium" and "user" by using Schema". The model represents a collection in the MongoDB database and provides an interface for interacting with the data. It allows import & export of these models in other parts of the web application and perform CRUD operations on different sections.:
+##modles.js group of files provided define a Mongoose model for each section, it imports the Mongoose library, which is an Object Data Modeling (ODM) library for MongoDB and provides a convenient way to define schemas and interact with the database. Then creates a Mongoose model for different sections such as: "Community", "payments", "reservation" and "user" by using Schema". The model represents a collection in the MongoDB database and provides an interface for interacting with the data. It allows import & export of these models in other parts of the web application and perform CRUD operations on different sections.:
 
 The break down of each section as follows along with their defined schema:
 
 
 
-- `/community`:  defines a Mongoose model for a "Facility" entity with a schema that includes two fields: "facility" and "image". 
-   The model provides an interface for interacting with the "Facility" collection in the MongoDB database.
+- `/community`:  defines a Mongoose model for a "Communitty" entity with a schema that includes two fields: "community" and "image". 
+   The model provides an interface for interacting with the "community" collection in the MongoDB database.
 
-- `/reservation`: defines a Mongoose model for a "Reservation" entity with a schema that includes several fields such as "date", 
-   "startTime", "endTime", "status", "price", "user", and "stadium". The "user" and "stadium" fields are object references to the "User" and "Stadium" models respectively. The model provides an interface for interacting with the "Reservation" collection in the MongoDB database.
+- `/reservation`: defines a Mongoose model for a "Reservation" entity with a schema that includes several fields such as add their album in separe web application for album. 
+   
 
-
-- `/library`: defines a Mongoose model for a "Stadium" entity with a schema that includes several fields such as "name", "image", 
-    "description", "size", "location", "price", "user", "communities", and "category". The "user", "communities", and "category" fields are object references to the "User", "Facility", and "album" models respectively. The model provides an interface for interacting with the "Stadium" collection in the MongoDB database.
+- `/library`: defines a Mongoose model for a "other library" entity with a schema that includes several fields such as "name", "image", 
+    "description", "size", "location", "price", "user", "communities", and "category". The "user", "communities", and "category" fields are object references to the "User", "community membership for other libraries", and "album" models respectively. The model provides an interface for interacting with the "Library" collection in the MongoDB database.
 
 -  `/payment`: defines a Mongoose model for a "Payment" entity with a schema that includes four fields: "status", "date", "price", and 
-    "reservation". The "reservation" field is an array of object references to the "Reservation" model. The model provides an interface for interacting with the "Payment" collection in the MongoDB database.
+    "reservation". The "reservation" field is an array of object references to the "Reservation" model. The model provides an interface for interacting with the "Payment" collection in the MongoDB database.  But this for futur enhancement.
 
--   `/albums`: defines a Mongoose model for a "album" entity with a schema that includes several fields such as "category", "image",
-     and "stadium". The "stadium" field is an array of object references to the "Stadium" model. The model provides an interface for interacting with the "album" collection in the MongoDB database.
+-   `/albums`: defines a Mongoose model for a "album" entity with a schema that includes several fields such as "category", "image". The model provides an interface for interacting 
+     with the "album" collection in the MongoDB database.  Separate web app available and designed.
 
 
 -   `/user`:  defines a Mongoose model for a "User" entity with a schema that includes several fields such as "firstName", "lastName",
       "userName", "emailAddress", "phoneNumber", "role", "password", and "image". The model provides an interface for interacting with the "User" collection in the MongoDB database.
 
 
-
+##Testing for backend;
+ postman is used for testing for all HTTP methods, application is tested on different localhosts;3000,3011, 3002,3001.
 
 ##  Web Application Usage
 
