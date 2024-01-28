@@ -374,8 +374,10 @@ The break down of each section as follows along with their defined schema:
 -   `/user`:  defines a Mongoose model for a "User" entity with a schema that includes several fields such as "firstName", "lastName",
       "userName", "emailAddress", "phoneNumber", "role", "password", and "image". The model provides an interface for interacting with the "User" collection in the MongoDB database.
 
-
-##Testing for backend;
+## Web is having entertainment zone ;
+  Music box application is having virtual music grids for win and loss game that encourage traffic to the website.
+  
+## Testing for backend;
  postman is used for testing for all HTTP methods, application is tested on different localhosts;3000,3011, 3002,3001.
 
 ##  Web Application Usage
