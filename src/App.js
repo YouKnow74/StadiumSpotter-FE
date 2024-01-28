@@ -77,6 +77,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        console.log(err.message);
       });
   };
 
@@ -147,63 +148,75 @@ function App() {
           <img className='logo' src={logo}/>
         </a>
       </div>
-      <ul class=" col-12 col-md-auto justify-content-center mb-md-0">
-        <nav>
-      {userDetails && userDetails.role=='Admin'  ?
-      (
-      <div class="d-flex flex-wrap justify-content-between align-items-center ">
-        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
-        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+      <nav><ul class=" col-12 col-md-auto justify-content-center mb-md-0">
+      <div className="d-flex flex-wrap justify-content-between align-items-center ">
+        {/* <Link to="/" className="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" className=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
   <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
 </svg></Link> &nbsp;
-        <Link to="/library" class="nav-link px-2">Library Membership</Link> &nbsp;
-        <Link to="/album" class="nav-link px-2">Album List</Link> &nbsp;
-        <Link to="/community" class="nav-link px-2">Community </Link> &nbsp;
-        <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp;
-        <Link to='/mylibrary'class="nav-link px-2">My Libraries Branches</Link>
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
-          </a>
-          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
+        <Link to="/library" className="nav-link px-2">Library List</Link> &nbsp;
+        <Link to="/album" className="nav-link px-2">Album List</Link> &nbsp;
+        <div className="dropdown text-end">
+          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" className="rounded-circle"/>}
+            <div>
+      <a href="file:///C:/Users/ASUS-PC/OneDrive/Desktop/Game%202/game2.html" classname="Enetertain">Game 2</a>
+    </div>
 
-            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
-            <li><Link to={`/usersList`} class="nav-link px-2">All Users</Link></li>
-            <li><hr class="dropdown-divider"/></li>
-            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+          <ul className="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} className="nav-link px-2"></Link></li>
+            <li><Link to={`/usersList`} className="nav-link px-2"></Link></li>
+            <li><hr className="dropdown-divider"/></li>
+           
+          </ul>
+          </a>
+        </div>
+        <Link to="/community" className="nav-link px-2">Community List</Link> &nbsp;
+        <Link to="/reservations" className="nav-link px-2">Reservations</Link> &nbsp;
+        <Link to="/myReservations" className="nav-link px-2">My Reservations</Link>&nbsp;
+        <Link to='/mylibrary'className="nav-link px-2">My Libraries</Link>
+        <div className="dropdown text-end">
+          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" className="rounded-circle"/>}
+          </a>
+
+          <ul className="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} className="nav-link px-2">Profile</Link></li>
+            <li><Link to={`/usersList`} className="nav-link px-2">All Users</Link></li>
+            <li><hr className="dropdown-divider"/></li>
+            <li><Link to='/logout'className="btn " onClick={onLogoutHandler}>Logout</Link></li>
           </ul>
         </div>
         {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link> */}
       </div>
-      )
-      :
-      (
-        ""
-      )
-      }
+
+
      {userDetails && userDetails.role=='renter'  ?
       (
-      <div class="d-flex flex-wrap justify-content-between align-items-center ">
-        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
-        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+      <div className="d-flex flex-wrap justify-content-between align-items-center ">
+        {/* <Link to="/" className="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" className=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
   <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
 </svg></Link> &nbsp;
-        <Link to="/library" class="nav-link px-2">Library Membership List</Link> &nbsp;
-        {/* <Link to="/album" class="nav-link px-2">Album List</Link> &nbsp; */}
-        {/* <Link to="/community" class="nav-link px-2">Community List</Link> &nbsp; */}
-        {/* <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp; */}
-        {/* <Link to='/mylibrary'class="nav-link px-2">My Library </Link> */}
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
+        <Link to="/library" className="nav-link px-2">Library List</Link> &nbsp;
+        <Link to="/myReservations" className="nav-link px-2">My Reservations</Link> &nbsp;
+        {/* <Link to="/album" className="nav-link px-2">Album List</Link> &nbsp; */}
+        {/* <Link to="/community" className="nav-link px-2">Community List</Link> &nbsp; */}
+        {/* <Link to="/reservations" className="nav-link px-2">Reservations</Link> &nbsp; */}
+        {/* <Link to='/mylibrary'className="nav-link px-2">My Library </Link> */}
+        <div className="dropdown text-end">
+          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" className="rounded-circle"/>}
           </a>
-          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
+          <ul className="dropdown-menu text-small"  data-popper-placement="bottom-end">
 
-            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
-            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+            <li><Link to={`/profile`} className="nav-link px-2">Profile</Link></li>
+            <li><Link to='/logout'className="btn " onClick={onLogoutHandler}>Logout</Link></li>
           </ul>
         </div>
-        {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
+        {/* <Link to='/logout'className="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
       </div>
       )
       :
@@ -211,30 +224,42 @@ function App() {
         ""
       )
       }
-     {userDetails && userDetails.role=='library owner'  ?
+
+
+
+  
+
+
+
+
+
+     
+{userDetails && userDetails.role=='library owner'  ?
       (
-      <div class="d-flex flex-wrap justify-content-between align-items-center ">
-        {/* <Link to="/" class="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
-        <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+      <div className="d-flex flex-wrap justify-content-between align-items-center ">
+        {/* <Link to="/" className="btn btn-outline-primary me-2">Home</Link> &nbsp; */}
+        <Link to="/" className=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
   <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
 </svg></Link> &nbsp;
-        <Link to="/library" class="nav-link px-2">Library List</Link> &nbsp;
-        {/* <Link to="/album" class="nav-link px-2">Album List</Link> &nbsp; */}
-        {/* <Link to="/community" class="nav-link px-2">Community List</Link> &nbsp; */}
-        {/* <Link to="/reservations" class="nav-link px-2">Reservations</Link> &nbsp; */}
-        <Link to='/mylibrary'class="nav-link px-2">My Libraries</Link>
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" class="rounded-circle"/>}
-          </a>
-          <ul class="dropdown-menu text-small"  data-popper-placement="bottom-end">
 
-            <li><Link to={`/profile`} class="nav-link px-2">Profile</Link></li>
-            <li><hr class="dropdown-divider"/></li>
-            <li><Link to='/logout'class="btn " onClick={onLogoutHandler}>Logout</Link></li>
+        <Link to="/library" className="nav-link px-2">Library List</Link> &nbsp;
+        <Link to="/myReservations" className="nav-link px-2">My Reservations</Link> &nbsp;
+        {/* <Link to="/album" className="nav-link px-2">Album List</Link> &nbsp; */}
+        {/* <Link to="/community" className="nav-link px-2">Community List</Link> &nbsp; */}
+        {/* <Link to="/reservations" className="nav-link px-2">Reservations</Link> &nbsp; */}
+        <Link to='/mylibrary'className="nav-link px-2">My Libraries</Link>
+        <div className="dropdown text-end">
+          <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
+            {userDetails &&<img src={"/images/"+userDetails.image} alt="mdo" width="32" height="32" className="rounded-circle"/>}
+          </a>
+          <ul className="dropdown-menu text-small"  data-popper-placement="bottom-end">
+
+            <li><Link to={`/profile`} className="nav-link px-2">Profile</Link></li>
+            <li><hr className="dropdown-divider"/></li>
+            <li><Link to='/logout'className="btn " onClick={onLogoutHandler}>Logout</Link></li>
           </ul>
         </div>
-        {/* <Link to='/logout'class="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
+        {/* <Link to='/logout'className="btn btn-outline-primary me-2" onClick={onLogoutHandler}>Logout</Link>&nbsp; */}
       </div>
       )
       :
@@ -242,26 +267,42 @@ function App() {
         ""
       )
       }
-      {!isAuth ? (
-                <div class="d-flex flex-wrap justify-content-between align-items-center ">
-                <Link to="/" class=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+
+
+
+
+
+
+
+
+{!isAuth ? (
+                <div className="d-flex flex-wrap justify-content-between align-items-center ">
+                <Link to="/" className=" px-2 link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
   <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
 </svg></Link> &nbsp;
-                <Link to='/signup' class="btn btn-outline-success me-2">Signup</Link> &nbsp;
-                <Link to='/signin' class="btn btn-outline-success me-2">Signin</Link> &nbsp;
+                <Link to='/signup' className="btn btn-outline-success me-2">Signup</Link> &nbsp;
+                <Link to='/signin' className="btn btn-outline-success me-2">Signin</Link> &nbsp;
               </div>
       ):
       ""}
-    </nav>
+    
       </ul>
-
-      {/* <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+</nav>
+      {/* <div className="col-md-3 text-end">
+        <button type="button" className="btn btn-outline-primary me-2">Login</button>
+        <button type="button" className="btn btn-primary">Sign-up</button>
       </div> */}
     </header>
-
     
+
+
+
+
+
+
+
+
+
     <div className="App">
       <Routes>
 
@@ -274,69 +315,31 @@ function App() {
       <Route path='/signup' element={ <Signup register={registerHandler} /> } />
       <Route path='/signin' element={ isAuth ? <LibraryList user={userDetails}/>:<Signin login={loginHandler} />  } />
       <Route path='/reservation/:id' element={ userDetails && <ReservationCreateForm user={userDetails} /> }/>
-      <Route path='/reservations' element={ isAuth && userDetails && userDetails.role=="Admin" ? <ReservationList user={userDetails} /> : <Home /> } />
-      {/*
-       superData is for when the admin is going to edit another user details we need to save the data of current user
-        to be passed into user edit form      
-
-      */}
+      <Route path='/reservations' element={ isAuth && (userDetails && userDetails.role=="Admin") ? <ReservationList user={userDetails} /> : <Home /> } />
 
 
-         {/* <Route
-
-//             path="/usersList"
-//             element={<UserList superData={userDetails} />}
-//           />
-//           <Route
-//             path="/profile"
-//             element={
-//               userDetails && (
-//                 <UserIndex
-//                   getUser={getUser}
-//                   user={userDetails}
-//                   superUser={userDetails}
-//                 />
-//               )
-//             }
-//           />
-//           <Route
-//             path="/editProfile"
-//             element={
-//               <UserEditForm user={userDetails} superUser={userDetails} />
-//             }
-//           />
-//   <Route
-//             path="/myReservations"
-//             element={
-//               isAuth ? (userDetails &&
-//                 <ReservationCustomerList user={userDetails} />
-//               ) : (
-//                 <Signin login={loginHandler} />
-//               )
-//             }
-//           />
-//         </Routes>
-        
-//       </div> */}
-
-      {/*} */ } 
 
 
-      {/* //} */} 
+ <Route path="/myReservations" element={ isAuth ? (userDetails && <ReservationCustomerList user={userDetails} />
+            ) : (
+             <Signin login={loginHandler} />
+            )
+           }
+           />
+
       <Route path='/allLibraries' element={ userDetails ? <LibraryShow user={userDetails} /> :""} />
       <Route path='/usersList' element={ isAuth && userDetails && userDetails.role=="Admin" ? <UserList superData={userDetails}/> :<Home />} />
       <Route path='/profile' element={ isAuth && <UserIndex getUser={getUser} user={userDetails} superUser={userDetails}/> } />
       <Route path='/editProfile' element={ isAuth && <UserEditForm user={userDetails} superUser={userDetails} /> } />
 
-  
 
       <Route path='/' element={ <Home />}/>
-      <Route path='/mylibrary' element={ userDetails &&( userDetails.role=="Admin") ?<MyLibrary user={userDetails}/>:<Home />} />
+      <Route path='/mylibrary' element={ userDetails &&(userDetails.role=="library owner" || userDetails.role=="Admin") ?<MyLibrary user={userDetails}/>:<Home />} />
 
 
       </Routes>
     </div>
-   
+
 
     
     <footer class="d-flex flex-wrap justify-content-between align-items-center border-top">
@@ -354,6 +357,10 @@ function App() {
       <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Visit our Branches</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About US</a></li>
     </ul>
+
+
+    
+
   </footer>
   </div>
 

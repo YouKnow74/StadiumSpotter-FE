@@ -4,6 +4,7 @@
   /* text-align: center; */
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
+  margin: 20px;
 
 }
 
@@ -84,3 +85,28 @@
   border-color: green;
 }
 
+
+option:hover {
+  background-color: #4bb5436f;
+}
+
+select option:checked {
+  background-color: #a5d8ff; /* Change this to the desired color */
+}
+
+.myClasss {
+  font-size: 70px;
+}
+
+.para {
+  font-size: 18px;
+}
+
+video {
+  height: 400px;
+  width: 500px;
+}
+
+.form-check-input:checked{
+  background-color: green;
+}

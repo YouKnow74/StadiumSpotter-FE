@@ -9,8 +9,8 @@ export default function ReservationEditForm(props) {
 
     console.log(props.reservation)
     const [newReserve, setNewReserve] = useState(props.reservation)
-    const stadium = useParams();
-    const [currentStadium, setCurrentStadium] = useState()
+    const library = useParams();
+    const [currentlibrary, setCurrentlibrary] = useState()
 
     const [selectedStartTime, setSelectedStartTime] = useState(props.reservation.startTime);
     const [selectedEndTime, setSelectedEndTime] = useState(props.reservation.endTime)
@@ -22,32 +22,32 @@ export default function ReservationEditForm(props) {
 
     const navigate = useNavigate();
 
-    const getStadium = ()=>{
-        Axios.get('stadium/')
+    const getlibrary = ()=>{
+        Axios.get('library/')
     }
 
     useEffect(() => {
     
-        gettingStadiumData();
+        gettinglibraryData();
         setSelectedStartTime(props.reservation.startTime)
         setSelectedEndTime(props.reservation.endTime)
      
-        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime,user: props.user._id, stadiumName: props.reservation.stadiumName, stadium: props.reservation.stadium , Status: "Pending" })
+        setNewReserve({startTime: selectedStartTime, endTime: selectedEndTime,user: props.user._id, libraryName: props.reservation.libraryName, library: props.reservation.library , Status: "Pending" })
       
     }, [])
     
-    const gettingStadiumData = () => {
-        Axios.get(`/reservation/add?id=${props.reservation.stadium}`, {
+    const gettinglibraryData = () => {
+        Axios.get(`/reservation/add?id=${props.reservation.library}`, {
             headers: {
                 "Authorization":"Bearer "+localStorage.getItem("token")
                 }
         })
         .then((res) => {
             const reservationData = res.data.reservation;
-            const stadiumData = res.data.stadium;
+            const libraryData = res.data.library;
             console.log(reservationData);
-            console.log(stadiumData);
-            setCurrentStadium(stadiumData);
+            console.log(libraryData);
+            setCurrentlibrary(libraryData);
         })
         .catch(err => {
             console.log("Error Fetching Data!");
@@ -82,9 +82,9 @@ export default function ReservationEditForm(props) {
 
         const durationInHours = endTimeIndex - startTimeIndex;
 
-        const stadiumPrice = currentStadium.price;
-        console.log(stadiumPrice);
-        const totalPrice = stadiumPrice * (durationInHours + 1);
+        const libraryPrice = currentlibrary.price;
+        console.log(libraryPrice);
+        const totalPrice = libraryPrice * (durationInHours + 1);
         // reservation.price = totalPrice;
         console.log("price",parseInt(totalPrice));
         const reservation = { ...newReserve, endTime: selectedValue, price: totalPrice };
@@ -109,9 +109,9 @@ export default function ReservationEditForm(props) {
 
         const durationInHours = endTimeIndex - startTimeIndex1;
 
-        const stadiumPrice = currentStadium.price;
-        console.log(stadiumPrice);
-        const totalPrice = stadiumPrice * (durationInHours + 1);
+        const libraryPrice = currentlibrary.price;
+        console.log(libraryPrice);
+        const totalPrice = libraryPrice * (durationInHours + 1);
         return totalPrice;
     }
 
@@ -126,7 +126,7 @@ export default function ReservationEditForm(props) {
   return (
     <div>
         <h2>Edit Reservation</h2>
-            <h2>{newReserve.stadiumName}</h2>
+            <h2>{newReserve.libraryName}</h2>
             <form class=" row g-2 " onSubmit={submitReservation}>
                
          <div class=" row g-2 p-2 ">
@@ -178,7 +178,7 @@ export default function ReservationEditForm(props) {
 
                 </div>
                
-                {props.user && ((props.user.role == 'stadium owner') || (props.user.role == 'Admin')) &&
+                {props.user && ((props.user.role == 'library Renter') || (props.user.role == 'Admin')) &&
                 
                 <div>
                     <label>Status</label>
@@ -187,8 +187,8 @@ export default function ReservationEditForm(props) {
                 }
                 
                 {/* <input type='hidden' value={props.user.id} name='user' onSubmit={handleChange} /> 
-                <input type='hidden' value={currentStadium.name} name='stadiumName' onSubmit={handleChange} />
-                <input type='hidden' value={stadium.id} name='stadium' onSubmit={handleChange} />
+                <input type='hidden' value={currentlibrary.name} name='libraryName' onSubmit={handleChange} />
+                <input type='hidden' value={library.id} name='library' onSubmit={handleChange} />
                 <input type='hidden' value={newReserve.Status} name='Status' onSubmit={handleChange} /> */}
     
             </form>

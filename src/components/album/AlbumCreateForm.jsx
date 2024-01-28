@@ -14,13 +14,60 @@ export default function AlbumCreateForm({setIsAdd,add,libraries}) {
 
     }
 
-    const handleMultiple =(e)=>{
+    
+    const { useState } = require('react');
+
+    const AlbumCreateForm = () => {
+      const [librariesArr, setLibrariesArr] = useState([]);
+    
+      const handleMultiple =(e)=>{
         const libArr = Array.from(e.target.selectedOptions, (option)=>option.value);
         setLibrariesArr(libArr);
       }
+      
+      const libraries = [
+        // the array of libraries data
+      ];
+    
+      return (
+        <div>
+          <select
+            type="text"
+            className="form-control"
+            name="library"
+            multiple="multiple"
+            onChange={handleMultiple}
+            value={librariesArr}
+          >
+            {libraries.map((oneLibrary, index) => (
+              <option key={index} value={oneLibrary._id}>
+                {oneLibrary.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      );
+    };
+    
+    module.exports = AlbumCreateForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const handleChange=(e)=>{
-        const albm = {...newAlbm};
+        const albm = {...newAlbum};
         albm[e.target.name]=e.target.value;
         console.log(albm);
         setNewAlbum(albm);
@@ -29,7 +76,7 @@ export default function AlbumCreateForm({setIsAdd,add,libraries}) {
     const addAlbum =(e)=>{
         e.preventDefault();
         console.log(newAlbum);
-        newAlbuum.library = librariesArr;
+        newAlbum.library = librariesArr;
         const formData = new FormData();
         formData.append("album",JSON.stringify(newAlbum));
         formData.append("image",image);
@@ -68,6 +115,9 @@ export default function AlbumCreateForm({setIsAdd,add,libraries}) {
             <div className='col-auto'>
               <label  class="form-label" >Libraries:</label>
               </div>
+
+
+
               <div className='col-auto'>
                 <select type="text" class="form-control" name='library' multiple='multiple' onChange={handleMultiple} value={librariesArr}>
                   {libraries.map((oneLibrary,index)=>(

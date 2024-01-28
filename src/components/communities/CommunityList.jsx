@@ -13,7 +13,7 @@ export default function CommunityList(props) {
 
     useEffect(() => {
    
-        loadCommunitiesList();
+        loadCommunityList();
     
       
     }, []);
@@ -28,7 +28,7 @@ export default function CommunityList(props) {
         setIsEdit(!isEdit);
     }
 
-    const loadCommunitiesList =()=>{
+    const loadCommunityList =()=>{
         Axios.get("community/index", {
             headers: {
                 "Authorization":"Bearer "+localStorage.getItem("token")
@@ -55,7 +55,7 @@ export default function CommunityList(props) {
         .then(res=>{
             console.log("Community added");
             console.log(res);
-            loadCommunitiesList();
+            loadCommunityList();
         })
         .catch(err=>{
             console.log("error adding community");
@@ -91,7 +91,7 @@ export default function CommunityList(props) {
         .then(res=>{
             console.log("Community updated");
             console.log(res);
-            loadCommunitiesList();
+            loadCommunityList();
         })
         .catch(err=>{
             console.log("error updating community");
@@ -107,7 +107,7 @@ export default function CommunityList(props) {
         .then(res=>{
             console.log("community deleted");
             console.log(res);
-            loadCommunitiesList();
+            loadCommunityList();
         })
         .catch(err=>{
             console.log("Community Did not Delete");
